@@ -11,10 +11,7 @@
 #import "HomeModel.h"
 #import "MJExtension.h"
 #import "SDCycleScrollView.h"
-//#import "MokooMacro.h"
-//#import "CustomTopBarView.h"
 #import "HomePageHeadView.h"
-//#import "SGActionView.h"
 #import "MJRefresh.h"
 #import "RequestCustom.h"
 #import "BannerModel.h"
@@ -37,7 +34,6 @@ static NSString* const WaterfallHeaderIdentifier = @"WaterfallHeader";
 @property(nonatomic,strong)NSMutableArray * shops;
 @property (nonatomic,strong)NSMutableArray *banners;
 @property (nonatomic,strong)NSMutableDictionary *optionalParam;
-@property (nonatomic,strong)NSDictionary *selectedTextField;
 @end
 #define kFileName @"homePage.plist"
 @implementation HomeThreeViewController
@@ -84,20 +80,11 @@ static NSString* const WaterfallHeaderIdentifier = @"WaterfallHeader";
     [self.view insertSubview:self.goToTopBtn aboveSubview:self.collectView];
 
     [self.collectView registerNib:[UINib nibWithNibName:@"HPCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:WaterfallCellIdentifier];
-    //    [collectView registerClass:[SDCycleScrollView class]
-    //          forSupplementaryViewOfKind:CSStickyHeaderParallaxHeader
-    //                 withReuseIdentifier:@"header"];
+
     [self.collectView registerClass:[HomePageHeadView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:WaterfallHeaderIdentifier];
     [self.collectView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"cell"];
     [self.collectView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"head"];
-    //    self.collectView = collectView;
-    //    __typeof (self) __weak weakSelf = self;
     
-    //    MJRefreshNormalHeader *rHead = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-    //        [self requestHomePageList:@"1" refreshType:@"header"];
-    //    }];
-    ////    rHead.arrowView.image = [UIImage imageNamed:@"loading100.gif"];
-    //    self.collectView.header = rHead;
     self.collectView.footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
         // 进入刷新状态后会自动调用这个block
         showPage += 1;
@@ -185,7 +172,7 @@ static NSString* const WaterfallHeaderIdentifier = @"WaterfallHeader";
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section ==1) {
-                   HPCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:WaterfallCellIdentifier forIndexPath:indexPath];
+            HPCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:WaterfallCellIdentifier forIndexPath:indexPath];
 //            cell.backgroundColor = listBgColor;
             cell.shop = self.shops[indexPath.item];
             UITapGestureRecognizer *personalGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(imageGesture:)];

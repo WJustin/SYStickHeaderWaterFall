@@ -2,13 +2,15 @@
 //  SYStickHeaderWaterFallLayout.h
 //  SYStickHeaderWaterFall
 //
-//  Created by Mac on 16/3/4.
+//  Created by 张苏亚 on 16/3/4.
 //  Copyright © 2016年 suya. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 #define kDeviceWidth  [UIScreen mainScreen].bounds.size.width
 #define kDeviceHeight [UIScreen mainScreen].bounds.size.height
+#define kFixTop (44)//在此修正sectionheader停留的位置
+
 @class SYStickHeaderWaterFallLayout;
 
 @protocol SYStickHeaderWaterFallDelegate <NSObject>
@@ -34,9 +36,9 @@ heightForHeaderAtIndexPath:(NSIndexPath *)indexPath;
 @property (nonatomic) CGFloat topInset;
 @property (nonatomic) CGFloat bottomInset;
 
-@property (nonatomic)BOOL isSectionHeaderInset;//是否头部有上下间距
-@property (nonatomic) CGFloat headerTopInset;//头部上间距
-@property (nonatomic) CGFloat headerBottomInset;//头部下间距
+//@property (nonatomic)BOOL isSectionHeaderInset;//是否头部有上下间距
+//@property (nonatomic) CGFloat headerTopInset;//头部上间距
+//@property (nonatomic) CGFloat headerBottomInset;//头部下间距
 
 @property (nonatomic) BOOL stickyHeader;
 

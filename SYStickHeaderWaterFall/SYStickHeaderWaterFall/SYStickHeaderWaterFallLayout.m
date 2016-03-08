@@ -2,7 +2,7 @@
 //  SYStickHeaderWaterFallLayout.m
 //  SYStickHeaderWaterFall
 //
-//  Created by Mac on 16/3/4.
+//  Created by 张苏亚 on 16/3/4.
 //  Copyright © 2016年 suya. All rights reserved.
 //
 
@@ -103,11 +103,11 @@ NSString* const SYStickHeaderWaterDecorationKind = @"Decoration";
             //                   CGRectGetMinY(firstCellAttrs.frame) - headerHeight + [[self.sectionsHeights objectAtIndex:section] floatValue] - currentHeaderHeight - self.topInset
             //                   ) + self.topInset ;
             origin.y = MIN(
-                           MAX(self.collectionView.contentOffset.y +64, (CGRectGetMinY(firstCellAttrs.frame) - headerHeight) - self.topInset),
+                           MAX(self.collectionView.contentOffset.y + kFixTop, (CGRectGetMinY(firstCellAttrs.frame) - headerHeight) - self.topInset),
                            CGRectGetMinY(firstCellAttrs.frame) - headerHeight + [[self.sectionsHeights objectAtIndex:section] floatValue] - currentHeaderHeight - self.topInset
-                           ) + self.topInset ;
+                           ) + self.topInset ;//
             CGFloat width = layoutAttributes.frame.size.width;
-            if(self.collectionView.contentOffset.y > origin.y -64) {
+            if(self.collectionView.contentOffset.y > origin.y -(kFixTop +20)) {
                 width = self.collectionView.bounds.size.width;
                 origin.x = 0;
                 NSLog(@"self.collectionView.contentOffset.y%@",@(self.collectionView.contentOffset.y));
