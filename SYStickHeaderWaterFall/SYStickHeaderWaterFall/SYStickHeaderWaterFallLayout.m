@@ -8,10 +8,9 @@
 
 #import "SYStickHeaderWaterFallLayout.h"
 
-#define kDeviceWidth  [UIScreen mainScreen].bounds.size.width
 
-NSString* const FRGWaterfallLayoutCellKind = @"WaterfallCell";
-NSString* const FRGWaterfallLayouDecorationKind = @"Decoration";
+NSString* const SYStickHeaderWaterCellKind = @"WaterfallCell";
+NSString* const SYStickHeaderWaterDecorationKind = @"Decoration";
 @interface SYStickHeaderWaterFallLayout()
 @property (nonatomic) NSInteger columnsCount;
 @property (nonatomic) CGFloat itemInnerMargin;
@@ -47,7 +46,7 @@ NSString* const FRGWaterfallLayouDecorationKind = @"Decoration";
 }
 
 - (void)setup {
-    //    [self registerClass:[FRGWaterfallDecorationReusableView class] forDecorationViewOfKind:FRGWaterfallLayouDecorationKind];
+    //    [self registerClass:[FRGWaterfallDecorationReusableView class] forDecorationViewOfKind:SYStickHeaderWaterDecorationKind];
     self.itemWidth = (kDeviceWidth-15)/2;
     self.topInset = 0.0f;
     self.bottomInset = 0.0f;
@@ -135,7 +134,7 @@ NSString* const FRGWaterfallLayouDecorationKind = @"Decoration";
 }
 
 - (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return self.layoutInfo[FRGWaterfallLayoutCellKind][indexPath];
+    return self.layoutInfo[SYStickHeaderWaterCellKind][indexPath];
 }
 
 - (UICollectionViewLayoutAttributes *)layoutAttributesForSupplementaryViewOfKind:(NSString *)kind
@@ -145,7 +144,7 @@ NSString* const FRGWaterfallLayouDecorationKind = @"Decoration";
 
 //- (UICollectionViewLayoutAttributes *)layoutAttributesForDecorationViewOfKind:
 //(NSString*)decorationViewKind atIndexPath:(NSIndexPath *)indexPath {
-//    return self.layoutInfo[FRGWaterfallLayouDecorationKind][indexPath];
+//    return self.layoutInfo[SYStickHeaderWaterDecorationKind][indexPath];
 //}
 
 - (CGSize)collectionViewContentSize {
@@ -284,7 +283,7 @@ NSString* const FRGWaterfallLayouDecorationKind = @"Decoration";
     
     NSIndexPath *indexPath = [NSIndexPath indexPathForItem:0 inSection:0];
     UICollectionViewLayoutAttributes *emblemAttributes =
-    [UICollectionViewLayoutAttributes layoutAttributesForDecorationViewOfKind:FRGWaterfallLayouDecorationKind
+    [UICollectionViewLayoutAttributes layoutAttributesForDecorationViewOfKind:SYStickHeaderWaterDecorationKind
                                                                 withIndexPath:indexPath];
     //    emblemAttributes.frame = [self frameForWaterfallDecoration];
     
@@ -307,9 +306,9 @@ NSString* const FRGWaterfallLayouDecorationKind = @"Decoration";
         }
     }
     
-    newLayoutInfo[FRGWaterfallLayoutCellKind] = cellLayoutInfo;
+    newLayoutInfo[SYStickHeaderWaterCellKind] = cellLayoutInfo;
     newLayoutInfo[UICollectionElementKindSectionHeader] = titleLayoutInfo;
-    //    newLayoutInfo[FRGWaterfallLayouDecorationKind] = @{indexPath: emblemAttributes};
+    //    newLayoutInfo[SYStickHeaderWaterDecorationKind] = @{indexPath: emblemAttributes};
     
     self.layoutInfo = newLayoutInfo;
     

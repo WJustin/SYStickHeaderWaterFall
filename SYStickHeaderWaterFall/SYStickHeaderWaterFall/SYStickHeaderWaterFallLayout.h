@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#define kDeviceWidth  [UIScreen mainScreen].bounds.size.width
+#define kDeviceHeight [UIScreen mainScreen].bounds.size.height
 @class SYStickHeaderWaterFallLayout;
 
 @protocol SYStickHeaderWaterFallDelegate <NSObject>
