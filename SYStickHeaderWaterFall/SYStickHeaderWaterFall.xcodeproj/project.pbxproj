@@ -15,6 +15,8 @@
 		042E9ABA1C8EAA65004C406C /* BannerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 042E9AB91C8EAA65004C406C /* BannerModel.m */; };
 		042E9ABC1C8EAC39004C406C /* HPCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 042E9ABB1C8EAC39004C406C /* HPCollectionViewCell.xib */; };
 		042E9ABE1C8EC093004C406C /* 1.gif in Resources */ = {isa = PBXBuildFile; fileRef = 042E9ABD1C8EC093004C406C /* 1.gif */; };
+		042E9AC01C8EC41D004C406C /* 2.gif in Resources */ = {isa = PBXBuildFile; fileRef = 042E9ABF1C8EC41D004C406C /* 2.gif */; };
+		042E9AC21C8EC486004C406C /* 3.gif in Resources */ = {isa = PBXBuildFile; fileRef = 042E9AC11C8EC486004C406C /* 3.gif */; };
 		04CE95321C8992F000CBA178 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CE95311C8992F000CBA178 /* main.m */; };
 		04CE95351C8992F000CBA178 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CE95341C8992F000CBA178 /* AppDelegate.m */; };
 		04CE95381C8992F000CBA178 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CE95371C8992F000CBA178 /* ViewController.m */; };
@@ -61,6 +63,8 @@
 		042E9AB91C8EAA65004C406C /* BannerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BannerModel.m; sourceTree = "<group>"; };
 		042E9ABB1C8EAC39004C406C /* HPCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HPCollectionViewCell.xib; sourceTree = "<group>"; };
 		042E9ABD1C8EC093004C406C /* 1.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 1.gif; sourceTree = "<group>"; };
+		042E9ABF1C8EC41D004C406C /* 2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 2.gif; sourceTree = "<group>"; };
+		042E9AC11C8EC486004C406C /* 3.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 3.gif; sourceTree = "<group>"; };
 		04CE952D1C8992F000CBA178 /* SYStickHeaderWaterFall.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SYStickHeaderWaterFall.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04CE95311C8992F000CBA178 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		04CE95331C8992F000CBA178 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -161,6 +165,8 @@
 		04CE952F1C8992F000CBA178 /* SYStickHeaderWaterFall */ = {
 			isa = PBXGroup;
 			children = (
+				042E9AC11C8EC486004C406C /* 3.gif */,
+				042E9ABF1C8EC41D004C406C /* 2.gif */,
 				042E9ABD1C8EC093004C406C /* 1.gif */,
 				042E9AB41C8EA7D4004C406C /* Tool */,
 				042E9AA71C8EA169004C406C /* Controller */,
@@ -367,7 +373,9 @@
 				042E9ABC1C8EAC39004C406C /* HPCollectionViewCell.xib in Resources */,
 				04CE95401C8992F000CBA178 /* LaunchScreen.storyboard in Resources */,
 				04CE953D1C8992F000CBA178 /* Assets.xcassets in Resources */,
+				042E9AC21C8EC486004C406C /* 3.gif in Resources */,
 				04CE953B1C8992F000CBA178 /* Main.storyboard in Resources */,
+				042E9AC01C8EC41D004C406C /* 2.gif in Resources */,
 				042E9ABE1C8EC093004C406C /* 1.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
