@@ -282,9 +282,9 @@ NSString* const SYStickHeaderWaterDecorationKind = @"Decoration";
     NSMutableDictionary *titleLayoutInfo = [NSMutableDictionary dictionary];
     
     NSIndexPath *indexPath = [NSIndexPath indexPathForItem:0 inSection:0];
-    UICollectionViewLayoutAttributes *emblemAttributes =
-    [UICollectionViewLayoutAttributes layoutAttributesForDecorationViewOfKind:SYStickHeaderWaterDecorationKind
-                                                                withIndexPath:indexPath];
+//    UICollectionViewLayoutAttributes *emblemAttributes =
+//    [UICollectionViewLayoutAttributes layoutAttributesForDecorationViewOfKind:SYStickHeaderWaterDecorationKind
+//                                                                withIndexPath:indexPath];
     //    emblemAttributes.frame = [self frameForWaterfallDecoration];
     
     for (NSInteger section = 0; section < [self.collectionView numberOfSections]; section++) {
