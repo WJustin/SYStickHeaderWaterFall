@@ -18,6 +18,7 @@
 		042E9AC01C8EC41D004C406C /* 2.gif in Resources */ = {isa = PBXBuildFile; fileRef = 042E9ABF1C8EC41D004C406C /* 2.gif */; };
 		042E9AC21C8EC486004C406C /* 3.gif in Resources */ = {isa = PBXBuildFile; fileRef = 042E9AC11C8EC486004C406C /* 3.gif */; };
 		045979081C99039100C2E8C2 /* Classes in Resources */ = {isa = PBXBuildFile; fileRef = 045979071C99039100C2E8C2 /* Classes */; };
+		0459790B1C99054F00C2E8C2 /* SYStickHeaderWaterFallLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 0459790A1C99054F00C2E8C2 /* SYStickHeaderWaterFallLayout.m */; };
 		04CE95321C8992F000CBA178 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CE95311C8992F000CBA178 /* main.m */; };
 		04CE95351C8992F000CBA178 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CE95341C8992F000CBA178 /* AppDelegate.m */; };
 		04CE95381C8992F000CBA178 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CE95371C8992F000CBA178 /* ViewController.m */; };
@@ -66,6 +67,7 @@
 		042E9ABF1C8EC41D004C406C /* 2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 2.gif; sourceTree = "<group>"; };
 		042E9AC11C8EC486004C406C /* 3.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 3.gif; sourceTree = "<group>"; };
 		045979071C99039100C2E8C2 /* Classes */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Classes; path = SYStickHeaderWaterFall/Classes; sourceTree = "<group>"; };
+		0459790A1C99054F00C2E8C2 /* SYStickHeaderWaterFallLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SYStickHeaderWaterFallLayout.m; path = SYStickHeaderWaterFall/Classes/SYStickHeaderWaterFallLayout.m; sourceTree = "<group>"; };
 		04CE952D1C8992F000CBA178 /* SYStickHeaderWaterFall.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SYStickHeaderWaterFall.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04CE95311C8992F000CBA178 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		04CE95331C8992F000CBA178 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 		04CE95241C8992F000CBA178 = {
 			isa = PBXGroup;
 			children = (
+				0459790A1C99054F00C2E8C2 /* SYStickHeaderWaterFallLayout.m */,
 				045979071C99039100C2E8C2 /* Classes */,
 				04CE952F1C8992F000CBA178 /* SYStickHeaderWaterFall */,
 				04CE95491C8992F100CBA178 /* SYStickHeaderWaterFallTests */,
@@ -523,6 +526,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0459790B1C99054F00C2E8C2 /* SYStickHeaderWaterFallLayout.m in Sources */,
 				042E9AB31C8EA66D004C406C /* HomeModel.m in Sources */,
 				04CE95381C8992F000CBA178 /* ViewController.m in Sources */,
 				042E9AB71C8EA810004C406C /* RequestCustom.m in Sources */,
