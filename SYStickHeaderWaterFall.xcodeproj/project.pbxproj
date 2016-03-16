@@ -17,6 +17,7 @@
 		042E9ABE1C8EC093004C406C /* 1.gif in Resources */ = {isa = PBXBuildFile; fileRef = 042E9ABD1C8EC093004C406C /* 1.gif */; };
 		042E9AC01C8EC41D004C406C /* 2.gif in Resources */ = {isa = PBXBuildFile; fileRef = 042E9ABF1C8EC41D004C406C /* 2.gif */; };
 		042E9AC21C8EC486004C406C /* 3.gif in Resources */ = {isa = PBXBuildFile; fileRef = 042E9AC11C8EC486004C406C /* 3.gif */; };
+		045979081C99039100C2E8C2 /* Classes in Resources */ = {isa = PBXBuildFile; fileRef = 045979071C99039100C2E8C2 /* Classes */; };
 		04CE95321C8992F000CBA178 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CE95311C8992F000CBA178 /* main.m */; };
 		04CE95351C8992F000CBA178 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CE95341C8992F000CBA178 /* AppDelegate.m */; };
 		04CE95381C8992F000CBA178 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CE95371C8992F000CBA178 /* ViewController.m */; };
@@ -25,7 +26,6 @@
 		04CE95401C8992F000CBA178 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04CE953E1C8992F000CBA178 /* LaunchScreen.storyboard */; };
 		04CE954B1C8992F100CBA178 /* SYStickHeaderWaterFallTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CE954A1C8992F100CBA178 /* SYStickHeaderWaterFallTests.m */; };
 		04CE95561C8992F100CBA178 /* SYStickHeaderWaterFallUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CE95551C8992F100CBA178 /* SYStickHeaderWaterFallUITests.m */; };
-		04CE95661C8993A200CBA178 /* SYStickHeaderWaterFallLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CE95651C8993A200CBA178 /* SYStickHeaderWaterFallLayout.m */; };
 		43CD84D6E06320493D4D1043 /* libPods-SYStickHeaderWaterFall.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CDBDC4C18413DD503332F423 /* libPods-SYStickHeaderWaterFall.a */; };
 		89A35E9B7B673FA8C90880B8 /* libPods-SYStickHeaderWaterFallTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1B489B8281B8BDD92943F8F /* libPods-SYStickHeaderWaterFallTests.a */; };
 		92698E6E2D2CC9838DE2ECCD /* libPods-SYStickHeaderWaterFallUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3201C1CCBC0FD703D130B35C /* libPods-SYStickHeaderWaterFallUITests.a */; };
@@ -65,6 +65,7 @@
 		042E9ABD1C8EC093004C406C /* 1.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 1.gif; sourceTree = "<group>"; };
 		042E9ABF1C8EC41D004C406C /* 2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 2.gif; sourceTree = "<group>"; };
 		042E9AC11C8EC486004C406C /* 3.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 3.gif; sourceTree = "<group>"; };
+		045979071C99039100C2E8C2 /* Classes */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Classes; path = SYStickHeaderWaterFall/Classes; sourceTree = "<group>"; };
 		04CE952D1C8992F000CBA178 /* SYStickHeaderWaterFall.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SYStickHeaderWaterFall.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04CE95311C8992F000CBA178 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		04CE95331C8992F000CBA178 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -81,8 +82,6 @@
 		04CE95511C8992F100CBA178 /* SYStickHeaderWaterFallUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SYStickHeaderWaterFallUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		04CE95551C8992F100CBA178 /* SYStickHeaderWaterFallUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SYStickHeaderWaterFallUITests.m; sourceTree = "<group>"; };
 		04CE95571C8992F100CBA178 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		04CE95641C8993A200CBA178 /* SYStickHeaderWaterFallLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYStickHeaderWaterFallLayout.h; sourceTree = "<group>"; };
-		04CE95651C8993A200CBA178 /* SYStickHeaderWaterFallLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYStickHeaderWaterFallLayout.m; sourceTree = "<group>"; };
 		3201C1CCBC0FD703D130B35C /* libPods-SYStickHeaderWaterFallUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SYStickHeaderWaterFallUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F7A6B004A65890C742012AD /* Pods-SYStickHeaderWaterFall.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SYStickHeaderWaterFall.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SYStickHeaderWaterFall/Pods-SYStickHeaderWaterFall.debug.xcconfig"; sourceTree = "<group>"; };
 		7802C47C1F945FA03A9A3577 /* Pods-SYStickHeaderWaterFallUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SYStickHeaderWaterFallUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SYStickHeaderWaterFallUITests/Pods-SYStickHeaderWaterFallUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -143,6 +142,7 @@
 		04CE95241C8992F000CBA178 = {
 			isa = PBXGroup;
 			children = (
+				045979071C99039100C2E8C2 /* Classes */,
 				04CE952F1C8992F000CBA178 /* SYStickHeaderWaterFall */,
 				04CE95491C8992F100CBA178 /* SYStickHeaderWaterFallTests */,
 				04CE95541C8992F100CBA178 /* SYStickHeaderWaterFallUITests */,
@@ -218,8 +218,6 @@
 				042E9AB91C8EAA65004C406C /* BannerModel.m */,
 				042E9AB11C8EA66D004C406C /* HomeModel.h */,
 				042E9AB21C8EA66D004C406C /* HomeModel.m */,
-				04CE95641C8993A200CBA178 /* SYStickHeaderWaterFallLayout.h */,
-				04CE95651C8993A200CBA178 /* SYStickHeaderWaterFallLayout.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -375,6 +373,7 @@
 				04CE953D1C8992F000CBA178 /* Assets.xcassets in Resources */,
 				042E9AC21C8EC486004C406C /* 3.gif in Resources */,
 				04CE953B1C8992F000CBA178 /* Main.storyboard in Resources */,
+				045979081C99039100C2E8C2 /* Classes in Resources */,
 				042E9AC01C8EC41D004C406C /* 2.gif in Resources */,
 				042E9ABE1C8EC093004C406C /* 1.gif in Resources */,
 			);
@@ -525,7 +524,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				042E9AB31C8EA66D004C406C /* HomeModel.m in Sources */,
-				04CE95661C8993A200CBA178 /* SYStickHeaderWaterFallLayout.m in Sources */,
 				04CE95381C8992F000CBA178 /* ViewController.m in Sources */,
 				042E9AB71C8EA810004C406C /* RequestCustom.m in Sources */,
 				042E9AAC1C8EA247004C406C /* HomePageHeadView.m in Sources */,

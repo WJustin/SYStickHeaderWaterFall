@@ -7,7 +7,7 @@
 //
 
 #import "HomeThreeViewController.h"
-#import "SYStickHeaderWaterFallLayout.h"
+#import "Classes/SYStickHeaderWaterFallLayout.h"
 #import "HomeModel.h"
 #import "MJExtension.h"
 #import "SDCycleScrollView.h"
