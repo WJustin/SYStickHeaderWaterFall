@@ -9,7 +9,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = 'SYStickHeaderWaterFall'
-  s.version      = '0.0.1'
+  s.version      = '0.0.2'
   s.summary      = 'SYStickHeaderWaterFall is an layout for section sticky collecionView.'
 
   # This description is used to generate tags and improve search results.
