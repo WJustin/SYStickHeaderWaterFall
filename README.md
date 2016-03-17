@@ -14,3 +14,11 @@ SYStickHeaderWaterFall <a href="#中文介绍">中文介绍</a>
 以后封装任务：
 1.在SYStickHeaderWaterFallLayout中增加section上间距和section下间距和section左间距和section右间距等属性。
 
+安装
+==============
+
+### CocoaPods
+
+1. 将 cocoapods 更新至最新版本.
+2. 在 Podfile 中添加 `pod "SYStickHeaderWaterFall"`。
+3. 执行 `pod install` 或 `pod update`。
