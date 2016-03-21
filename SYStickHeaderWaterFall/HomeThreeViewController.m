@@ -18,6 +18,8 @@
 #import "MBProgressHUD.h"
 #import "HPCollectionViewCell.h"
 #import "UIView+SDExtension.h"
+#define kDeviceWidth  [UIScreen mainScreen].bounds.size.width
+#define kDeviceHeight [UIScreen mainScreen].bounds.size.height
 static NSString* const WaterfallCellIdentifier = @"WaterfallCell";
 static NSString* const WaterfallHeaderIdentifier = @"WaterfallHeader";
 @interface HomeThreeViewController ()< UICollectionViewDataSource,UICollectionViewDelegate,UIScrollViewDelegate,SDCycleScrollViewDelegate,SYStickHeaderWaterFallDelegate>
@@ -67,14 +69,15 @@ static NSString* const WaterfallHeaderIdentifier = @"WaterfallHeader";
 {
     SYStickHeaderWaterFallLayout *cvLayout = [[SYStickHeaderWaterFallLayout alloc] init];
     cvLayout.delegate = self;
-    cvLayout.itemWidth = (kDeviceWidth-15)/2;
-    cvLayout.topInset = 0.0f;
-    cvLayout.bottomInset = 0.0f;
+//    cvLayout.itemWidth = (kDeviceWidth-15)/2;
+//    cvLayout.topInset = 0.0f;
+//    cvLayout.bottomInset = 0.0f;
     cvLayout.stickyHeader = YES;
     
     
     self.collectView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, kDeviceWidth, kDeviceHeight ) collectionViewLayout:cvLayout];
-    
+//    self.collectView.delegate = self;
+//    self.collectView.dataSource = self;
     self.collectView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.collectView];
     [self.view insertSubview:self.goToTopBtn aboveSubview:self.collectView];
@@ -274,6 +277,32 @@ heightForHeaderAtIndexPath:(NSIndexPath *)indexPath {
         return 38.0f;
     }
     return 0.0f;
+}
+- (CGFloat)collectionView:(nonnull UICollectionView *)collectionView
+                   layout:(nonnull SYStickHeaderWaterFallLayout *)collectionViewLayout
+    widthForItemInSection:( NSInteger )section
+{
+    if (section ==0) {
+        return kDeviceWidth;
+    }else if (section ==1)
+    {
+        return (kDeviceWidth-15)/2;
+    }
+    return 0;
+}
+
+- (CGFloat) collectionView:(nonnull UICollectionView *)collectionView
+                    layout:(nonnull SYStickHeaderWaterFallLayout *)collectionViewLayout
+              topInSection:(NSInteger )section
+{
+    return 0;
+}
+
+- (CGFloat) collectionView:(nonnull UICollectionView *)collectionView
+                    layout:(nonnull SYStickHeaderWaterFallLayout *)collectionViewLayout
+           bottomInSection:( NSInteger)section
+{
+    return 0;
 }
 - (void)clicked {
     if ([self.delegate respondsToSelector:@selector(leftBtnClicked)]) {

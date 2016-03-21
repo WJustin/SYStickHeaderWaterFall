@@ -5,41 +5,59 @@
 //  Created by 张苏亚 on 16/3/4.
 //  Copyright © 2016年 suya. All rights reserved.
 //
+//  Thanks FRGWaterfallCollectionViewLayout😊.
 
 #import <UIKit/UIKit.h>
-#define kDeviceWidth  [UIScreen mainScreen].bounds.size.width
-#define kDeviceHeight [UIScreen mainScreen].bounds.size.height
-#define kFixTop (44)//在此修正sectionheader停留的位置
 
 @class SYStickHeaderWaterFallLayout;
 
 @protocol SYStickHeaderWaterFallDelegate <NSObject>
-
-- (CGFloat)collectionView:(UICollectionView *)collectionView
-                   layout:(SYStickHeaderWaterFallLayout *)collectionViewLayout
- heightForItemAtIndexPath:(NSIndexPath *)indexPath;
+//Inspired by UITableViewDelegate 😄
+/**
+ *  返回所在section的每个item的width（一个section只有一个width）
+ *
+ */
+- (CGFloat)collectionView:(nonnull UICollectionView *)collectionView
+                   layout:(nonnull SYStickHeaderWaterFallLayout *)collectionViewLayout
+   widthForItemInSection:( NSInteger )section;
+/**
+ *  返回所在indexPath的每个item的height（每个item有一个height，要不然怎么是瀑布流😄）
+ *
+ */
+- (CGFloat)collectionView:(nonnull UICollectionView *)collectionView
+                   layout:(nonnull SYStickHeaderWaterFallLayout *)collectionViewLayout
+ heightForItemAtIndexPath:(nonnull NSIndexPath *)indexPath;
 
 @optional
-
-- (CGFloat) collectionView:(UICollectionView *)collectionView
-                    layout:(SYStickHeaderWaterFallLayout *)collectionViewLayout
-heightForHeaderAtIndexPath:(NSIndexPath *)indexPath;
+/**
+ *  返回所在indexPath的header的height
+ *
+*/
+- (CGFloat) collectionView:(nonnull UICollectionView *)collectionView
+                    layout:(nonnull SYStickHeaderWaterFallLayout *)collectionViewLayout
+heightForHeaderAtIndexPath:(nonnull NSIndexPath *)indexPath;
+/**
+ *  返回所在section与上一个section的间距(表达的可能不够准确，但是你们都懂的)
+ *
+ */
+- (CGFloat) collectionView:(nonnull UICollectionView *)collectionView
+                    layout:(nonnull SYStickHeaderWaterFallLayout *)collectionViewLayout
+topInSection:(NSInteger )section;
+/**
+ *  返回所在section与下一个section的间距(表达的可能不够准确，但是你们都懂的)
+ *
+ */
+- (CGFloat) collectionView:(nonnull UICollectionView *)collectionView
+                    layout:(nonnull SYStickHeaderWaterFallLayout *)collectionViewLayout
+            bottomInSection:( NSInteger)section;
 
 @end
 
 @interface SYStickHeaderWaterFallLayout : UICollectionViewLayout
 
-@property (nonatomic, assign)  id<SYStickHeaderWaterFallDelegate> delegate;
-//itemWidth必须设定.如果topInset和BottomInset未设定则设为(kDeviceWidth -itemWidth) /3（两行时）
-@property (nonatomic) CGFloat itemWidth;
+@property (nonatomic, assign,nonnull)  id<SYStickHeaderWaterFallDelegate> delegate;
 
-@property (nonatomic) CGFloat topInset;
-@property (nonatomic) CGFloat bottomInset;
-
-//@property (nonatomic)BOOL isSectionHeaderInset;//是否头部有上下间距
-//@property (nonatomic) CGFloat headerTopInset;//头部上间距
-//@property (nonatomic) CGFloat headerBottomInset;//头部下间距
-
+//是否设置sectionHeader停留
 @property (nonatomic) BOOL stickyHeader;
 
 @end
