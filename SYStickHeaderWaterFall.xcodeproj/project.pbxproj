@@ -23,6 +23,7 @@
 		0459790B1C99054F00C2E8C2 /* SYStickHeaderWaterFallLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 0459790A1C99054F00C2E8C2 /* SYStickHeaderWaterFallLayout.m */; };
 		04A93B871CA0D7BC00C7DBC1 /* MulitipleSectionNoTopHeightViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A93B861CA0D7BC00C7DBC1 /* MulitipleSectionNoTopHeightViewController.m */; };
 		04A93B8A1CA0E2F500C7DBC1 /* MulitipleSectionHeaderToTopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A93B891CA0E2F500C7DBC1 /* MulitipleSectionHeaderToTopViewController.m */; };
+		04A93B8C1CA0FB2C00C7DBC1 /* 4.gif in Resources */ = {isa = PBXBuildFile; fileRef = 04A93B8B1CA0FB2C00C7DBC1 /* 4.gif */; };
 		04CE95321C8992F000CBA178 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CE95311C8992F000CBA178 /* main.m */; };
 		04CE95351C8992F000CBA178 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CE95341C8992F000CBA178 /* AppDelegate.m */; };
 		04CE95381C8992F000CBA178 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CE95371C8992F000CBA178 /* ViewController.m */; };
@@ -80,6 +81,7 @@
 		04A93B861CA0D7BC00C7DBC1 /* MulitipleSectionNoTopHeightViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MulitipleSectionNoTopHeightViewController.m; sourceTree = "<group>"; };
 		04A93B881CA0E2F500C7DBC1 /* MulitipleSectionHeaderToTopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MulitipleSectionHeaderToTopViewController.h; sourceTree = "<group>"; };
 		04A93B891CA0E2F500C7DBC1 /* MulitipleSectionHeaderToTopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MulitipleSectionHeaderToTopViewController.m; sourceTree = "<group>"; };
+		04A93B8B1CA0FB2C00C7DBC1 /* 4.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 4.gif; sourceTree = "<group>"; };
 		04CE952D1C8992F000CBA178 /* SYStickHeaderWaterFall.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SYStickHeaderWaterFall.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04CE95311C8992F000CBA178 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		04CE95331C8992F000CBA178 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -186,6 +188,7 @@
 		04CE952F1C8992F000CBA178 /* SYStickHeaderWaterFall */ = {
 			isa = PBXGroup;
 			children = (
+				04A93B8B1CA0FB2C00C7DBC1 /* 4.gif */,
 				042E9AC11C8EC486004C406C /* 3.gif */,
 				042E9ABF1C8EC41D004C406C /* 2.gif */,
 				042E9ABD1C8EC093004C406C /* 1.gif */,
@@ -399,6 +402,7 @@
 				045979081C99039100C2E8C2 /* Classes in Resources */,
 				042E9AC01C8EC41D004C406C /* 2.gif in Resources */,
 				042E9ABE1C8EC093004C406C /* 1.gif in Resources */,
+				04A93B8C1CA0FB2C00C7DBC1 /* 4.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
