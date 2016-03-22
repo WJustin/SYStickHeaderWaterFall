@@ -1,12 +1,12 @@
 //
-//  HomeThreeViewController.m
-//  mokoo
+//  MulitipleSectionViewController.m
+//  SYStickHeaderWaterFall
 //
-//  Created by Mac on 15/12/14.
-//  Copyright © 2015年 Mac. All rights reserved.
+//  Created by Mac on 16/3/21.
+//  Copyright © 2016年 suya. All rights reserved.
 //
 
-#import "HomeThreeViewController.h"
+#import "MulitipleSectionViewController.h"
 #import "Classes/SYStickHeaderWaterFallLayout.h"
 #import "HomeModel.h"
 #import "MJExtension.h"
@@ -22,13 +22,12 @@
 #define kDeviceHeight [UIScreen mainScreen].bounds.size.height
 static NSString* const WaterfallCellIdentifier = @"WaterfallCell";
 static NSString* const WaterfallHeaderIdentifier = @"WaterfallHeader";
-@interface HomeThreeViewController ()< UICollectionViewDataSource,UICollectionViewDelegate,UIScrollViewDelegate,SDCycleScrollViewDelegate,SYStickHeaderWaterFallDelegate>
+@interface MulitipleSectionViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,UIScrollViewDelegate,SDCycleScrollViewDelegate,SYStickHeaderWaterFallDelegate>
 {
     NSInteger showPage;
-//    notiNilView *_notinilView;
-    HomePageHeadView *headView;
+    //    notiNilView *_notinilView;
+    
     UICollectionReusableView *reusableView;
-//    SettingVersionModel *settingModel;
 }
 @property (nonatomic,strong)UIScrollView *baseScrollView;
 @property (nonatomic,strong )SDCycleScrollView *cycleScrollADView;
@@ -37,10 +36,9 @@ static NSString* const WaterfallHeaderIdentifier = @"WaterfallHeader";
 @property (nonatomic,strong)NSMutableArray *banners;
 @property (nonatomic,strong)NSMutableDictionary *optionalParam;
 @end
-#define kFileName @"homePage.plist"
-@implementation HomeThreeViewController
-@synthesize goToTopBtn =  _goToTopBtn;
+#define kFileName @"MulitipleSectionVC.plist"
 
+@implementation MulitipleSectionViewController
 -(NSMutableArray *)banners
 {
     if (_banners ==nil) {
@@ -61,30 +59,28 @@ static NSString* const WaterfallHeaderIdentifier = @"WaterfallHeader";
     [self initNavigationItem];
     [self initRefresh];
     [self initData];
-//    [self.collectView.header beginRefreshing];
-//    [self requestHomePageList:@"1" refreshType:@"header"];
 
+    // Do any additional setup after loading the view.
 }
 -(void)initCollectionView
 {
     SYStickHeaderWaterFallLayout *cvLayout = [[SYStickHeaderWaterFallLayout alloc] init];
     cvLayout.delegate = self;
-//    cvLayout.itemWidth = (kDeviceWidth-15)/2;
-//    cvLayout.topInset = 0.0f;
-//    cvLayout.bottomInset = 0.0f;
+    //    cvLayout.itemWidth = (kDeviceWidth-15)/2;
+    //    cvLayout.topInset = 0.0f;
+    //    cvLayout.bottomInset = 0.0f;
     cvLayout.isStickyHeader = YES;
-    
+    cvLayout.isTopForHeader = YES;
     
     self.collectView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, kDeviceWidth, kDeviceHeight ) collectionViewLayout:cvLayout];
-
-//    self.collectView.delegate = self;
-//    self.collectView.dataSource = self;
-    self.collectView.backgroundColor = [UIColor whiteColor];
+    self.collectView.backgroundColor = [UIColor grayColor];
+    //    self.collectView.delegate = self;
+    //    self.collectView.dataSource = self;
     [self.view addSubview:self.collectView];
     [self.view insertSubview:self.goToTopBtn aboveSubview:self.collectView];
-
+    
     [self.collectView registerNib:[UINib nibWithNibName:@"HPCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:WaterfallCellIdentifier];
-
+    
     [self.collectView registerClass:[HomePageHeadView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:WaterfallHeaderIdentifier];
     [self.collectView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"cell"];
     [self.collectView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"head"];
@@ -103,7 +99,7 @@ static NSString* const WaterfallHeaderIdentifier = @"WaterfallHeader";
     self.leftBtn.frame = CGRectMake(16, 16, 14, 13);
     [self.leftBtn addTarget:self action:@selector(clicked) forControlEvents:UIControlEventTouchUpInside];
     [self.leftBtn setImage:[UIImage imageNamed:@"top_sidebar.pdf"]  forState:UIControlStateNormal];
-//    [self.leftBtn setEnlargeEdgeWithTop:10 right:20 bottom:10 left:20];
+    //    [self.leftBtn setEnlargeEdgeWithTop:10 right:20 bottom:10 left:20];
     UIBarButtonItem *barLeftBtn = [[UIBarButtonItem alloc]initWithCustomView:self.leftBtn];
     UIImageView *titleImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 34, 20)];
     titleImageView.image = [UIImage imageNamed:@"home_logo.pdf"];
@@ -117,15 +113,6 @@ static NSString* const WaterfallHeaderIdentifier = @"WaterfallHeader";
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
     return 2;
@@ -144,30 +131,20 @@ static NSString* const WaterfallHeaderIdentifier = @"WaterfallHeader";
         
     }
     else
-        {
-            itemCount = 1;
-        }
+    {
+        itemCount = 1;
+    }
     return itemCount;
 }
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
 {
     reusableView = nil;
-    if ([kind isEqual:UICollectionElementKindSectionHeader]&&indexPath.section ==1) {
-        headView= (HomePageHeadView *)[collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:WaterfallHeaderIdentifier forIndexPath:indexPath];
+    if ([kind isEqual:UICollectionElementKindSectionHeader]) {
+        HomePageHeadView *headView= (HomePageHeadView *)[collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:WaterfallHeaderIdentifier forIndexPath:indexPath];
         //            headView = [[HomePageHeadView alloc] initWithFrame:CGRectMake(0, 0, kDeviceWidth, 30)];
-        headView.tag = 1001;
-        [headView.styleBtn addTarget:self action:@selector(styleBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-        [headView.typeBtn addTarget:self action:@selector(typeBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-        [headView.moreBtn addTarget:self action:@selector(moreBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+        headView.tag = 1001 +indexPath.section;
         reusableView = headView;
-        return reusableView;
-    }else if ([kind isEqual:UICollectionElementKindSectionHeader]&&indexPath.section ==0)
-    {
-        //这一段代码可以想办法去掉
-        reusableView =[collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"head" forIndexPath:indexPath];
-        reusableView.frame = CGRectMake(0, 0, 0, 0);
-        reusableView.hidden = YES;
         return reusableView;
     }
     
@@ -177,18 +154,18 @@ static NSString* const WaterfallHeaderIdentifier = @"WaterfallHeader";
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section ==1) {
-            HPCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:WaterfallCellIdentifier forIndexPath:indexPath];
-//            cell.backgroundColor = listBgColor;
-            cell.shop = self.shops[indexPath.item];
-            UITapGestureRecognizer *personalGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(imageGesture:)];
-            //            personalGesture.cancelsTouchesInView = NO;
-            cell.markImageView.userInteractionEnabled = YES;
-            [cell.markImageView addGestureRecognizer:personalGesture];
-            return cell;
+        HPCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:WaterfallCellIdentifier forIndexPath:indexPath];
+        //            cell.backgroundColor = listBgColor;
+        cell.shop = self.shops[indexPath.item];
+        UITapGestureRecognizer *personalGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(imageGesture:)];
+        //            personalGesture.cancelsTouchesInView = NO;
+        cell.markImageView.userInteractionEnabled = YES;
+        [cell.markImageView addGestureRecognizer:personalGesture];
+        return cell;
         
     }else if (indexPath.section ==0)
     {
-        SDCycleScrollView *cycleView = [[SDCycleScrollView alloc] initWithFrame:CGRectMake(0, 0, kDeviceWidth, 180)];
+        SDCycleScrollView *cycleView = [[SDCycleScrollView alloc] initWithFrame:CGRectMake(0, 18, kDeviceWidth, 180)];
         cycleView.autoScroll = true;
         cycleView.autoScrollTimeInterval = 4.0;
         cycleView.delegate = self;
@@ -221,14 +198,14 @@ static NSString* const WaterfallHeaderIdentifier = @"WaterfallHeader";
         
         UICollectionViewCell *cycleCollectionViewCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath ];
         cycleCollectionViewCell.frame = cycleView.frame;
-//        cycleCollectionViewCell.mj_y =38;
+        //        cycleCollectionViewCell.mj_y =38;
         //            [[UICollectionViewCell alloc]initWithFrame:cycleView.frame];
         [cycleCollectionViewCell addSubview:cycleView];
         return cycleCollectionViewCell;
-
+        
     }
     
-            return nil;
+    return nil;
     
 }
 
@@ -275,10 +252,7 @@ static NSString* const WaterfallHeaderIdentifier = @"WaterfallHeader";
 - (CGFloat)collectionView:(UICollectionView *)collectionView
                    layout:(SYStickHeaderWaterFallLayout *)collectionViewLayout
 heightForHeaderAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section ==1) {
         return 38.0f;
-    }
-    return 0.0f;
 }
 - (CGFloat)collectionView:(nonnull UICollectionView *)collectionView
                    layout:(nonnull SYStickHeaderWaterFallLayout *)collectionViewLayout
@@ -297,25 +271,28 @@ heightForHeaderAtIndexPath:(NSIndexPath *)indexPath {
                     layout:(nonnull SYStickHeaderWaterFallLayout *)collectionViewLayout
               topInSection:(NSInteger )section
 {
-    return 0;
+    if (section ==0) {
+        return 3;
+    }else if (section ==1)
+    {
+        return 10;
+    }
+    return 10;
 }
 
 - (CGFloat) collectionView:(nonnull UICollectionView *)collectionView
                     layout:(nonnull SYStickHeaderWaterFallLayout *)collectionViewLayout
            bottomInSection:( NSInteger)section
 {
-    return 0;
+    return 5;
 }
--(void)clicked
-{
-    [self.navigationController popViewControllerAnimated:YES];
-}
+
 //SDCycleScrollViewDelegate
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index
 {
     //广告页跳转
     //广告页跳转
-    }
+}
 
 -(void)requestHomePageList:(NSString *)page refreshType:(NSString *)type
 {
@@ -328,7 +305,7 @@ heightForHeaderAtIndexPath:(NSIndexPath *)indexPath {
                     [self.collectView reloadData];
                     
                     return;
-
+                    
                 }else
                 {
                     MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -394,26 +371,14 @@ heightForHeaderAtIndexPath:(NSIndexPath *)indexPath {
             }
             
         }
-
+        
         
         
     }];
     
 }
 //
--(void)styleBtnClicked:(UIButton *)btn
-{
-    
-}
--(void)typeBtnClicked:(UIButton *)btn
-{
-    
-}
--(void)moreBtnClicked:(UIButton *)btn
-{
-    
-    
-}
+
 -(void)doAfter
 {
     
@@ -425,9 +390,9 @@ heightForHeaderAtIndexPath:(NSIndexPath *)indexPath {
     HPCollectionViewCell * cell = (HPCollectionViewCell *)tap.view.superview.superview;
     NSIndexPath *indexPath = [_collectView indexPathForCell:cell];
     cell.shop = self.shops[indexPath.item];
-//    PersonalCenterViewController *personalViewController = [[PersonalCenterViewController alloc]init];
-//    personalViewController.user_id = cell.shop.user_id;
-//    [self.navigationController pushViewController:personalViewController animated:NO];
+    //    PersonalCenterViewController *personalViewController = [[PersonalCenterViewController alloc]init];
+    //    personalViewController.user_id = cell.shop.user_id;
+    //    [self.navigationController pushViewController:personalViewController animated:NO];
 }
 
 
@@ -546,9 +511,13 @@ heightForHeaderAtIndexPath:(NSIndexPath *)indexPath {
     //后加载新数据
     [self.collectView.header performSelector:@selector(beginRefreshing) withObject:nil];
 }
-
+-(void)clicked
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
 -(BOOL)prefersStatusBarHidden
 {
     return YES;
 }
+
 @end

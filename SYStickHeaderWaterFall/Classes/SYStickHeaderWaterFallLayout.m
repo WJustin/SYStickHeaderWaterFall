@@ -9,7 +9,6 @@
 #import "SYStickHeaderWaterFallLayout.h"
 #define kDeviceWidth  [UIScreen mainScreen].bounds.size.width
 #define kDeviceHeight [UIScreen mainScreen].bounds.size.height
-#define kFixTop (44)//在此修正sectionheader停留的位置
 #define NSLog(format, ...) do { \
 fprintf(stderr, "<%s : %d> %s\n", \
 [[[NSString stringWithUTF8String:__FILE__] lastPathComponent] UTF8String], \
@@ -26,6 +25,7 @@ NSString* const SYStickHeaderWaterDecorationKind = @"Decoration";
 @property (nonatomic,strong) NSArray *itemInnerMarginArray;//
 @property (nonatomic,strong) NSArray *columnsCountArray;//每个section的columncount
 @property (nonatomic,strong) NSArray *itemsWidthArray;
+@property (nonatomic,strong) NSArray *headerToTopArray;//每个section的停留时与顶部的距离
 @property (nonatomic) NSDictionary *layoutInfo;//全部layoutAttribute信息
 @property (nonatomic) NSArray *sectionsHeights;//
 @property (nonatomic) NSArray *itemsInSectionsHeights;//每个section里cell的高度.
@@ -54,9 +54,9 @@ NSString* const SYStickHeaderWaterDecorationKind = @"Decoration";
 
 
 - (void)setup {
-
-
-    self.stickyHeader = YES;
+    self.fixTop = 64;
+    self.isTopForHeader = NO;
+    self.isStickyHeader = YES;
     [self invalidateLayout];
 
 }
@@ -65,7 +65,7 @@ NSString* const SYStickHeaderWaterDecorationKind = @"Decoration";
     if (self.collectionView.isDecelerating || self.collectionView.isDragging) {
         
     } else {
-
+        [self calculateHeaderToTop];//计算每个section的停留时与顶部的距离通,过代理方法（collectionView:layout:headerToTopInSection:）获得
         [self calculateItemsWidth];//计算所在section的每个item的width（一个section只有一个width）.通过代理方法（collectionView:layout:widthForItemInSection:）获得
         [self calculateSectionsTopInsetAndBottomInset];//计算所在section与上一个section的间距和所在section与下一个section的间距.通过代理方法（collectionView:layout:topInSection:和collectionView:layout:bottomInSection:）获得
         [self calculateColumnsCount];//计算每个section的列数（根据itemsWidthArray计算列数，而itemsWidthArray是[self calculateItemsWidth]计算出来的）
@@ -91,7 +91,7 @@ NSString* const SYStickHeaderWaterDecorationKind = @"Decoration";
         }];
     }];
     
-    if(!self.stickyHeader) {
+    if(!self.isStickyHeader) {
         return allAttributes;
     }
     //保证section停留
@@ -106,19 +106,20 @@ NSString* const SYStickHeaderWaterDecorationKind = @"Decoration";
             CGPoint origin = layoutAttributes.frame.origin;
 
             origin.y = MIN(
-                           MAX(self.collectionView.contentOffset.y + kFixTop, (CGRectGetMinY(firstCellAttrs.frame) - headerHeight) - [self.topInsetArray[section] floatValue]),
-                           CGRectGetMinY(firstCellAttrs.frame) - headerHeight + [[self.sectionsHeights objectAtIndex:section] floatValue] - currentHeaderHeight - [self.topInsetArray[section] floatValue]
-                           ) + [self.topInsetArray[section] floatValue] ;//
+                           MAX(self.collectionView.contentOffset.y + self.fixTop +[self.headerToTopArray[section] floatValue], (CGRectGetMinY(firstCellAttrs.frame) - headerHeight) - (self.isTopForHeader?[self.topInsetArray[section] floatValue]:0.0f)) ,
+                           CGRectGetMinY(firstCellAttrs.frame) - headerHeight + [[self.sectionsHeights objectAtIndex:section] floatValue] - currentHeaderHeight - (self.isTopForHeader?[self.topInsetArray[section] floatValue]:0.0f)                           ) + (self.isTopForHeader?[self.topInsetArray[section] floatValue]:0.0f) ;//
             CGFloat width = layoutAttributes.frame.size.width;
-            if(self.collectionView.contentOffset.y > origin.y -(kFixTop +20)) {
+            if(self.collectionView.contentOffset.y > origin.y -self.fixTop -[self.headerToTopArray[section] floatValue]) {
                 width = self.collectionView.bounds.size.width;
                 origin.x = 0;
+                origin.y = origin.y + [self.headerToTopArray[section] floatValue];
                 NSLog(@"self.collectionView.contentOffset.y%@",@(self.collectionView.contentOffset.y));
                 
             } else {
-
+                
                 width = kDeviceWidth;
                 origin.x = 0;
+
             }
             
             layoutAttributes.zIndex = 1024 +section;
@@ -163,11 +164,19 @@ NSString* const SYStickHeaderWaterDecorationKind = @"Decoration";
 }
 
 -(BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)newBound {
-    return self.stickyHeader;
+    return self.isStickyHeader;
 }
 
 #pragma mark - Prepare layout calculation
-
+//计算每个section的停留时与顶部的距离（此时不加上topInsetArray里的值）
+-(void)calculateHeaderToTop
+{
+    NSMutableArray *headerToTopArray = [NSMutableArray arrayWithCapacity:self.collectionView.numberOfSections];
+    for (NSInteger section = 0; section< self.collectionView.numberOfSections; section++) {
+        [headerToTopArray addObject:[NSNumber numberWithFloat:[self headerToTopInSection:section]]];
+    }
+    self.headerToTopArray = [headerToTopArray copy];
+}
 //每个cell的高度.
 - (void) calculateItemsHeights {
     NSMutableArray *itemsInSectionsHeights = [NSMutableArray arrayWithCapacity:self.collectionView.numberOfSections];
@@ -391,7 +400,7 @@ NSString* const SYStickHeaderWaterDecorationKind = @"Decoration";
                   heightForHeaderAtIndexPath:indexPath];
     }
     
-    return 0;
+    return 0.0f;
 }
 //返回headerView（如果有）与cell之间的距离。通过代理返回，如果没有实现代理，返回0
 - (CGFloat) topInSection:(NSInteger )section
@@ -401,7 +410,7 @@ NSString* const SYStickHeaderWaterDecorationKind = @"Decoration";
                                       layout:self
                                 topInSection:section];
     }
-    return 0;
+    return 0.0f;
 }
 //返回cell与下一个section的headerView（如果有）之间的距离。通过代理返回，如果没有实现代理，返回0
 -(CGFloat) bottomInSection:(NSInteger)section
@@ -411,7 +420,7 @@ NSString* const SYStickHeaderWaterDecorationKind = @"Decoration";
                                       layout:self
                              bottomInSection:section];
     }
-    return 0;
+    return 0.0f;
 }
 //每个section里的item的width,默认返回屏幕的宽度
 -(CGFloat) itemWidthInSection :(NSInteger)section
@@ -420,5 +429,16 @@ NSString* const SYStickHeaderWaterDecorationKind = @"Decoration";
         return [self.delegate collectionView:self.collectionView layout:self widthForItemInSection:section];
     }
     return kDeviceWidth;
+}
+/**
+ *返回所在section的header停留时与顶部的距离（如果设置isTopForHeader ＝ yes ，则距离会叠加），默认返回0
+ *
+ */
+-(CGFloat)headerToTopInSection:(NSInteger)section
+{
+    if ([self.delegate respondsToSelector:@selector(collectionView:layout:headerToTopInSection:)]) {
+        return [self.delegate collectionView:self.collectionView layout:self headerToTopInSection:section];
+    }
+    return 0.0f;
 }
 @end

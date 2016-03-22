@@ -17,8 +17,12 @@
 		042E9ABE1C8EC093004C406C /* 1.gif in Resources */ = {isa = PBXBuildFile; fileRef = 042E9ABD1C8EC093004C406C /* 1.gif */; };
 		042E9AC01C8EC41D004C406C /* 2.gif in Resources */ = {isa = PBXBuildFile; fileRef = 042E9ABF1C8EC41D004C406C /* 2.gif */; };
 		042E9AC21C8EC486004C406C /* 3.gif in Resources */ = {isa = PBXBuildFile; fileRef = 042E9AC11C8EC486004C406C /* 3.gif */; };
+		045631541C9FF5610099ED78 /* SYRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 045631531C9FF5610099ED78 /* SYRootViewController.m */; };
+		045631571C9FF7CF0099ED78 /* MulitipleSectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 045631561C9FF7CF0099ED78 /* MulitipleSectionViewController.m */; };
 		045979081C99039100C2E8C2 /* Classes in Resources */ = {isa = PBXBuildFile; fileRef = 045979071C99039100C2E8C2 /* Classes */; };
 		0459790B1C99054F00C2E8C2 /* SYStickHeaderWaterFallLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 0459790A1C99054F00C2E8C2 /* SYStickHeaderWaterFallLayout.m */; };
+		04A93B871CA0D7BC00C7DBC1 /* MulitipleSectionNoTopHeightViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A93B861CA0D7BC00C7DBC1 /* MulitipleSectionNoTopHeightViewController.m */; };
+		04A93B8A1CA0E2F500C7DBC1 /* MulitipleSectionHeaderToTopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A93B891CA0E2F500C7DBC1 /* MulitipleSectionHeaderToTopViewController.m */; };
 		04CE95321C8992F000CBA178 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CE95311C8992F000CBA178 /* main.m */; };
 		04CE95351C8992F000CBA178 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CE95341C8992F000CBA178 /* AppDelegate.m */; };
 		04CE95381C8992F000CBA178 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CE95371C8992F000CBA178 /* ViewController.m */; };
@@ -66,8 +70,16 @@
 		042E9ABD1C8EC093004C406C /* 1.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 1.gif; sourceTree = "<group>"; };
 		042E9ABF1C8EC41D004C406C /* 2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 2.gif; sourceTree = "<group>"; };
 		042E9AC11C8EC486004C406C /* 3.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 3.gif; sourceTree = "<group>"; };
+		045631521C9FF5610099ED78 /* SYRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYRootViewController.h; sourceTree = "<group>"; };
+		045631531C9FF5610099ED78 /* SYRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYRootViewController.m; sourceTree = "<group>"; };
+		045631551C9FF7CF0099ED78 /* MulitipleSectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MulitipleSectionViewController.h; sourceTree = "<group>"; };
+		045631561C9FF7CF0099ED78 /* MulitipleSectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MulitipleSectionViewController.m; sourceTree = "<group>"; };
 		045979071C99039100C2E8C2 /* Classes */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Classes; path = SYStickHeaderWaterFall/Classes; sourceTree = "<group>"; };
 		0459790A1C99054F00C2E8C2 /* SYStickHeaderWaterFallLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SYStickHeaderWaterFallLayout.m; path = SYStickHeaderWaterFall/Classes/SYStickHeaderWaterFallLayout.m; sourceTree = "<group>"; };
+		04A93B851CA0D7BC00C7DBC1 /* MulitipleSectionNoTopHeightViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MulitipleSectionNoTopHeightViewController.h; sourceTree = "<group>"; };
+		04A93B861CA0D7BC00C7DBC1 /* MulitipleSectionNoTopHeightViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MulitipleSectionNoTopHeightViewController.m; sourceTree = "<group>"; };
+		04A93B881CA0E2F500C7DBC1 /* MulitipleSectionHeaderToTopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MulitipleSectionHeaderToTopViewController.h; sourceTree = "<group>"; };
+		04A93B891CA0E2F500C7DBC1 /* MulitipleSectionHeaderToTopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MulitipleSectionHeaderToTopViewController.m; sourceTree = "<group>"; };
 		04CE952D1C8992F000CBA178 /* SYStickHeaderWaterFall.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SYStickHeaderWaterFall.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04CE95311C8992F000CBA178 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		04CE95331C8992F000CBA178 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -128,6 +140,12 @@
 			children = (
 				042E9AAE1C8EA269004C406C /* HomeThreeViewController.h */,
 				042E9AAF1C8EA269004C406C /* HomeThreeViewController.m */,
+				045631551C9FF7CF0099ED78 /* MulitipleSectionViewController.h */,
+				045631561C9FF7CF0099ED78 /* MulitipleSectionViewController.m */,
+				04A93B851CA0D7BC00C7DBC1 /* MulitipleSectionNoTopHeightViewController.h */,
+				04A93B861CA0D7BC00C7DBC1 /* MulitipleSectionNoTopHeightViewController.m */,
+				04A93B881CA0E2F500C7DBC1 /* MulitipleSectionHeaderToTopViewController.h */,
+				04A93B891CA0E2F500C7DBC1 /* MulitipleSectionHeaderToTopViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -184,6 +202,8 @@
 				04CE953E1C8992F000CBA178 /* LaunchScreen.storyboard */,
 				04CE95411C8992F000CBA178 /* Info.plist */,
 				04CE95301C8992F000CBA178 /* Supporting Files */,
+				045631521C9FF5610099ED78 /* SYRootViewController.h */,
+				045631531C9FF5610099ED78 /* SYRootViewController.m */,
 			);
 			path = SYStickHeaderWaterFall;
 			sourceTree = "<group>";
@@ -528,11 +548,15 @@
 			files = (
 				0459790B1C99054F00C2E8C2 /* SYStickHeaderWaterFallLayout.m in Sources */,
 				042E9AB31C8EA66D004C406C /* HomeModel.m in Sources */,
+				04A93B8A1CA0E2F500C7DBC1 /* MulitipleSectionHeaderToTopViewController.m in Sources */,
+				04A93B871CA0D7BC00C7DBC1 /* MulitipleSectionNoTopHeightViewController.m in Sources */,
 				04CE95381C8992F000CBA178 /* ViewController.m in Sources */,
 				042E9AB71C8EA810004C406C /* RequestCustom.m in Sources */,
 				042E9AAC1C8EA247004C406C /* HomePageHeadView.m in Sources */,
 				04CE95351C8992F000CBA178 /* AppDelegate.m in Sources */,
 				042E9AAD1C8EA247004C406C /* HPCollectionViewCell.m in Sources */,
+				045631541C9FF5610099ED78 /* SYRootViewController.m in Sources */,
+				045631571C9FF7CF0099ED78 /* MulitipleSectionViewController.m in Sources */,
 				04CE95321C8992F000CBA178 /* main.m in Sources */,
 				042E9AB01C8EA269004C406C /* HomeThreeViewController.m in Sources */,
 				042E9ABA1C8EAA65004C406C /* BannerModel.m in Sources */,

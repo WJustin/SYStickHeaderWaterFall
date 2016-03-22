@@ -8,6 +8,51 @@
 
 #import "AppDelegate.h"
 #import "HomeThreeViewController.h"
+#import "SYRootViewController.h"
+/// Fix the navigation bar height when hide status bar.
+@interface SYExampleNavBar : UINavigationBar
+@end
+
+@implementation SYExampleNavBar {
+    CGSize _previousSize;
+}
+
+- (CGSize)sizeThatFits:(CGSize)size {
+    size = [super sizeThatFits:size];
+    if ([UIApplication sharedApplication].statusBarHidden) {
+        size.height = 64;
+    }
+    return size;
+}
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    if (!CGSizeEqualToSize(self.bounds.size, _previousSize)) {
+        _previousSize = self.bounds.size;
+        [self.layer removeAllAnimations];
+        [self.layer.sublayers enumerateObjectsUsingBlock:^(CALayer *layer, NSUInteger idx, BOOL *stop) {
+            [layer removeAllAnimations];
+        }];
+    }
+}
+
+@end
+@interface SYExampleNavController : UINavigationController
+@end
+@implementation SYExampleNavController
+- (BOOL)shouldAutorotate {
+    return YES;
+}
+
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskPortrait;
+}
+
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
+    return UIInterfaceOrientationPortrait;
+}
+
+@end
 @interface AppDelegate ()
 
 @end
@@ -16,17 +61,21 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    SYRootViewController *root = [SYRootViewController new];
+    SYExampleNavController *nav = [[SYExampleNavController alloc] initWithNavigationBarClass:[SYExampleNavBar class] toolbarClass:[UIToolbar class]];
+    if ([nav respondsToSelector:@selector(setAutomaticallyAdjustsScrollViewInsets:)]) {
+        nav.automaticallyAdjustsScrollViewInsets = NO;
+    }
+    [nav pushViewController:root animated:NO];
+    
+    self.rootViewController = nav;
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    self.window.backgroundColor = [UIColor whiteColor];
-    
-    HomeThreeViewController *homeVC = [[HomeThreeViewController alloc] init];
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:homeVC];
-    self.window.rootViewController = nav;
-    
+    self.window.rootViewController = self.rootViewController;
+    self.window.backgroundColor = [UIColor grayColor];
     [self.window makeKeyAndVisible];
-
-    // Override point for customization after application launch.
+    
     return YES;
+
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

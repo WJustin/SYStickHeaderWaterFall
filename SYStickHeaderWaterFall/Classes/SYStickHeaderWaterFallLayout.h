@@ -5,7 +5,7 @@
 //  Created by 张苏亚 on 16/3/4.
 //  Copyright © 2016年 suya. All rights reserved.
 //
-//  Thanks FRGWaterfallCollectionViewLayout😊.
+//  Thank FRGWaterfallCollectionViewLayout😊.
 
 #import <UIKit/UIKit.h>
 
@@ -50,16 +50,25 @@ topInSection:(NSInteger )section;
 - (CGFloat) collectionView:(nonnull UICollectionView *)collectionView
                     layout:(nonnull SYStickHeaderWaterFallLayout *)collectionViewLayout
             bottomInSection:( NSInteger)section;
-
+/**
+ *  返回所在section的header停留时与顶部的距离（如果设置isTopForHeader ＝ yes ，则距离会叠加）
+ *
+ */
+- (CGFloat) collectionView:(nonnull UICollectionView *)collectionView
+                    layout:(nonnull SYStickHeaderWaterFallLayout *)collectionViewLayout
+           headerToTopInSection:( NSInteger)section;
 @end
 
 @interface SYStickHeaderWaterFallLayout : UICollectionViewLayout
 
 @property (nonatomic, assign,nonnull)  id<SYStickHeaderWaterFallDelegate> delegate;
+//在此修正sectionheader停留的位置,默认64
+@property (nonatomic,assign) CGFloat fixTop;
 
-//是否设置sectionHeader停留
-@property (nonatomic) BOOL stickyHeader;
-
+//是否设置sectionHeader停留,默认YES
+@property (nonatomic) BOOL isStickyHeader;
+//section停留的位置是否包括原来设置的top，默认NO
+@property (nonatomic) BOOL isTopForHeader;
 @end
 
 
