@@ -37,6 +37,7 @@ cvLayout.delegate = self;
 //在此修正sectionheader停留的位置,默认64
   cvLayout.fixTop = 64.0f;
 3. 实现代理方法：
+
 // 返回所在section的每个item的width（一个section只有一个width）
 
 - (CGFloat)collectionView:(nonnull UICollectionView *)collectionView
