@@ -37,15 +37,13 @@ cvLayout.delegate = self;
 //在此修正sectionheader停留的位置,默认64
   cvLayout.fixTop = 64.0f;
 3. 实现代理方法：
-/**
- *  返回所在section的每个item的width（一个section只有一个width）
+/**  返回所在section的每个item的width（一个section只有一个width）
  *
  */
 - (CGFloat)collectionView:(nonnull UICollectionView *)collectionView
                    layout:(nonnull SYStickHeaderWaterFallLayout *)collectionViewLayout
    widthForItemInSection:( NSInteger )section;
-/**
- *  返回所在indexPath的每个item的height（每个item有一个height，要不然怎么是瀑布流😄）
+/**  返回所在indexPath的每个item的height（每个item有一个height，要不然怎么是瀑布流😄）
  *
  */
 - (CGFloat)collectionView:(nonnull UICollectionView *)collectionView
