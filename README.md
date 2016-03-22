@@ -12,6 +12,7 @@ SYStickHeaderWaterFall 中文介绍
 
 以后封装任务：
 1.装饰视图的增加。
+2.暂时没想好，看官老爷可以给个idea。
 
 安装
 ==============
@@ -84,3 +85,7 @@ SYStickHeaderWaterFall 中文介绍
     - (CGFloat) collectionView:(nonnull UICollectionView *)collectionView
                     layout:(nonnull SYStickHeaderWaterFallLayout *)collectionViewLayout
            headerToTopInSection:( NSInteger)section;
+
+另
+==============
+有什么问题可以邮箱联系我，或者issue我。
