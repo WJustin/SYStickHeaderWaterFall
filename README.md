@@ -24,14 +24,14 @@ SYStickHeaderWaterFall 中文介绍
 
 用法
 ==============
-1. 初始化并设置delegate：
+### 初始化并设置delegate：
 
 SYStickHeaderWaterFallLayout *cvLayout = [[SYStickHeaderWaterFallLayout alloc] init];
 
 cvLayout.delegate = self;
 
 
-2. 设置属性：
+### 设置属性：
 
  //是否设置sectionHeader停留,默认YES
  
@@ -45,7 +45,7 @@ cvLayout.delegate = self;
 
   cvLayout.fixTop = 64.0f;
   
-3. 实现代理方法：
+### 实现代理方法：
 
 // 返回所在section的每个item的width（一个section只有一个width）
 
