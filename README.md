@@ -26,9 +26,9 @@ SYStickHeaderWaterFall 中文介绍
 ==============
 ### 初始化并设置delegate：
 
-SYStickHeaderWaterFallLayout *cvLayout = [[SYStickHeaderWaterFallLayout alloc] init];
+    SYStickHeaderWaterFallLayout *cvLayout = [[SYStickHeaderWaterFallLayout alloc] init];
 
-cvLayout.delegate = self;
+    cvLayout.delegate = self;
 
 
 ### 设置属性：
@@ -43,44 +43,44 @@ cvLayout.delegate = self;
     
 //在此修正sectionheader停留的位置,默认64
 
-  cvLayout.fixTop = 64.0f;
+    cvLayout.fixTop = 64.0f;
   
 ### 实现代理方法：
 
 // 返回所在section的每个item的width（一个section只有一个width）
 
-- (CGFloat)collectionView:(nonnull UICollectionView *)collectionView
+    - (CGFloat)collectionView:(nonnull UICollectionView *)collectionView
                    layout:(nonnull SYStickHeaderWaterFallLayout *)collectionViewLayout
-   widthForItemInSection:( NSInteger )section;
+    widthForItemInSection:( NSInteger )section;
 
 // 返回所在indexPath的每个item的height（每个item有一个height，要不然怎么是瀑布流😄）
 
-- (CGFloat)collectionView:(nonnull UICollectionView *)collectionView
+    - (CGFloat)collectionView:(nonnull UICollectionView *)collectionView
                    layout:(nonnull SYStickHeaderWaterFallLayout *)collectionViewLayout
- heightForItemAtIndexPath:(nonnull NSIndexPath *)indexPath;
+    heightForItemAtIndexPath:(nonnull NSIndexPath *)indexPath;
 
 @optional
 
 // 返回所在indexPath的header的height
 
-- (CGFloat) collectionView:(nonnull UICollectionView *)collectionView
+    - (CGFloat) collectionView:(nonnull UICollectionView *)collectionView
                     layout:(nonnull SYStickHeaderWaterFallLayout *)collectionViewLayout
-heightForHeaderAtIndexPath:(nonnull NSIndexPath *)indexPath;
+    heightForHeaderAtIndexPath:(nonnull NSIndexPath *)indexPath;
 
 //  返回所在section与上一个section的间距(表达的可能不够准确，但是你们都懂的)
 
-- (CGFloat) collectionView:(nonnull UICollectionView *)collectionView
+    - (CGFloat) collectionView:(nonnull UICollectionView *)collectionView
                     layout:(nonnull SYStickHeaderWaterFallLayout *)collectionViewLayout
-topInSection:(NSInteger )section;
+    topInSection:(NSInteger )section;
 
 //  返回所在section与下一个section的间距(表达的可能不够准确，但是你们都懂的)
 
-- (CGFloat) collectionView:(nonnull UICollectionView *)collectionView
+    - (CGFloat) collectionView:(nonnull UICollectionView *)collectionView
                     layout:(nonnull SYStickHeaderWaterFallLayout *)collectionViewLayout
             bottomInSection:( NSInteger)section;
 
 // 返回所在section的header停留时与顶部的距离（如果设置isTopForHeader ＝ yes ，则距离会叠加）
 
-- (CGFloat) collectionView:(nonnull UICollectionView *)collectionView
+    - (CGFloat) collectionView:(nonnull UICollectionView *)collectionView
                     layout:(nonnull SYStickHeaderWaterFallLayout *)collectionViewLayout
            headerToTopInSection:( NSInteger)section;
