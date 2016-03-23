@@ -6,7 +6,7 @@ SYStickHeaderWaterFall 中文介绍
 [![Support](https://img.shields.io/badge/support-iOS%208%2B%20-blue.svg?style=flat)](https://www.apple.com/nl/ios/)&nbsp;
 
 
-更加灵活支持各种类型的瀑布流结构。
+More flexible support various types of waterfalls flow .（更加灵活支持各种类型的瀑布流结构。）
 
 ![image](https://github.com/zhangsuya/SYStickHeaderWaterFall/blob/master/SYStickHeaderWaterFall/4.gif)
 
