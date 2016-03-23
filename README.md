@@ -23,16 +23,16 @@ More flexible support various types of waterfalls flow .（更加灵活支持各
 2. 在 Podfile 中添加 `pod "SYStickHeaderWaterFall"`。
 3. 执行 `pod install` 或 `pod update`。
 
-usage 用法
+(usage) 用法
 ==============
-### init and set delegate 初始化并设置delegate：
+### (init and set delegate) 初始化并设置delegate：
 
     SYStickHeaderWaterFallLayout *cvLayout = [[SYStickHeaderWaterFallLayout alloc] init];
 
     cvLayout.delegate = self;
 
 
-### set property 设置属性：
+### (set property) 设置属性：
 
  //是否设置sectionHeader停留,默认YES
  
@@ -46,7 +46,7 @@ usage 用法
 
     cvLayout.fixTop = 64.0f;
   
-### implement delegate method 实现代理方法：
+### (implement delegate method) 实现代理方法：
 
 // 返回所在section的每个item的width（一个section只有一个width）
 
