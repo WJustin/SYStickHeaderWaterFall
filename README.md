@@ -42,7 +42,7 @@ More flexible support various types of waterfalls flow .（更加灵活支持各
 
     cvLayout.isTopForHeader = YES;
     
-//在此修正sectionheader停留的位置,默认64
+//当你用UINavigationController和UITabbarViewController并设置一些属性时，collectionview的展示视图的坐标y会变得很奇怪，那就在此修正,默认64
 
     cvLayout.fixTop = 64.0f;
   
