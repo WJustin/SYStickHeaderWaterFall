@@ -5,7 +5,7 @@
 //  Created by 张苏亚 on 16/3/4.
 //  Copyright © 2016年 suya. All rights reserved.
 //
-//  Thank FRGWaterfallCollectionViewLayout😊.
+//  Thank FRGWaterfallCollectionViewLayout😊.https://github.com/SureCase/WaterfallCollectionView
 
 #import <UIKit/UIKit.h>
 

@@ -20,7 +20,7 @@
     self.title = @"SYStickHeaderWaterFall Example";
     self.titles = @[].mutableCopy;
     self.classNames = @[].mutableCopy;
-    [self addCell:@"一个section不带top和bottom" class:@"HomeThreeViewController"];
+    [self addCell:@"一个section不带top和bottom（仿模咖首页）" class:@"HomeThreeViewController"];
     [self addCell:@"两个section带top和bottom" class:@"MulitipleSectionViewController"];
     [self addCell:@"多个section停留位置不加top距离" class:@"MulitipleSectionNoTopHeightViewController"];
     [self addCell:@"任意设置header停留位置" class:@"MulitipleSectionHeaderToTopViewController"];

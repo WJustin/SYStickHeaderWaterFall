@@ -301,7 +301,7 @@ heightForHeaderAtIndexPath:(NSIndexPath *)indexPath {
         return (kDeviceWidth-15)/2;
     }else if (section ==2)
     {
-        return (kDeviceWidth-15)/2;
+        return (kDeviceWidth-15)/3;
     }
     return 0;
 }
