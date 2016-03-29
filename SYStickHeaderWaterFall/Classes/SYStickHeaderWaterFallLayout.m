@@ -152,14 +152,14 @@ NSString* const SYStickHeaderWaterDecorationKind = @"Decoration";
     for (NSInteger i =0; i< [self.topInsetArray count]; i++) {
         height += [self.topInsetArray[i] floatValue];
     }
-    NSLog(@"height%@",[NSString stringWithFormat:@"%f",[[NSNumber numberWithFloat:height] floatValue]]);
+//    NSLog(@"height%@",[NSString stringWithFormat:@"%f",[[NSNumber numberWithFloat:height] floatValue]]);
     for (NSNumber *h in self.sectionsHeights) {
         height += [h integerValue];
     }
     for (NSInteger i =0; i< [self.bottomInsetArray count]; i++) {
         height += [self.bottomInsetArray[i] floatValue];
     }
-    NSLog(@"height%@",[NSString stringWithFormat:@"%li",(long)[[NSNumber numberWithFloat:height] integerValue]]);
+//    NSLog(@"height%@",[NSString stringWithFormat:@"%li",(long)[[NSNumber numberWithFloat:height] integerValue]]);
     return CGSizeMake(self.collectionView.bounds.size.width, height);
 }
 
@@ -188,6 +188,7 @@ NSString* const SYStickHeaderWaterDecorationKind = @"Decoration";
             CGFloat itemHeight = [self.delegate collectionView:self.collectionView
                                                         layout:self
                                       heightForItemAtIndexPath:itemIndex];
+            NSAssert(![[NSNumber numberWithFloat:itemHeight] isEqualToNumber:[NSDecimalNumber notANumber]] , @"itemHeight must not be nan");
             [itemsHeights addObject:[NSNumber numberWithFloat:itemHeight]];
         }
         [itemsInSectionsHeights addObject:itemsHeights];
@@ -297,7 +298,7 @@ NSString* const SYStickHeaderWaterDecorationKind = @"Decoration";
 //    [UICollectionViewLayoutAttributes layoutAttributesForDecorationViewOfKind:SYStickHeaderWaterDecorationKind
 //                                                                withIndexPath:indexPath];
     //    emblemAttributes.frame = [self frameForWaterfallDecoration];
-    NSLog(@"%@",@([self.collectionView numberOfSections]));
+//    NSLog(@"%@",@([self.collectionView numberOfSections]));
     for (NSInteger section = 0; section < [self.collectionView numberOfSections]; section++) {
         for (NSInteger item = 0; item < [self.collectionView numberOfItemsInSection:section]; item++) {
             indexPath = [NSIndexPath indexPathForItem:item inSection:section];
@@ -395,6 +396,9 @@ NSString* const SYStickHeaderWaterDecorationKind = @"Decoration";
 //headerView的height。通过代理返回，如果没有实现代理，返回0
 - (CGFloat) headerHeightForIndexPath:(NSIndexPath*)indexPath {
     if ([self.delegate respondsToSelector:@selector(collectionView:layout:heightForHeaderAtIndexPath:)]) {
+        NSAssert(![[NSNumber numberWithFloat:[self.delegate collectionView:self.collectionView
+                                                                    layout:self
+                                                heightForHeaderAtIndexPath:indexPath]] isEqualToNumber:[NSDecimalNumber notANumber]] , @"headerHeight must not be nan");
         return [self.delegate collectionView:self.collectionView
                                       layout:self
                   heightForHeaderAtIndexPath:indexPath];
@@ -406,6 +410,10 @@ NSString* const SYStickHeaderWaterDecorationKind = @"Decoration";
 - (CGFloat) topInSection:(NSInteger )section
 {
     if ([self.delegate respondsToSelector:@selector(collectionView:layout:topInSection:)]) {
+        
+        NSAssert(![[NSNumber numberWithFloat:[self.delegate collectionView:self.collectionView
+                                                                    layout:self
+                                                              topInSection:section]] isEqualToNumber:[NSDecimalNumber notANumber]] , @"topInSection must not be nan");
         return [self.delegate collectionView:self.collectionView
                                       layout:self
                                 topInSection:section];
@@ -416,6 +424,9 @@ NSString* const SYStickHeaderWaterDecorationKind = @"Decoration";
 -(CGFloat) bottomInSection:(NSInteger)section
 {
     if ([self.delegate respondsToSelector:@selector(collectionView:layout:bottomInSection:)]) {
+        NSAssert(![[NSNumber numberWithFloat:[self.delegate collectionView:self.collectionView
+                                                                    layout:self
+                                                           bottomInSection:section]] isEqualToNumber:[NSDecimalNumber notANumber]] , @"bottomInSection must not be nan");
         return [self.delegate collectionView:self.collectionView
                                       layout:self
                              bottomInSection:section];
@@ -426,6 +437,7 @@ NSString* const SYStickHeaderWaterDecorationKind = @"Decoration";
 -(CGFloat) itemWidthInSection :(NSInteger)section
 {
     if ([self.delegate respondsToSelector:@selector(collectionView:layout:widthForItemInSection:)]) {
+        NSAssert(![[NSNumber numberWithFloat:[self.delegate collectionView:self.collectionView layout:self widthForItemInSection:section]] isEqualToNumber:[NSDecimalNumber notANumber]] , @"widthForItemInSection must not be nan");
         return [self.delegate collectionView:self.collectionView layout:self widthForItemInSection:section];
     }
     return kDeviceWidth;
@@ -437,6 +449,8 @@ NSString* const SYStickHeaderWaterDecorationKind = @"Decoration";
 -(CGFloat)headerToTopInSection:(NSInteger)section
 {
     if ([self.delegate respondsToSelector:@selector(collectionView:layout:headerToTopInSection:)]) {
+        
+        NSAssert(![[NSNumber numberWithFloat:[self.delegate collectionView:self.collectionView layout:self headerToTopInSection:section]] isEqualToNumber:[NSDecimalNumber notANumber]] , @"headerToTopInSection must not be nan");
         return [self.delegate collectionView:self.collectionView layout:self headerToTopInSection:section];
     }
     return 0.0f;
