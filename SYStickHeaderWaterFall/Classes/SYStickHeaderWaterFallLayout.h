@@ -62,7 +62,7 @@ topInSection:(NSInteger )section;
 @interface SYStickHeaderWaterFallLayout : UICollectionViewLayout
 
 @property (nonatomic, assign,nonnull)  id<SYStickHeaderWaterFallDelegate> delegate;
-//在此修正sectionheader停留的位置,默认64
+//当你用UINavigationController和UITabbarViewController并设置一些属性时，collectionview的展示视图的坐标y会变得很奇怪，那就在此修正,默认64
 @property (nonatomic,assign) CGFloat fixTop;
 
 //是否设置sectionHeader停留,默认YES
