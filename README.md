@@ -6,7 +6,7 @@ SYStickHeaderWaterFall 中文介绍
 [![Support](https://img.shields.io/badge/support-iOS%208%2B%20-blue.svg?style=flat)](https://www.apple.com/nl/ios/)&nbsp;
 
 
-更加灵活支持各种类型的瀑布流结构。
+More flexible support various types of waterfalls flow .（更加灵活支持各种类型的瀑布流结构。）
 
 ![image](https://github.com/zhangsuya/SYStickHeaderWaterFall/blob/master/SYStickHeaderWaterFall/4.gif)
 
@@ -23,16 +23,16 @@ SYStickHeaderWaterFall 中文介绍
 2. 在 Podfile 中添加 `pod "SYStickHeaderWaterFall"`。
 3. 执行 `pod install` 或 `pod update`。
 
-用法
+(usage) 用法
 ==============
-### 初始化并设置delegate：
+### (init and set delegate) 初始化并设置delegate：
 
     SYStickHeaderWaterFallLayout *cvLayout = [[SYStickHeaderWaterFallLayout alloc] init];
 
     cvLayout.delegate = self;
 
 
-### 设置属性：
+### (set property) 设置属性：
 
  //是否设置sectionHeader停留,默认YES
  
@@ -42,11 +42,11 @@ SYStickHeaderWaterFall 中文介绍
 
     cvLayout.isTopForHeader = YES;
     
-//在此修正sectionheader停留的位置,默认64
+//当你用UINavigationController和UITabbarViewController并设置一些属性时，collectionview的展示视图的坐标y会变得很奇怪，那就在此修正,默认64
 
     cvLayout.fixTop = 64.0f;
   
-### 实现代理方法：
+### (implement delegate method) 实现代理方法：
 
 // 返回所在section的每个item的width（一个section只有一个width）
 
