@@ -32,6 +32,11 @@
 		43CD84D6E06320493D4D1043 /* libPods-SYStickHeaderWaterFall.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CDBDC4C18413DD503332F423 /* libPods-SYStickHeaderWaterFall.a */; };
 		89A35E9B7B673FA8C90880B8 /* libPods-SYStickHeaderWaterFallTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1B489B8281B8BDD92943F8F /* libPods-SYStickHeaderWaterFallTests.a */; };
 		92698E6E2D2CC9838DE2ECCD /* libPods-SYStickHeaderWaterFallUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3201C1CCBC0FD703D130B35C /* libPods-SYStickHeaderWaterFallUITests.a */; };
+		F0F07D6D1CD0CB3400B26453 /* BaseRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F0F07D641CD0CB3400B26453 /* BaseRequest.m */; };
+		F0F07D6E1CD0CB3400B26453 /* NetWorkAgent.m in Sources */ = {isa = PBXBuildFile; fileRef = F0F07D661CD0CB3400B26453 /* NetWorkAgent.m */; };
+		F0F07D6F1CD0CB3400B26453 /* NetWorkConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = F0F07D681CD0CB3400B26453 /* NetWorkConfig.m */; };
+		F0F07D701CD0CB3400B26453 /* NetWorkPrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = F0F07D6A1CD0CB3400B26453 /* NetWorkPrivate.m */; };
+		F0F07D711CD0CB3400B26453 /* YZPBaseRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F0F07D6C1CD0CB3400B26453 /* YZPBaseRequest.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -101,6 +106,16 @@
 		BEB81134C9AF2972112DCED5 /* Pods-SYStickHeaderWaterFallTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SYStickHeaderWaterFallTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SYStickHeaderWaterFallTests/Pods-SYStickHeaderWaterFallTests.release.xcconfig"; sourceTree = "<group>"; };
 		CDBDC4C18413DD503332F423 /* libPods-SYStickHeaderWaterFall.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SYStickHeaderWaterFall.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEC273E535D9358DFEA02119 /* Pods-SYStickHeaderWaterFallTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SYStickHeaderWaterFallTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SYStickHeaderWaterFallTests/Pods-SYStickHeaderWaterFallTests.debug.xcconfig"; sourceTree = "<group>"; };
+		F0F07D631CD0CB3400B26453 /* BaseRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseRequest.h; sourceTree = "<group>"; };
+		F0F07D641CD0CB3400B26453 /* BaseRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseRequest.m; sourceTree = "<group>"; };
+		F0F07D651CD0CB3400B26453 /* NetWorkAgent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetWorkAgent.h; sourceTree = "<group>"; };
+		F0F07D661CD0CB3400B26453 /* NetWorkAgent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetWorkAgent.m; sourceTree = "<group>"; };
+		F0F07D671CD0CB3400B26453 /* NetWorkConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetWorkConfig.h; sourceTree = "<group>"; };
+		F0F07D681CD0CB3400B26453 /* NetWorkConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetWorkConfig.m; sourceTree = "<group>"; };
+		F0F07D691CD0CB3400B26453 /* NetWorkPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetWorkPrivate.h; sourceTree = "<group>"; };
+		F0F07D6A1CD0CB3400B26453 /* NetWorkPrivate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetWorkPrivate.m; sourceTree = "<group>"; };
+		F0F07D6B1CD0CB3400B26453 /* YZPBaseRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZPBaseRequest.h; sourceTree = "<group>"; };
+		F0F07D6C1CD0CB3400B26453 /* YZPBaseRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YZPBaseRequest.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +164,16 @@
 		042E9AB41C8EA7D4004C406C /* Tool */ = {
 			isa = PBXGroup;
 			children = (
+				F0F07D631CD0CB3400B26453 /* BaseRequest.h */,
+				F0F07D641CD0CB3400B26453 /* BaseRequest.m */,
+				F0F07D651CD0CB3400B26453 /* NetWorkAgent.h */,
+				F0F07D661CD0CB3400B26453 /* NetWorkAgent.m */,
+				F0F07D671CD0CB3400B26453 /* NetWorkConfig.h */,
+				F0F07D681CD0CB3400B26453 /* NetWorkConfig.m */,
+				F0F07D691CD0CB3400B26453 /* NetWorkPrivate.h */,
+				F0F07D6A1CD0CB3400B26453 /* NetWorkPrivate.m */,
+				F0F07D6B1CD0CB3400B26453 /* YZPBaseRequest.h */,
+				F0F07D6C1CD0CB3400B26453 /* YZPBaseRequest.m */,
 				042E9AB51C8EA810004C406C /* RequestCustom.h */,
 				042E9AB61C8EA810004C406C /* RequestCustom.m */,
 			);
@@ -540,11 +565,15 @@
 			files = (
 				0459790B1C99054F00C2E8C2 /* SYStickHeaderWaterFallLayout.m in Sources */,
 				042E9AB31C8EA66D004C406C /* HomeModel.m in Sources */,
+				F0F07D6E1CD0CB3400B26453 /* NetWorkAgent.m in Sources */,
 				04A93B8A1CA0E2F500C7DBC1 /* MulitipleSectionHeaderToTopViewController.m in Sources */,
 				04A93B871CA0D7BC00C7DBC1 /* MulitipleSectionNoTopHeightViewController.m in Sources */,
 				04CE95381C8992F000CBA178 /* ViewController.m in Sources */,
+				F0F07D701CD0CB3400B26453 /* NetWorkPrivate.m in Sources */,
 				042E9AB71C8EA810004C406C /* RequestCustom.m in Sources */,
 				042E9AAC1C8EA247004C406C /* HomePageHeadView.m in Sources */,
+				F0F07D711CD0CB3400B26453 /* YZPBaseRequest.m in Sources */,
+				F0F07D6D1CD0CB3400B26453 /* BaseRequest.m in Sources */,
 				04CE95351C8992F000CBA178 /* AppDelegate.m in Sources */,
 				042E9AAD1C8EA247004C406C /* HPCollectionViewCell.m in Sources */,
 				045631541C9FF5610099ED78 /* SYRootViewController.m in Sources */,
@@ -552,6 +581,7 @@
 				04CE95321C8992F000CBA178 /* main.m in Sources */,
 				042E9AB01C8EA269004C406C /* HomeThreeViewController.m in Sources */,
 				042E9ABA1C8EAA65004C406C /* BannerModel.m in Sources */,
+				F0F07D6F1CD0CB3400B26453 /* NetWorkConfig.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
