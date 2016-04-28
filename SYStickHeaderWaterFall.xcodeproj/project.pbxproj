@@ -32,6 +32,8 @@
 		43CD84D6E06320493D4D1043 /* libPods-SYStickHeaderWaterFall.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CDBDC4C18413DD503332F423 /* libPods-SYStickHeaderWaterFall.a */; };
 		89A35E9B7B673FA8C90880B8 /* libPods-SYStickHeaderWaterFallTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1B489B8281B8BDD92943F8F /* libPods-SYStickHeaderWaterFallTests.a */; };
 		92698E6E2D2CC9838DE2ECCD /* libPods-SYStickHeaderWaterFallUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3201C1CCBC0FD703D130B35C /* libPods-SYStickHeaderWaterFallUITests.a */; };
+		F02289D91CD1F77800EFF43C /* SYSHomeRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F02289D81CD1F77800EFF43C /* SYSHomeRequest.m */; };
+		F02289DC1CD203C600EFF43C /* SYSHomeBannerRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F02289DB1CD203C600EFF43C /* SYSHomeBannerRequest.m */; };
 		F0F07D6D1CD0CB3400B26453 /* BaseRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F0F07D641CD0CB3400B26453 /* BaseRequest.m */; };
 		F0F07D6E1CD0CB3400B26453 /* NetWorkAgent.m in Sources */ = {isa = PBXBuildFile; fileRef = F0F07D661CD0CB3400B26453 /* NetWorkAgent.m */; };
 		F0F07D6F1CD0CB3400B26453 /* NetWorkConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = F0F07D681CD0CB3400B26453 /* NetWorkConfig.m */; };
@@ -106,6 +108,12 @@
 		BEB81134C9AF2972112DCED5 /* Pods-SYStickHeaderWaterFallTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SYStickHeaderWaterFallTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SYStickHeaderWaterFallTests/Pods-SYStickHeaderWaterFallTests.release.xcconfig"; sourceTree = "<group>"; };
 		CDBDC4C18413DD503332F423 /* libPods-SYStickHeaderWaterFall.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SYStickHeaderWaterFall.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEC273E535D9358DFEA02119 /* Pods-SYStickHeaderWaterFallTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SYStickHeaderWaterFallTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SYStickHeaderWaterFallTests/Pods-SYStickHeaderWaterFallTests.debug.xcconfig"; sourceTree = "<group>"; };
+		F02289D71CD1F77800EFF43C /* SYSHomeRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYSHomeRequest.h; sourceTree = "<group>"; };
+		F02289D81CD1F77800EFF43C /* SYSHomeRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYSHomeRequest.m; sourceTree = "<group>"; };
+		F02289DA1CD203C600EFF43C /* SYSHomeBannerRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYSHomeBannerRequest.h; sourceTree = "<group>"; };
+		F02289DB1CD203C600EFF43C /* SYSHomeBannerRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYSHomeBannerRequest.m; sourceTree = "<group>"; };
+		F02289DD1CD2042400EFF43C /* SYSURLMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SYSURLMacro.h; sourceTree = "<group>"; };
+		F02289DE1CD206CF00EFF43C /* SYSMAINMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SYSMAINMacro.h; path = ../SYSMAINMacro.h; sourceTree = "<group>"; };
 		F0F07D631CD0CB3400B26453 /* BaseRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseRequest.h; sourceTree = "<group>"; };
 		F0F07D641CD0CB3400B26453 /* BaseRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseRequest.m; sourceTree = "<group>"; };
 		F0F07D651CD0CB3400B26453 /* NetWorkAgent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetWorkAgent.h; sourceTree = "<group>"; };
@@ -207,6 +215,7 @@
 		04CE952F1C8992F000CBA178 /* SYStickHeaderWaterFall */ = {
 			isa = PBXGroup;
 			children = (
+				F02289D61CD1F73700EFF43C /* Api */,
 				04A93B8B1CA0FB2C00C7DBC1 /* 4.gif */,
 				042E9AB41C8EA7D4004C406C /* Tool */,
 				042E9AA71C8EA169004C406C /* Controller */,
@@ -222,7 +231,9 @@
 				04CE95411C8992F000CBA178 /* Info.plist */,
 				04CE95301C8992F000CBA178 /* Supporting Files */,
 				045631521C9FF5610099ED78 /* SYRootViewController.h */,
+				F02289DE1CD206CF00EFF43C /* SYSMAINMacro.h */,
 				045631531C9FF5610099ED78 /* SYRootViewController.m */,
+				F02289DD1CD2042400EFF43C /* SYSURLMacro.h */,
 			);
 			path = SYStickHeaderWaterFall;
 			sourceTree = "<group>";
@@ -297,6 +308,17 @@
 				3201C1CCBC0FD703D130B35C /* libPods-SYStickHeaderWaterFallUITests.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F02289D61CD1F73700EFF43C /* Api */ = {
+			isa = PBXGroup;
+			children = (
+				F02289D71CD1F77800EFF43C /* SYSHomeRequest.h */,
+				F02289D81CD1F77800EFF43C /* SYSHomeRequest.m */,
+				F02289DA1CD203C600EFF43C /* SYSHomeBannerRequest.h */,
+				F02289DB1CD203C600EFF43C /* SYSHomeBannerRequest.m */,
+			);
+			name = Api;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -566,6 +588,7 @@
 				0459790B1C99054F00C2E8C2 /* SYStickHeaderWaterFallLayout.m in Sources */,
 				042E9AB31C8EA66D004C406C /* HomeModel.m in Sources */,
 				F0F07D6E1CD0CB3400B26453 /* NetWorkAgent.m in Sources */,
+				F02289DC1CD203C600EFF43C /* SYSHomeBannerRequest.m in Sources */,
 				04A93B8A1CA0E2F500C7DBC1 /* MulitipleSectionHeaderToTopViewController.m in Sources */,
 				04A93B871CA0D7BC00C7DBC1 /* MulitipleSectionNoTopHeightViewController.m in Sources */,
 				04CE95381C8992F000CBA178 /* ViewController.m in Sources */,
@@ -575,6 +598,7 @@
 				F0F07D711CD0CB3400B26453 /* YZPBaseRequest.m in Sources */,
 				F0F07D6D1CD0CB3400B26453 /* BaseRequest.m in Sources */,
 				04CE95351C8992F000CBA178 /* AppDelegate.m in Sources */,
+				F02289D91CD1F77800EFF43C /* SYSHomeRequest.m in Sources */,
 				042E9AAD1C8EA247004C406C /* HPCollectionViewCell.m in Sources */,
 				045631541C9FF5610099ED78 /* SYRootViewController.m in Sources */,
 				045631571C9FF7CF0099ED78 /* MulitipleSectionViewController.m in Sources */,

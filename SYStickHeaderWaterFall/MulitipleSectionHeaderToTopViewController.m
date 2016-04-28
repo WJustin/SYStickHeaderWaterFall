@@ -13,16 +13,17 @@
 #import "SDCycleScrollView.h"
 #import "HomePageHeadView.h"
 #import "MJRefresh.h"
-#import "RequestCustom.h"
+//#import "RequestCustom.h"
 #import "BannerModel.h"
 #import "MBProgressHUD.h"
 #import "HPCollectionViewCell.h"
 #import "UIView+SDExtension.h"
-#define kDeviceWidth  [UIScreen mainScreen].bounds.size.width
-#define kDeviceHeight [UIScreen mainScreen].bounds.size.height
+#import "SYSHomeRequest.h"
+#import "SYSHomeBannerRequest.h"
+#import "SYSMAINMacro.h"
+
 #define kFileName @"MulitipleSectionNoTopHeightVC.plist"
-static NSString* const WaterfallCellIdentifier = @"WaterfallCell";
-static NSString* const WaterfallHeaderIdentifier = @"WaterfallHeader";
+
 @interface MulitipleSectionHeaderToTopViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,UIScrollViewDelegate,SDCycleScrollViewDelegate,SYStickHeaderWaterFallDelegate>
 {
     NSInteger showPage;
@@ -176,25 +177,25 @@ static NSString* const WaterfallHeaderIdentifier = @"WaterfallHeader";
         cycleView.autoScrollTimeInterval = 4.0;
         cycleView.delegate = self;
         cycleView.pageControlAliment = SDCycleScrollViewPageContolAlimentRight;
-        [RequestCustom requestBanner:[[NSUserDefaults standardUserDefaults] objectForKey:@"user_id"] complete:^(BOOL succed,id obj){
-            if (succed) {
-                NSString *status = [NSString stringWithFormat:@"%@",[obj objectForKey:@"status"]];
+
+        SYSHomeBannerRequest *bannerRequest = [[SYSHomeBannerRequest alloc] initRequestWithUserId:[[NSUserDefaults standardUserDefaults] objectForKey:@"user_id"]];
+        [bannerRequest startWithCompletionBlockWithSuccess:^(__kindof BaseRequest *request, id obj) {
+            NSString *status = [NSString stringWithFormat:@"%@",[obj objectForKey:@"status"]];
+            if ([status isEqual:@"1"]) {
+                NSArray *dataArray = [obj objectForKey:@"data"];
+                //                    NSDictionary *dataDict = (NSDictionary *)[obj objectForKey:@"data"];
+                NSMutableArray *imageArray = [NSMutableArray array];
+                _banners = [NSMutableArray array];
                 if ([status isEqual:@"1"]) {
-                    NSArray *dataArray = [obj objectForKey:@"data"];
-                    //                    NSDictionary *dataDict = (NSDictionary *)[obj objectForKey:@"data"];
-                    NSMutableArray *imageArray = [NSMutableArray array];
-                    _banners = [NSMutableArray array];
-                    if ([status isEqual:@"1"]) {
-                        for (int i =0; i<[dataArray count]; i++) {
-                            [_banners addObject:[BannerModel initBannerWithDict:dataArray[i]]];
-                            [imageArray addObject:[dataArray[i] objectForKey:@"img_url"]];
-                        }
-                        cycleView.imageURLStringsGroup = imageArray;
-                        
+                    for (int i =0; i<[dataArray count]; i++) {
+                        [_banners addObject:[BannerModel initBannerWithDict:dataArray[i]]];
+                        [imageArray addObject:[dataArray[i] objectForKey:@"img_url"]];
                     }
+                    cycleView.imageURLStringsGroup = imageArray;
+                    
                 }
-                
             }
+        } failure:^(__kindof BaseRequest *request, id obj) {
             
         }];
         //    [self.baseScrollView addSubview:cycleView];
@@ -328,87 +329,79 @@ heightForHeaderAtIndexPath:(NSIndexPath *)indexPath {
 
 -(void)requestHomePageList:(NSString *)page refreshType:(NSString *)type
 {
-    [RequestCustom requestFlowWater:_optionalParam pageNUM:page pageLINE:@"10" complete:^(BOOL succed, id obj){
-        if (succed) {
-            if ([obj objectForKey:@"data"]== [NSNull null]) {
-                if ([page isEqualToString:@"1"]) {
-                    [_shopForThree removeAllObjects];
-                    [self.collectView.header endRefreshing];
-                    [self.collectView reloadData];
-                    
-                    return;
-                    
-                }else
-                {
-                    MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
-                    hud.mode = MBProgressHUDModeText;
-                    hud.labelText = @"内容看光了 刷新也白搭";
-                    hud.margin = 10.f;
-                    hud.removeFromSuperViewOnHide = YES;
-                    [hud hide:YES afterDelay:1];
-                    [self.collectView.footer endRefreshing];
-                    return ;
-                }
-                
-            }
-            NSArray *dataArray = [obj objectForKey:@"data"];
-            NSString *status = [NSString stringWithFormat:@"%@",[obj objectForKey:@"status"]];
-            if ([status isEqual:@"1"]) {
-                self.collectView.delegate =self;
-                self.collectView.dataSource =self;
-                if ([status isEqual:@"1"]) {
-                    if ([page isEqualToString:@"1"]) {
-                        [_shopForThree removeAllObjects];
-                        showPage = 1;
-                    }
-                    for (int i =0; i<[dataArray count]; i++) {
-                        [_shopForThree addObject:[HomeModel initHomeModelWithDict:dataArray[i]]];
-                    }
-                    if (showPage ==1) {
-                        _shops=_shopForThree;
-                    }
-                    
-                }
-                if ([type isEqualToString:@"header"]) {
-                    [self.collectView.header endRefreshing];
-                }else if([type isEqualToString:@"footer"])
-                {
-                    [self.collectView.footer endRefreshing];
-                }
-                
+    SYSHomeRequest *homeRequest = [[SYSHomeRequest alloc] initRequestWithPageLine:10 pageNum:[page integerValue]];
+    
+    [homeRequest startWithCompletionBlockWithSuccess:^(__kindof BaseRequest *request, id obj) {
+        if ([obj objectForKey:@"data"]== [NSNull null]) {
+            if ([page isEqualToString:@"1"]) {
+                [_shops removeAllObjects];
+                [self.collectView.header endRefreshing];
                 [self.collectView reloadData];
-            }
-            
-        }else
-        {
-            if (self.view.superview) {
-                MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:self.view.superview animated:YES];
+                
+                return;
+                
+            }else
+            {
+                MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
                 hud.mode = MBProgressHUDModeText;
-                hud.labelText = @"网络不给力 挥泪重连中";
+                hud.labelText = @"内容看光了 刷新也白搭";
                 hud.margin = 10.f;
                 hud.removeFromSuperViewOnHide = YES;
                 [hud hide:YES afterDelay:1];
-            }
-            
-            if ([type isEqualToString:@"header"]) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self.collectView.header endRefreshing];
-                });
-                
-                
-            }else if([type isEqualToString:@"footer"])
-            {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self.collectView.footer endRefreshing];
-                    
-                });
-                
+                [self.collectView.footer endRefreshing];
+                return ;
             }
             
         }
+        NSArray *dataArray = [obj objectForKey:@"data"];
+        NSString *status = [NSString stringWithFormat:@"%@",[obj objectForKey:@"status"]];
+        if ([status isEqual:@"1"]) {
+            self.collectView.delegate =self;
+            self.collectView.dataSource =self;
+            if ([status isEqual:@"1"]) {
+                if ([page isEqualToString:@"1"]) {
+                    [_shops removeAllObjects];
+                    showPage = 1;
+                }
+                for (int i =0; i<[dataArray count]; i++) {
+                    [_shops addObject:[HomeModel initHomeModelWithDict:dataArray[i]]];
+                }
+                
+            }
+            if ([type isEqualToString:@"header"]) {
+                [self.collectView.header endRefreshing];
+            }else if([type isEqualToString:@"footer"])
+            {
+                [self.collectView.footer endRefreshing];
+            }
+            
+            [self.collectView reloadData];
+        }
         
+    } failure:^(__kindof BaseRequest *request, id obj) {
+        if (self.view.superview) {
+            MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:self.view.superview animated:YES];
+            hud.mode = MBProgressHUDModeText;
+            hud.labelText = @"网络不给力 挥泪重连中";
+            hud.margin = 10.f;
+            hud.removeFromSuperViewOnHide = YES;
+            [hud hide:YES afterDelay:1];
+        }
         
-        
+        if ([type isEqualToString:@"header"]) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.collectView.header endRefreshing];
+            });
+            
+            
+        }else if([type isEqualToString:@"footer"])
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.collectView.footer endRefreshing];
+                
+            });
+            
+        }
     }];
     
 }

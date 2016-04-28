@@ -59,10 +59,10 @@ typedef void (^RequestCompletionBlock)(__kindof  BaseRequest *request, id obj);
 
 @end
 
-#define WARN_NETWORK_FAILE            @"请检查您的网络"
-#define WARN_UNKNOW_FAILE               @"未知错误"
-#define URL_MAIN                        @"http://121.40.147.31/xgou/"
-#define RESULT_DATAS                    @"data"
+//#define WARN_NETWORK_FAILE            @"请检查您的网络"
+//#define WARN_UNKNOW_FAILE               @"未知错误"
+//#define URL_MAIN                        @"http://121.40.147.31/xgou/"
+//#define RESULT_DATAS                    @"data"
 @interface BaseRequest : NSObject
 
 /// Tag

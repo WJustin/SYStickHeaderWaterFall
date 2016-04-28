@@ -165,115 +165,115 @@
     [self.requestAccessories addObject:accessory];
 }
 
-+(void)postRequestParameters:(NSDictionary *)dicParameters api:(NSString *)_typeApi andlastInterFace:(NSString *)_interface analysisDataComplete:(requestComplete)complete {
-    AFHTTPSessionManager   *manager    = [BaseRequest managerCustom];
-    
-    NSMutableString *strURl = [[NSMutableString alloc] initWithString:URL_MAIN];
-    if ([_typeApi isEqualToString:@"Api"]) {
-        [strURl appendString:@"Api/"];
-    } else if([_typeApi isEqualToString:@"UserApi"]){
-        [strURl appendString:@"UserApi/"];
-    }else if ([_typeApi isEqualToString:@"FilmApi"])
-    {
-        [strURl appendString:@"FilmApi/"];
-    }else if ([_typeApi isEqualToString:@"GoodsApi"])
-    {
-        [strURl appendString:@"GoodsApi/"];
-        
-    }else if ([_typeApi isEqualToString:@"OrderApi"])
-    {
-        [strURl appendString:@"OrderApi/"];
-        
-    }else if ([_typeApi isEqualToString:@"CartApi"])
-    {
-        [strURl appendString:@"CartApi/"];
-    }else if ([_typeApi isEqualToString:@"AddressApi"])
-    {
-        [strURl appendString:@"AddressApi/"];
-    }else if ([_typeApi isEqualToString:@"SetApi"])
-    {
-        [strURl appendString:@"SetApi/"];
-    }
-    [strURl appendString:[NSString stringWithFormat:@"%@/",_interface]];
-    
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-    
-    //        NSLog(@"requstURLandDic%@::%@\n>>>>>>>>",strURl,dicParameters);
-    [manager POST:strURl parameters:dicParameters progress:^(NSProgress *uploadProgress)
-     {
-         
-     }
-          success:^(NSURLSessionDataTask *task, id responseObject) {
-              BOOL succed = [BaseRequest errorSolution:responseObject];
-              //        SLog(@"关于succed>>>>>>>%@",@(succed));
-              complete(succed,responseObject);
-              
-          } failure:^(NSURLSessionDataTask *task, NSError *error) {
-              
-              complete(NO,WARN_NETWORK_FAILE);
-          }];
-    
-    
-}
-
-+(BOOL)errorSolution:(id)responseObject {
-    //数据data中没有 error 参数
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-    BOOL succed = YES;
-    //    if ([dicdatas isKindOfClass:[NSDictionary class]]) {
-    //        NSString    *strError   = [dicdatas drObjectForKey:@"error"];
-    //        if (![NSString isEmptyString:strError]) {
-    //            succed = NO;
-    //        }
-    //    }
-    if ([responseObject isKindOfClass:[NSDictionary class]]) {
-        
-        //                NSInteger status = [[responseObject objectForKey:@"status"] integerValue];
-        //                NSString    *status = [responseObject objectForKey:@"status"];
-        //                if (![status isEqualToString:@"1"]) {
-        //                    succed = NO;
-        //                }
-    }
-    
-    return succed;
-}
-
-+(AFHTTPSessionManager *)managerCustom {
-    
-    AFHTTPSessionManager   *manager    = [AFHTTPSessionManager manager];
-    manager.requestSerializer.timeoutInterval   = 6;
-    
-    return manager;
-}
-
-+(NSMutableDictionary *)baseOption {
-    
-    NSMutableDictionary *dicbase    = [[NSMutableDictionary alloc] init];
-    
-    return dicbase;
-}
-
-+(NSMutableDictionary *)userIdOption {
-    
-    NSMutableDictionary *dicbase    = [[NSMutableDictionary alloc] init];
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [dicbase setObject:[userDefaults objectForKey:@"user_id"] forKey:@"user_id"];
-    //    if (![NSString isEmptyString:[UserInfo shareUserInfo].strToken]) {
-    //        [dicbase setObject:[UserInfo shareUserInfo].strToken forKey:@"key"];
-    //    }
-    
-    return dicbase;
-}
-
-+ (NSString *)md5HexDigest:(NSString *)str
-{
-    const char *original_str = [str UTF8String];
-    unsigned char result[CC_MD5_DIGEST_LENGTH];
-    CC_MD5(original_str, (CC_LONG)strlen(original_str), result);
-    NSMutableString *hash = [NSMutableString string];
-    for (int i = 0; i < CC_MD5_DIGEST_LENGTH; i++)
-        [hash appendFormat:@"%02X", result[i]];
-    return [hash lowercaseString];
-    
-}
+//+(void)postRequestParameters:(NSDictionary *)dicParameters api:(NSString *)_typeApi andlastInterFace:(NSString *)_interface analysisDataComplete:(requestComplete)complete {
+//    AFHTTPSessionManager   *manager    = [BaseRequest managerCustom];
+//    
+//    NSMutableString *strURl = [[NSMutableString alloc] initWithString:URL_MAIN];
+//    if ([_typeApi isEqualToString:@"Api"]) {
+//        [strURl appendString:@"Api/"];
+//    } else if([_typeApi isEqualToString:@"UserApi"]){
+//        [strURl appendString:@"UserApi/"];
+//    }else if ([_typeApi isEqualToString:@"FilmApi"])
+//    {
+//        [strURl appendString:@"FilmApi/"];
+//    }else if ([_typeApi isEqualToString:@"GoodsApi"])
+//    {
+//        [strURl appendString:@"GoodsApi/"];
+//        
+//    }else if ([_typeApi isEqualToString:@"OrderApi"])
+//    {
+//        [strURl appendString:@"OrderApi/"];
+//        
+//    }else if ([_typeApi isEqualToString:@"CartApi"])
+//    {
+//        [strURl appendString:@"CartApi/"];
+//    }else if ([_typeApi isEqualToString:@"AddressApi"])
+//    {
+//        [strURl appendString:@"AddressApi/"];
+//    }else if ([_typeApi isEqualToString:@"SetApi"])
+//    {
+//        [strURl appendString:@"SetApi/"];
+//    }
+//    [strURl appendString:[NSString stringWithFormat:@"%@/",_interface]];
+//    
+//    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+//    
+//    //        NSLog(@"requstURLandDic%@::%@\n>>>>>>>>",strURl,dicParameters);
+//    [manager POST:strURl parameters:dicParameters progress:^(NSProgress *uploadProgress)
+//     {
+//         
+//     }
+//          success:^(NSURLSessionDataTask *task, id responseObject) {
+//              BOOL succed = [BaseRequest errorSolution:responseObject];
+//              //        SLog(@"关于succed>>>>>>>%@",@(succed));
+//              complete(succed,responseObject);
+//              
+//          } failure:^(NSURLSessionDataTask *task, NSError *error) {
+//              
+//              complete(NO,WARN_NETWORK_FAILE);
+//          }];
+//    
+//    
+//}
+//
+//+(BOOL)errorSolution:(id)responseObject {
+//    //数据data中没有 error 参数
+//    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+//    BOOL succed = YES;
+//    //    if ([dicdatas isKindOfClass:[NSDictionary class]]) {
+//    //        NSString    *strError   = [dicdatas drObjectForKey:@"error"];
+//    //        if (![NSString isEmptyString:strError]) {
+//    //            succed = NO;
+//    //        }
+//    //    }
+//    if ([responseObject isKindOfClass:[NSDictionary class]]) {
+//        
+//        //                NSInteger status = [[responseObject objectForKey:@"status"] integerValue];
+//        //                NSString    *status = [responseObject objectForKey:@"status"];
+//        //                if (![status isEqualToString:@"1"]) {
+//        //                    succed = NO;
+//        //                }
+//    }
+//    
+//    return succed;
+//}
+//
+//+(AFHTTPSessionManager *)managerCustom {
+//    
+//    AFHTTPSessionManager   *manager    = [AFHTTPSessionManager manager];
+//    manager.requestSerializer.timeoutInterval   = 6;
+//    
+//    return manager;
+//}
+//
+//+(NSMutableDictionary *)baseOption {
+//    
+//    NSMutableDictionary *dicbase    = [[NSMutableDictionary alloc] init];
+//    
+//    return dicbase;
+//}
+//
+//+(NSMutableDictionary *)userIdOption {
+//    
+//    NSMutableDictionary *dicbase    = [[NSMutableDictionary alloc] init];
+//    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+//    [dicbase setObject:[userDefaults objectForKey:@"user_id"] forKey:@"user_id"];
+//    //    if (![NSString isEmptyString:[UserInfo shareUserInfo].strToken]) {
+//    //        [dicbase setObject:[UserInfo shareUserInfo].strToken forKey:@"key"];
+//    //    }
+//    
+//    return dicbase;
+//}
+//
+//+ (NSString *)md5HexDigest:(NSString *)str
+//{
+//    const char *original_str = [str UTF8String];
+//    unsigned char result[CC_MD5_DIGEST_LENGTH];
+//    CC_MD5(original_str, (CC_LONG)strlen(original_str), result);
+//    NSMutableString *hash = [NSMutableString string];
+//    for (int i = 0; i < CC_MD5_DIGEST_LENGTH; i++)
+//        [hash appendFormat:@"%02X", result[i]];
+//    return [hash lowercaseString];
+//    
+//}
 @end

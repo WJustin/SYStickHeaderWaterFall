@@ -9,6 +9,8 @@
 #import "AppDelegate.h"
 #import "HomeThreeViewController.h"
 #import "SYRootViewController.h"
+#import "NetWorkConfig.h"
+#import "SYSURLMacro.h"
 /// Fix the navigation bar height when hide status bar.
 @interface SYExampleNavBar : UINavigationBar
 @end
@@ -39,6 +41,7 @@
 @end
 @interface SYExampleNavController : UINavigationController
 @end
+
 @implementation SYExampleNavController
 - (BOOL)shouldAutorotate {
     return YES;
@@ -56,11 +59,20 @@
 @interface AppDelegate ()
 
 @end
-
 @implementation AppDelegate
 
+- (void)setupRequestFilters {
+    //    NSString *appVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+    NetWorkConfig *config = [NetWorkConfig shareInstance];
+    config.baseUrl = URL_MAIN;
+    
+    
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    [self setupRequestFilters];
+    
     SYRootViewController *root = [SYRootViewController new];
     SYExampleNavController *nav = [[SYExampleNavController alloc] initWithNavigationBarClass:[SYExampleNavBar class] toolbarClass:[UIToolbar class]];
     if ([nav respondsToSelector:@selector(setAutomaticallyAdjustsScrollViewInsets:)]) {
