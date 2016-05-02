@@ -38,6 +38,9 @@ More flexible support various types of waterfalls flow .（更加灵活支持各
  
     cvLayout.isStickyHeader = YES;
     
+//是否设置Footer停留,默认NO
+    cvLayout.isStickyFooter = NO;
+    
 //section停留的位置是否包括原来设置的top，默认NO
 
     cvLayout.isTopForHeader = YES;
@@ -67,6 +70,14 @@ More flexible support various types of waterfalls flow .（更加灵活支持各
     - (CGFloat) collectionView:(nonnull UICollectionView *)collectionView
                     layout:(nonnull SYStickHeaderWaterFallLayout *)collectionViewLayout
     heightForHeaderAtIndexPath:(nonnull NSIndexPath *)indexPath;
+
+
+// 返回所在indexPath的footer的height
+
+    - (CGFloat) collectionView:(nonnull UICollectionView *)collectionView
+                    layout:(nonnull SYStickHeaderWaterFallLayout *)collectionViewLayout
+    heightForFooterAtIndexPath:(nonnull NSIndexPath *)indexPath;
+
 
 //  返回所在section与上一个section的间距(表达的可能不够准确，但是你们都懂的)
 
