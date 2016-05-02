@@ -40,6 +40,7 @@
 		F0F07D701CD0CB3400B26453 /* NetWorkPrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = F0F07D6A1CD0CB3400B26453 /* NetWorkPrivate.m */; };
 		F0F07D711CD0CB3400B26453 /* YZPBaseRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F0F07D6C1CD0CB3400B26453 /* YZPBaseRequest.m */; };
 		FE39D45F1CD77AF9005135DA /* HomeFooterCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = FE39D45E1CD77AF9005135DA /* HomeFooterCollectionReusableView.m */; };
+		FE39D4651CD78249005135DA /* MulitipleSectionHeaderFooterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FE39D4641CD78249005135DA /* MulitipleSectionHeaderFooterViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -127,6 +128,8 @@
 		F0F07D6C1CD0CB3400B26453 /* YZPBaseRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YZPBaseRequest.m; sourceTree = "<group>"; };
 		FE39D45D1CD77AF9005135DA /* HomeFooterCollectionReusableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeFooterCollectionReusableView.h; sourceTree = "<group>"; };
 		FE39D45E1CD77AF9005135DA /* HomeFooterCollectionReusableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeFooterCollectionReusableView.m; sourceTree = "<group>"; };
+		FE39D4631CD78249005135DA /* MulitipleSectionHeaderFooterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MulitipleSectionHeaderFooterViewController.h; sourceTree = "<group>"; };
+		FE39D4641CD78249005135DA /* MulitipleSectionHeaderFooterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MulitipleSectionHeaderFooterViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,6 +163,8 @@
 		042E9AA71C8EA169004C406C /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				FE39D4631CD78249005135DA /* MulitipleSectionHeaderFooterViewController.h */,
+				FE39D4641CD78249005135DA /* MulitipleSectionHeaderFooterViewController.m */,
 				042E9AAE1C8EA269004C406C /* HomeThreeViewController.h */,
 				042E9AAF1C8EA269004C406C /* HomeThreeViewController.m */,
 				045631551C9FF7CF0099ED78 /* MulitipleSectionViewController.h */,
@@ -609,6 +614,7 @@
 				045631541C9FF5610099ED78 /* SYRootViewController.m in Sources */,
 				045631571C9FF7CF0099ED78 /* MulitipleSectionViewController.m in Sources */,
 				04CE95321C8992F000CBA178 /* main.m in Sources */,
+				FE39D4651CD78249005135DA /* MulitipleSectionHeaderFooterViewController.m in Sources */,
 				042E9AB01C8EA269004C406C /* HomeThreeViewController.m in Sources */,
 				042E9ABA1C8EAA65004C406C /* BannerModel.m in Sources */,
 				F0F07D6F1CD0CB3400B26453 /* NetWorkConfig.m in Sources */,
