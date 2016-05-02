@@ -101,7 +101,7 @@ NSString* const SYStickHeaderWaterDecorationKind = @"Decoration";
         }];
     }];
     
-    if(!self.isStickyHeader) {
+    if(!self.isStickyHeader&&!self.isStickyFooter) {
         return allAttributes;
     }
     //保证section停留
@@ -140,9 +140,7 @@ NSString* const SYStickHeaderWaterDecorationKind = @"Decoration";
                 .size = CGSizeMake(width, layoutAttributes.frame.size.height)
             };
         }
-        //        if (!self.isStickyFooter) {
-        //            return allAttributes;
-        //        }
+
         //保证footer停留，
         if ([layoutAttributes.representedElementKind isEqualToString:UICollectionElementKindSectionFooter]) {
             
