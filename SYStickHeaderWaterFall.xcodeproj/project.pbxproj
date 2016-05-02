@@ -41,6 +41,7 @@
 		F0F07D711CD0CB3400B26453 /* YZPBaseRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F0F07D6C1CD0CB3400B26453 /* YZPBaseRequest.m */; };
 		FE39D45F1CD77AF9005135DA /* HomeFooterCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = FE39D45E1CD77AF9005135DA /* HomeFooterCollectionReusableView.m */; };
 		FE39D4651CD78249005135DA /* MulitipleSectionHeaderFooterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FE39D4641CD78249005135DA /* MulitipleSectionHeaderFooterViewController.m */; };
+		FE39D4671CD78C4F005135DA /* 1.gif in Resources */ = {isa = PBXBuildFile; fileRef = FE39D4661CD78C4F005135DA /* 1.gif */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -130,6 +131,7 @@
 		FE39D45E1CD77AF9005135DA /* HomeFooterCollectionReusableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeFooterCollectionReusableView.m; sourceTree = "<group>"; };
 		FE39D4631CD78249005135DA /* MulitipleSectionHeaderFooterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MulitipleSectionHeaderFooterViewController.h; sourceTree = "<group>"; };
 		FE39D4641CD78249005135DA /* MulitipleSectionHeaderFooterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MulitipleSectionHeaderFooterViewController.m; sourceTree = "<group>"; };
+		FE39D4661CD78C4F005135DA /* 1.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 1.gif; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -223,6 +225,7 @@
 		04CE952F1C8992F000CBA178 /* SYStickHeaderWaterFall */ = {
 			isa = PBXGroup;
 			children = (
+				FE39D4661CD78C4F005135DA /* 1.gif */,
 				F02289D61CD1F73700EFF43C /* Api */,
 				04A93B8B1CA0FB2C00C7DBC1 /* 4.gif */,
 				042E9AB41C8EA7D4004C406C /* Tool */,
@@ -446,6 +449,7 @@
 				04CE95401C8992F000CBA178 /* LaunchScreen.storyboard in Resources */,
 				04CE953D1C8992F000CBA178 /* Assets.xcassets in Resources */,
 				04CE953B1C8992F000CBA178 /* Main.storyboard in Resources */,
+				FE39D4671CD78C4F005135DA /* 1.gif in Resources */,
 				045979081C99039100C2E8C2 /* Classes in Resources */,
 				04A93B8C1CA0FB2C00C7DBC1 /* 4.gif in Resources */,
 			);
