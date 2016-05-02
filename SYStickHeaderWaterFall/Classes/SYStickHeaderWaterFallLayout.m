@@ -57,8 +57,9 @@ NSString* const SYStickHeaderWaterDecorationKind = @"Decoration";
     self.fixTop = 64;
     self.isTopForHeader = NO;
     self.isStickyHeader = YES;
+    self.isStickyFooter = NO;
     [self invalidateLayout];
-
+    
 }
 
 - (void)prepareLayout {
@@ -86,7 +87,16 @@ NSString* const SYStickHeaderWaterDecorationKind = @"Decoration";
                                                           UICollectionViewLayoutAttributes *attributes,
                                                           BOOL *innerStop) {
             if (CGRectIntersectsRect(rect, attributes.frame) || [elementIdentifier isEqualToString:UICollectionElementKindSectionHeader]) {
-                [allAttributes addObject:attributes];
+                if (attributes.frame.size.height != 0) {//当用户不设置UICollectionElementKindSectionHeader时,如果不加判断的话,会走代理viewForSupplementaryElementOfKind:造成崩溃
+                    [allAttributes addObject:attributes];
+                }
+                
+            }else if (CGRectIntersectsRect(rect, attributes.frame)||[elementIdentifier isEqualToString:UICollectionElementKindSectionFooter])
+            {
+                if (attributes.frame.size.height != 0) {//当用户不设置UICollectionElementKindSectionFooter时,如果不加判断的话,会走代理viewForSupplementaryElementOfKind:造成崩溃
+                    [allAttributes addObject:attributes];
+                }
+                
             }
         }];
     }];
@@ -104,9 +114,11 @@ NSString* const SYStickHeaderWaterDecorationKind = @"Decoration";
             CGFloat headerHeight = CGRectGetHeight(layoutAttributes.frame) + [self.itemInnerMarginArray[section] floatValue];
             CGFloat currentHeaderHeight = [self headerHeightForIndexPath:firstCellIndexPath];
             CGPoint origin = layoutAttributes.frame.origin;
-
+            
             origin.y = MIN(
+                           //保证停留
                            MAX(self.collectionView.contentOffset.y + self.fixTop +[self.headerToTopArray[section] floatValue], (CGRectGetMinY(firstCellAttrs.frame) - headerHeight) - (self.isTopForHeader?[self.topInsetArray[section] floatValue]:0.0f)) ,
+                           //保证消失
                            CGRectGetMinY(firstCellAttrs.frame) - headerHeight + [[self.sectionsHeights objectAtIndex:section] floatValue] - currentHeaderHeight - (self.isTopForHeader?[self.topInsetArray[section] floatValue]:0.0f)                           ) + (self.isTopForHeader?[self.topInsetArray[section] floatValue]:0.0f) ;//
             CGFloat width = layoutAttributes.frame.size.width;
             if(self.collectionView.contentOffset.y > origin.y -self.fixTop -[self.headerToTopArray[section] floatValue]) {
@@ -117,10 +129,55 @@ NSString* const SYStickHeaderWaterDecorationKind = @"Decoration";
                 
             } else {
                 
-                width = kDeviceWidth;
+                width = self.collectionView.bounds.size.width;
                 origin.x = 0;
-
+                
             }
+            
+            layoutAttributes.zIndex = 2048 +section;//这里的zIndex一定要比footer的高，确保不会被footer遮挡
+            layoutAttributes.frame = (CGRect){
+                .origin = origin,
+                .size = CGSizeMake(width, layoutAttributes.frame.size.height)
+            };
+        }
+        //        if (!self.isStickyFooter) {
+        //            return allAttributes;
+        //        }
+        //保证footer停留，
+        if ([layoutAttributes.representedElementKind isEqualToString:UICollectionElementKindSectionFooter]) {
+            
+            NSInteger section = layoutAttributes.indexPath.section;
+            NSLog(@"indexPath.item%@",@(layoutAttributes.indexPath.item));
+            NSIndexPath *firstCellIndexPath = [NSIndexPath indexPathForItem:0 inSection:section];
+            UICollectionViewLayoutAttributes *firstCellAttrs = [self layoutAttributesForItemAtIndexPath:firstCellIndexPath];
+            CGFloat headerHeight = [self headerHeightForIndexPath:firstCellIndexPath] + [self.itemInnerMarginArray[section] floatValue];
+            //            CGFloat currentHeaderHeight = [self headerHeightForIndexPath:firstCellIndexPath];
+            
+            
+            CGFloat currentFooterHeight = [self footerHeightForIndexPath:firstCellIndexPath];
+            CGPoint origin = layoutAttributes.frame.origin;
+            
+            origin.y = MAX(
+                           //保证footer停留
+                           //第一个是停留时的y,第二个是非停留时的y
+                           MIN(self.collectionView.contentOffset.y + self.collectionView.frame.size.height -currentFooterHeight,CGRectGetMinY(firstCellAttrs.frame) - headerHeight + [[self.sectionsHeights objectAtIndex:section] floatValue] -currentFooterHeight) ,
+                           //保证footer消失
+                           CGRectGetMinY(firstCellAttrs.frame)- headerHeight  ) ;//
+            CGFloat width = layoutAttributes.frame.size.width;
+            width = self.collectionView.bounds.size.width;
+            origin.x = 0;
+            //            if(self.collectionView.contentOffset.y > origin.y -self.fixTop -[self.headerToTopArray[section] floatValue]) {
+            //                width = self.collectionView.bounds.size.width;
+            //                origin.x = 0;
+            ////                origin.y = origin.y + [self.headerToTopArray[section] floatValue];
+            //                NSLog(@"self.collectionView.contentOffset.y%@",@(self.collectionView.contentOffset.y));
+            //
+            //            } else {
+            //
+            //                width = self.collectionView.bounds.size.width;
+            //                origin.x = 0;
+            //
+            //            }
             
             layoutAttributes.zIndex = 1024 +section;
             layoutAttributes.frame = (CGRect){
@@ -134,12 +191,25 @@ NSString* const SYStickHeaderWaterDecorationKind = @"Decoration";
 }
 
 - (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
     return self.layoutInfo[SYStickHeaderWaterCellKind][indexPath];
+    
 }
 
 - (UICollectionViewLayoutAttributes *)layoutAttributesForSupplementaryViewOfKind:(NSString *)kind
                                                                      atIndexPath:(NSIndexPath *)indexPath {
-    return self.layoutInfo[UICollectionElementKindSectionHeader][indexPath];
+    
+    if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
+        
+        return self.layoutInfo[UICollectionElementKindSectionHeader][indexPath];
+        
+    }else if ([kind isEqualToString:UICollectionElementKindSectionFooter])
+    {
+        return self.layoutInfo[UICollectionElementKindSectionFooter][indexPath];
+    }
+    
+    return nil;
+    
 }
 
 //- (UICollectionViewLayoutAttributes *)layoutAttributesForDecorationViewOfKind:
@@ -152,14 +222,14 @@ NSString* const SYStickHeaderWaterDecorationKind = @"Decoration";
     for (NSInteger i =0; i< [self.topInsetArray count]; i++) {
         height += [self.topInsetArray[i] floatValue];
     }
-//    NSLog(@"height%@",[NSString stringWithFormat:@"%f",[[NSNumber numberWithFloat:height] floatValue]]);
+    //    NSLog(@"height%@",[NSString stringWithFormat:@"%f",[[NSNumber numberWithFloat:height] floatValue]]);
     for (NSNumber *h in self.sectionsHeights) {
         height += [h integerValue];
     }
     for (NSInteger i =0; i< [self.bottomInsetArray count]; i++) {
         height += [self.bottomInsetArray[i] floatValue];
     }
-//    NSLog(@"height%@",[NSString stringWithFormat:@"%li",(long)[[NSNumber numberWithFloat:height] integerValue]]);
+    //    NSLog(@"height%@",[NSString stringWithFormat:@"%li",(long)[[NSNumber numberWithFloat:height] integerValue]]);
     return CGSizeMake(self.collectionView.bounds.size.width, height);
 }
 
@@ -233,12 +303,12 @@ NSString* const SYStickHeaderWaterDecorationKind = @"Decoration";
     for (NSInteger section = 0; section < self.columnsCountArray.count; section++) {
         
         NSInteger columnsCount = [self.columnsCountArray[section] integerValue];
-
-            [itemsInnerMarginArray addObject:[NSNumber numberWithFloat:(self.collectionView.bounds.size.width -
-                                                                        columnsCount *[self.itemsWidthArray[section]floatValue])
-                                              /
-                                              (columnsCount + 1)]];
-            
+        
+        [itemsInnerMarginArray addObject:[NSNumber numberWithFloat:(self.collectionView.bounds.size.width -
+                                                                    columnsCount *[self.itemsWidthArray[section]floatValue])
+                                          /
+                                          (columnsCount + 1)]];
+        
     }
     self.itemInnerMarginArray = [itemsInnerMarginArray copy];
 }
@@ -252,39 +322,40 @@ NSString* const SYStickHeaderWaterDecorationKind = @"Decoration";
 }
 //返回最高列的高度
 - (NSNumber*) calculateHeightForSection: (NSInteger)section {
-        NSInteger sectionColumns[[self.columnsCountArray[section] integerValue]];
-        //为每一列初始化高度。sectionHeight
-        NSIndexPath* indexPath = [NSIndexPath indexPathForItem:0 inSection:section];
-        for (NSInteger column = 0; column < [self.columnsCountArray[section] integerValue]; column++) {
-            CGFloat itemInnerMargin = [self.itemInnerMarginArray[section] floatValue];
-            sectionColumns[column] = [self headerHeightForIndexPath:indexPath]
-            + itemInnerMargin+[self.topInsetArray[section] floatValue] +[self.bottomInsetArray[section] floatValue];
-        }
+    NSInteger sectionColumns[[self.columnsCountArray[section] integerValue]];
+    //为每一列初始化高度。sectionHeight
+    NSIndexPath* indexPath = [NSIndexPath indexPathForItem:0 inSection:section];
+    for (NSInteger column = 0; column < [self.columnsCountArray[section] integerValue]; column++) {
+        CGFloat itemInnerMargin = [self.itemInnerMarginArray[section] floatValue];
+        sectionColumns[column] = [self headerHeightForIndexPath:indexPath]
+        + itemInnerMargin+[self.topInsetArray[section] floatValue] +[self.bottomInsetArray[section] floatValue]
+        +[self footerHeightForIndexPath:indexPath];
+    }
+    
+    NSInteger itemCount = [self.collectionView numberOfItemsInSection:section];
+    for (NSInteger item = 0; item < itemCount; item++) {
+        indexPath = [NSIndexPath indexPathForItem:item inSection:section];
         
-        NSInteger itemCount = [self.collectionView numberOfItemsInSection:section];
-        for (NSInteger item = 0; item < itemCount; item++) {
-            indexPath = [NSIndexPath indexPathForItem:item inSection:section];
-            
-            NSInteger currentColumn = 0;
-            for (NSInteger column = 0; column < [self.columnsCountArray[section] integerValue]; column++) {
-                if(sectionColumns[currentColumn] > sectionColumns[column]) {
-                    currentColumn = column;
-                }
-            }
-            
-            sectionColumns[currentColumn] += [[[self.itemsInSectionsHeights objectAtIndex:section]
-                                               objectAtIndex:indexPath.item] floatValue];
-            sectionColumns[currentColumn] += [self.itemInnerMarginArray[section] floatValue];
-        }
-        
-        NSInteger biggestColumn = 0;
+        NSInteger currentColumn = 0;
         for (NSInteger column = 0; column < [self.columnsCountArray[section] integerValue]; column++) {
-            if(sectionColumns[biggestColumn] < sectionColumns[column]) {
-                biggestColumn = column;
+            if(sectionColumns[currentColumn] > sectionColumns[column]) {
+                currentColumn = column;
             }
         }
         
-        return [NSNumber numberWithFloat: sectionColumns[biggestColumn]];
+        sectionColumns[currentColumn] += [[[self.itemsInSectionsHeights objectAtIndex:section]
+                                           objectAtIndex:indexPath.item] floatValue];
+        sectionColumns[currentColumn] += [self.itemInnerMarginArray[section] floatValue];
+    }
+    
+    NSInteger biggestColumn = 0;
+    for (NSInteger column = 0; column < [self.columnsCountArray[section] integerValue]; column++) {
+        if(sectionColumns[biggestColumn] < sectionColumns[column]) {
+            biggestColumn = column;
+        }
+    }
+    
+    return [NSNumber numberWithFloat: sectionColumns[biggestColumn]];
     
 }
 //预估每个单位的UICollectionViewLayoutAttributes
@@ -292,13 +363,14 @@ NSString* const SYStickHeaderWaterDecorationKind = @"Decoration";
     NSMutableDictionary *newLayoutInfo = [NSMutableDictionary dictionary];
     NSMutableDictionary *cellLayoutInfo = [NSMutableDictionary dictionary];
     NSMutableDictionary *titleLayoutInfo = [NSMutableDictionary dictionary];
+    NSMutableDictionary *footertitleLayoutInfo = [NSMutableDictionary dictionary];
     
     NSIndexPath *indexPath = [NSIndexPath indexPathForItem:0 inSection:0];
-//    UICollectionViewLayoutAttributes *emblemAttributes =
-//    [UICollectionViewLayoutAttributes layoutAttributesForDecorationViewOfKind:SYStickHeaderWaterDecorationKind
-//                                                                withIndexPath:indexPath];
-    //    emblemAttributes.frame = [self frameForWaterfallDecoration];
-//    NSLog(@"%@",@([self.collectionView numberOfSections]));
+    //    UICollectionViewLayoutAttributes *emblemAttributes =
+    //    [UICollectionViewLayoutAttributes layoutAttributesForDecorationViewOfKind:SYStickHeaderWaterDecorationKind
+    //                                                                withIndexPath:indexPath];
+    //        emblemAttributes.frame = [self frameForWaterfallDecoration];
+    //    NSLog(@"%@",@([self.collectionView numberOfSections]));
     for (NSInteger section = 0; section < [self.collectionView numberOfSections]; section++) {
         for (NSInteger item = 0; item < [self.collectionView numberOfItemsInSection:section]; item++) {
             indexPath = [NSIndexPath indexPathForItem:item inSection:section];
@@ -307,19 +379,25 @@ NSString* const SYStickHeaderWaterDecorationKind = @"Decoration";
             itemAttributes.frame = [self frameForWaterfallCellIndexPath:indexPath];
             cellLayoutInfo[indexPath] = itemAttributes;
             
-            //Only one header in section, so we get only item at 0 position
+            //Only one header in section, so we get only item at 0 position? footer?
             if (indexPath.item == 0) {
                 UICollectionViewLayoutAttributes *titleAttributes = [UICollectionViewLayoutAttributes
                                                                      layoutAttributesForSupplementaryViewOfKind:UICollectionElementKindSectionHeader
                                                                      withIndexPath:indexPath];
                 titleAttributes.frame = [self frameForWaterfallHeaderAtIndexPath:indexPath];
                 titleLayoutInfo[indexPath] = titleAttributes;
+                
+                UICollectionViewLayoutAttributes *footerTitleAttributes = [UICollectionViewLayoutAttributes layoutAttributesForSupplementaryViewOfKind:UICollectionElementKindSectionFooter withIndexPath:indexPath];
+                footerTitleAttributes.frame = [self frameForWaterfallFooterAtIndexPath:indexPath];
+                footertitleLayoutInfo[indexPath] = footerTitleAttributes;
             }
         }
     }
     
     newLayoutInfo[SYStickHeaderWaterCellKind] = cellLayoutInfo;
     newLayoutInfo[UICollectionElementKindSectionHeader] = titleLayoutInfo;
+    
+    newLayoutInfo[UICollectionElementKindSectionFooter] = footertitleLayoutInfo;
     //    newLayoutInfo[SYStickHeaderWaterDecorationKind] = @{indexPath: emblemAttributes};
     
     self.layoutInfo = newLayoutInfo;
@@ -386,7 +464,21 @@ NSString* const SYStickHeaderWaterDecorationKind = @"Decoration";
     CGFloat originX = [self.itemInnerMarginArray[indexPath.section] floatValue];
     return CGRectMake(originX, originY, width, height);
 }
-
+//footerView的frame
+- (CGRect)frameForWaterfallFooterAtIndexPath:(NSIndexPath *)indexPath {
+    CGFloat width = self.collectionView.bounds.size.width ;
+    CGFloat height = [self footerHeightForIndexPath:indexPath];
+    //before
+    //    CGFloat originY = self.topInset;
+    CGFloat originY = 0;
+    for (NSInteger i = 0; i < indexPath.section; i++) {
+        originY += [[self.sectionsHeights objectAtIndex:i] floatValue];
+    }
+    //加上当前section的高度（除footerView之外）
+    originY += [[self.sectionsHeights objectAtIndex:indexPath.section] floatValue]- height;
+    CGFloat originX = 0;
+    return CGRectMake(originX, originY, width, height);
+}
 //- (CGRect) frameForWaterfallDecoration {
 //    CGSize size = [FRGWaterfallDecorationReusableView defaultSize];
 //    CGFloat originX = floorf((self.collectionView.bounds.size.width - size.width) * 0.5f);
@@ -402,6 +494,19 @@ NSString* const SYStickHeaderWaterDecorationKind = @"Decoration";
         return [self.delegate collectionView:self.collectionView
                                       layout:self
                   heightForHeaderAtIndexPath:indexPath];
+    }
+    
+    return 0.0f;
+}
+//footerView的height。通过代理返回，如果没有实现代理，返回0
+- (CGFloat) footerHeightForIndexPath:(NSIndexPath*)indexPath {
+    if ([self.delegate respondsToSelector:@selector(collectionView:layout:heightForFooterAtIndexPath:)]) {
+        NSAssert(![[NSNumber numberWithFloat:[self.delegate collectionView:self.collectionView
+                                                                    layout:self
+                                                heightForFooterAtIndexPath:indexPath]] isEqualToNumber:[NSDecimalNumber notANumber]] , @"footerHeight must not be nan");
+        return [self.delegate collectionView:self.collectionView
+                                      layout:self
+                  heightForFooterAtIndexPath:indexPath];
     }
     
     return 0.0f;
@@ -440,7 +545,7 @@ NSString* const SYStickHeaderWaterDecorationKind = @"Decoration";
         NSAssert(![[NSNumber numberWithFloat:[self.delegate collectionView:self.collectionView layout:self widthForItemInSection:section]] isEqualToNumber:[NSDecimalNumber notANumber]] , @"widthForItemInSection must not be nan");
         return [self.delegate collectionView:self.collectionView layout:self widthForItemInSection:section];
     }
-    return kDeviceWidth;
+    return self.collectionView.bounds.size.width;
 }
 /**
  *返回所在section的header停留时与顶部的距离（如果设置isTopForHeader ＝ yes ，则距离会叠加），默认返回0
@@ -455,4 +560,5 @@ NSString* const SYStickHeaderWaterDecorationKind = @"Decoration";
     }
     return 0.0f;
 }
+
 @end

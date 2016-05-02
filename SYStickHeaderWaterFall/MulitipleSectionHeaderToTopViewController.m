@@ -334,6 +334,7 @@ heightForHeaderAtIndexPath:(NSIndexPath *)indexPath {
     [homeRequest startWithCompletionBlockWithSuccess:^(__kindof BaseRequest *request, id obj) {
         if ([obj objectForKey:@"data"]== [NSNull null]) {
             if ([page isEqualToString:@"1"]) {
+                [_shopForThree removeAllObjects];
                 [_shops removeAllObjects];
                 [self.collectView.header endRefreshing];
                 [self.collectView reloadData];
@@ -360,13 +361,17 @@ heightForHeaderAtIndexPath:(NSIndexPath *)indexPath {
             self.collectView.dataSource =self;
             if ([status isEqual:@"1"]) {
                 if ([page isEqualToString:@"1"]) {
+                    [_shopForThree removeAllObjects];
                     [_shops removeAllObjects];
                     showPage = 1;
                 }
                 for (int i =0; i<[dataArray count]; i++) {
-                    [_shops addObject:[HomeModel initHomeModelWithDict:dataArray[i]]];
+                    [_shopForThree addObject:[HomeModel initHomeModelWithDict:dataArray[i]]];
+                    //                    [_shops addObject:[HomeModel initHomeModelWithDict:dataArray[i]]];
                 }
-                
+                if (showPage ==1) {
+                    _shops=_shopForThree;
+                }
             }
             if ([type isEqualToString:@"header"]) {
                 [self.collectView.header endRefreshing];
@@ -377,6 +382,7 @@ heightForHeaderAtIndexPath:(NSIndexPath *)indexPath {
             
             [self.collectView reloadData];
         }
+
         
     } failure:^(__kindof BaseRequest *request, id obj) {
         if (self.view.superview) {

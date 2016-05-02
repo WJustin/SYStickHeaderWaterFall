@@ -39,6 +39,7 @@
 		F0F07D6F1CD0CB3400B26453 /* NetWorkConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = F0F07D681CD0CB3400B26453 /* NetWorkConfig.m */; };
 		F0F07D701CD0CB3400B26453 /* NetWorkPrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = F0F07D6A1CD0CB3400B26453 /* NetWorkPrivate.m */; };
 		F0F07D711CD0CB3400B26453 /* YZPBaseRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F0F07D6C1CD0CB3400B26453 /* YZPBaseRequest.m */; };
+		FE39D45F1CD77AF9005135DA /* HomeFooterCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = FE39D45E1CD77AF9005135DA /* HomeFooterCollectionReusableView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -124,6 +125,8 @@
 		F0F07D6A1CD0CB3400B26453 /* NetWorkPrivate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetWorkPrivate.m; sourceTree = "<group>"; };
 		F0F07D6B1CD0CB3400B26453 /* YZPBaseRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZPBaseRequest.h; sourceTree = "<group>"; };
 		F0F07D6C1CD0CB3400B26453 /* YZPBaseRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YZPBaseRequest.m; sourceTree = "<group>"; };
+		FE39D45D1CD77AF9005135DA /* HomeFooterCollectionReusableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeFooterCollectionReusableView.h; sourceTree = "<group>"; };
+		FE39D45E1CD77AF9005135DA /* HomeFooterCollectionReusableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeFooterCollectionReusableView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -278,6 +281,8 @@
 		04CE95671C89998400CBA178 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				FE39D45D1CD77AF9005135DA /* HomeFooterCollectionReusableView.h */,
+				FE39D45E1CD77AF9005135DA /* HomeFooterCollectionReusableView.m */,
 				042E9AA81C8EA247004C406C /* HomePageHeadView.h */,
 				042E9AA91C8EA247004C406C /* HomePageHeadView.m */,
 				042E9AAA1C8EA247004C406C /* HPCollectionViewCell.h */,
@@ -592,6 +597,7 @@
 				04A93B8A1CA0E2F500C7DBC1 /* MulitipleSectionHeaderToTopViewController.m in Sources */,
 				04A93B871CA0D7BC00C7DBC1 /* MulitipleSectionNoTopHeightViewController.m in Sources */,
 				04CE95381C8992F000CBA178 /* ViewController.m in Sources */,
+				FE39D45F1CD77AF9005135DA /* HomeFooterCollectionReusableView.m in Sources */,
 				F0F07D701CD0CB3400B26453 /* NetWorkPrivate.m in Sources */,
 				042E9AB71C8EA810004C406C /* RequestCustom.m in Sources */,
 				042E9AAC1C8EA247004C406C /* HomePageHeadView.m in Sources */,
