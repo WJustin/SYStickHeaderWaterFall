@@ -39,6 +39,7 @@ More flexible support various types of waterfalls flow .（更加灵活支持各
     cvLayout.isStickyHeader = YES;
     
 //是否设置Footer停留,默认NO
+
     cvLayout.isStickyFooter = NO;
     
 //section停留的位置是否包括原来设置的top，默认NO
