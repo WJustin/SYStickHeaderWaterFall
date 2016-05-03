@@ -42,6 +42,7 @@
 		FE39D45F1CD77AF9005135DA /* HomeFooterCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = FE39D45E1CD77AF9005135DA /* HomeFooterCollectionReusableView.m */; };
 		FE39D4651CD78249005135DA /* MulitipleSectionHeaderFooterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FE39D4641CD78249005135DA /* MulitipleSectionHeaderFooterViewController.m */; };
 		FE39D4671CD78C4F005135DA /* 1.gif in Resources */ = {isa = PBXBuildFile; fileRef = FE39D4661CD78C4F005135DA /* 1.gif */; };
+		FE402DB11CD8DA5A00FF7786 /* NoHeaderNoFooterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FE402DB01CD8DA5A00FF7786 /* NoHeaderNoFooterViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -132,6 +133,8 @@
 		FE39D4631CD78249005135DA /* MulitipleSectionHeaderFooterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MulitipleSectionHeaderFooterViewController.h; sourceTree = "<group>"; };
 		FE39D4641CD78249005135DA /* MulitipleSectionHeaderFooterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MulitipleSectionHeaderFooterViewController.m; sourceTree = "<group>"; };
 		FE39D4661CD78C4F005135DA /* 1.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 1.gif; sourceTree = "<group>"; };
+		FE402DAF1CD8DA5A00FF7786 /* NoHeaderNoFooterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoHeaderNoFooterViewController.h; sourceTree = "<group>"; };
+		FE402DB01CD8DA5A00FF7786 /* NoHeaderNoFooterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoHeaderNoFooterViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,6 +178,8 @@
 				04A93B861CA0D7BC00C7DBC1 /* MulitipleSectionNoTopHeightViewController.m */,
 				04A93B881CA0E2F500C7DBC1 /* MulitipleSectionHeaderToTopViewController.h */,
 				04A93B891CA0E2F500C7DBC1 /* MulitipleSectionHeaderToTopViewController.m */,
+				FE402DAF1CD8DA5A00FF7786 /* NoHeaderNoFooterViewController.h */,
+				FE402DB01CD8DA5A00FF7786 /* NoHeaderNoFooterViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -615,6 +620,7 @@
 				04CE95351C8992F000CBA178 /* AppDelegate.m in Sources */,
 				F02289D91CD1F77800EFF43C /* SYSHomeRequest.m in Sources */,
 				042E9AAD1C8EA247004C406C /* HPCollectionViewCell.m in Sources */,
+				FE402DB11CD8DA5A00FF7786 /* NoHeaderNoFooterViewController.m in Sources */,
 				045631541C9FF5610099ED78 /* SYRootViewController.m in Sources */,
 				045631571C9FF7CF0099ED78 /* MulitipleSectionViewController.m in Sources */,
 				04CE95321C8992F000CBA178 /* main.m in Sources */,
