@@ -101,87 +101,92 @@ NSString* const SYStickHeaderWaterDecorationKind = @"Decoration";
         }];
     }];
     
-    if(!self.isStickyHeader&&!self.isStickyFooter) {
-        return allAttributes;
-    }
+//    if(!self.isStickyHeader&&!self.isStickyFooter) {
+//        return allAttributes;
+//    }
     //保证section停留
     for (UICollectionViewLayoutAttributes *layoutAttributes in allAttributes) {
-        if ([layoutAttributes.representedElementKind isEqualToString:UICollectionElementKindSectionHeader]) {
-            NSInteger section = layoutAttributes.indexPath.section;
-            NSIndexPath *firstCellIndexPath = [NSIndexPath indexPathForItem:0 inSection:section];
-            UICollectionViewLayoutAttributes *firstCellAttrs = [self layoutAttributesForItemAtIndexPath:firstCellIndexPath];
-            
-            CGFloat headerHeight = CGRectGetHeight(layoutAttributes.frame) + [self.itemInnerMarginArray[section] floatValue];
-            CGFloat currentHeaderHeight = [self headerHeightForIndexPath:firstCellIndexPath];
-            CGPoint origin = layoutAttributes.frame.origin;
-            
-            origin.y = MIN(
-                           //保证停留
-                           MAX(self.collectionView.contentOffset.y + self.fixTop +[self.headerToTopArray[section] floatValue], (CGRectGetMinY(firstCellAttrs.frame) - headerHeight) - (self.isTopForHeader?[self.topInsetArray[section] floatValue]:0.0f)) ,
-                           //保证消失
-                           CGRectGetMinY(firstCellAttrs.frame) - headerHeight + [[self.sectionsHeights objectAtIndex:section] floatValue] - currentHeaderHeight - (self.isTopForHeader?[self.topInsetArray[section] floatValue]:0.0f)                           ) + (self.isTopForHeader?[self.topInsetArray[section] floatValue]:0.0f) ;//
-            CGFloat width = layoutAttributes.frame.size.width;
-            if(self.collectionView.contentOffset.y > origin.y -self.fixTop -[self.headerToTopArray[section] floatValue]) {
-                width = self.collectionView.bounds.size.width;
-                origin.x = 0;
-                origin.y = origin.y + [self.headerToTopArray[section] floatValue];
-                NSLog(@"self.collectionView.contentOffset.y%@",@(self.collectionView.contentOffset.y));
+        if (self.isStickyHeader) {
+            if ([layoutAttributes.representedElementKind isEqualToString:UICollectionElementKindSectionHeader]) {
+                NSInteger section = layoutAttributes.indexPath.section;
+                NSIndexPath *firstCellIndexPath = [NSIndexPath indexPathForItem:0 inSection:section];
+                UICollectionViewLayoutAttributes *firstCellAttrs = [self layoutAttributesForItemAtIndexPath:firstCellIndexPath];
                 
-            } else {
+                CGFloat headerHeight = CGRectGetHeight(layoutAttributes.frame) + [self.itemInnerMarginArray[section] floatValue];
+                CGFloat currentHeaderHeight = [self headerHeightForIndexPath:firstCellIndexPath];
+                CGPoint origin = layoutAttributes.frame.origin;
                 
-                width = self.collectionView.bounds.size.width;
-                origin.x = 0;
+                origin.y = MIN(
+                               //保证停留
+                               MAX(self.collectionView.contentOffset.y + self.fixTop +[self.headerToTopArray[section] floatValue], (CGRectGetMinY(firstCellAttrs.frame) - headerHeight) - (self.isTopForHeader?[self.topInsetArray[section] floatValue]:0.0f)) ,
+                               //保证消失
+                               CGRectGetMinY(firstCellAttrs.frame) - headerHeight + [[self.sectionsHeights objectAtIndex:section] floatValue] - currentHeaderHeight - (self.isTopForHeader?[self.topInsetArray[section] floatValue]:0.0f)                           ) + (self.isTopForHeader?[self.topInsetArray[section] floatValue]:0.0f) ;//
+                CGFloat width = layoutAttributes.frame.size.width;
+                if(self.collectionView.contentOffset.y > origin.y -self.fixTop -[self.headerToTopArray[section] floatValue]) {
+                    width = self.collectionView.bounds.size.width;
+                    origin.x = 0;
+                    origin.y = origin.y + [self.headerToTopArray[section] floatValue];
+                    NSLog(@"self.collectionView.contentOffset.y%@",@(self.collectionView.contentOffset.y));
+                    
+                } else {
+                    
+                    width = self.collectionView.bounds.size.width;
+                    origin.x = 0;
+                    
+                }
                 
+                layoutAttributes.zIndex = 2048 +section;//这里的zIndex一定要比footer的高，确保不会被footer遮挡
+                layoutAttributes.frame = (CGRect){
+                    .origin = origin,
+                    .size = CGSizeMake(width, layoutAttributes.frame.size.height)
+                };
             }
-            
-            layoutAttributes.zIndex = 2048 +section;//这里的zIndex一定要比footer的高，确保不会被footer遮挡
-            layoutAttributes.frame = (CGRect){
-                .origin = origin,
-                .size = CGSizeMake(width, layoutAttributes.frame.size.height)
-            };
         }
+        
+        if (self.isStickyFooter) {
+            //保证footer停留，
+            if ([layoutAttributes.representedElementKind isEqualToString:UICollectionElementKindSectionFooter]) {
+                
+                NSInteger section = layoutAttributes.indexPath.section;
+                NSLog(@"indexPath.item%@",@(layoutAttributes.indexPath.item));
+                NSIndexPath *firstCellIndexPath = [NSIndexPath indexPathForItem:0 inSection:section];
+                UICollectionViewLayoutAttributes *firstCellAttrs = [self layoutAttributesForItemAtIndexPath:firstCellIndexPath];
+                CGFloat headerHeight = [self headerHeightForIndexPath:firstCellIndexPath] + [self.itemInnerMarginArray[section] floatValue];
+                //            CGFloat currentHeaderHeight = [self headerHeightForIndexPath:firstCellIndexPath];
+                
+                
+                CGFloat currentFooterHeight = [self footerHeightForIndexPath:firstCellIndexPath];
+                CGPoint origin = layoutAttributes.frame.origin;
+                
+                origin.y = MAX(
+                               //保证footer停留
+                               //第一个是停留时的y,第二个是非停留时的y
+                               MIN(self.collectionView.contentOffset.y + self.collectionView.frame.size.height -currentFooterHeight,CGRectGetMinY(firstCellAttrs.frame) - headerHeight + [[self.sectionsHeights objectAtIndex:section] floatValue] -currentFooterHeight) ,
+                               //保证footer消失
+                               CGRectGetMinY(firstCellAttrs.frame)- headerHeight  ) ;//
+                CGFloat width = layoutAttributes.frame.size.width;
+                width = self.collectionView.bounds.size.width;
+                origin.x = 0;
+                //            if(self.collectionView.contentOffset.y > origin.y -self.fixTop -[self.headerToTopArray[section] floatValue]) {
+                //                width = self.collectionView.bounds.size.width;
+                //                origin.x = 0;
+                ////                origin.y = origin.y + [self.headerToTopArray[section] floatValue];
+                //                NSLog(@"self.collectionView.contentOffset.y%@",@(self.collectionView.contentOffset.y));
+                //
+                //            } else {
+                //
+                //                width = self.collectionView.bounds.size.width;
+                //                origin.x = 0;
+                //
+                //            }
+                
+                layoutAttributes.zIndex = 1024 +section;
+                layoutAttributes.frame = (CGRect){
+                    .origin = origin,
+                    .size = CGSizeMake(width, layoutAttributes.frame.size.height)
+                };
+            }
 
-        //保证footer停留，
-        if ([layoutAttributes.representedElementKind isEqualToString:UICollectionElementKindSectionFooter]) {
-            
-            NSInteger section = layoutAttributes.indexPath.section;
-            NSLog(@"indexPath.item%@",@(layoutAttributes.indexPath.item));
-            NSIndexPath *firstCellIndexPath = [NSIndexPath indexPathForItem:0 inSection:section];
-            UICollectionViewLayoutAttributes *firstCellAttrs = [self layoutAttributesForItemAtIndexPath:firstCellIndexPath];
-            CGFloat headerHeight = [self headerHeightForIndexPath:firstCellIndexPath] + [self.itemInnerMarginArray[section] floatValue];
-            //            CGFloat currentHeaderHeight = [self headerHeightForIndexPath:firstCellIndexPath];
-            
-            
-            CGFloat currentFooterHeight = [self footerHeightForIndexPath:firstCellIndexPath];
-            CGPoint origin = layoutAttributes.frame.origin;
-            
-            origin.y = MAX(
-                           //保证footer停留
-                           //第一个是停留时的y,第二个是非停留时的y
-                           MIN(self.collectionView.contentOffset.y + self.collectionView.frame.size.height -currentFooterHeight,CGRectGetMinY(firstCellAttrs.frame) - headerHeight + [[self.sectionsHeights objectAtIndex:section] floatValue] -currentFooterHeight) ,
-                           //保证footer消失
-                           CGRectGetMinY(firstCellAttrs.frame)- headerHeight  ) ;//
-            CGFloat width = layoutAttributes.frame.size.width;
-            width = self.collectionView.bounds.size.width;
-            origin.x = 0;
-            //            if(self.collectionView.contentOffset.y > origin.y -self.fixTop -[self.headerToTopArray[section] floatValue]) {
-            //                width = self.collectionView.bounds.size.width;
-            //                origin.x = 0;
-            ////                origin.y = origin.y + [self.headerToTopArray[section] floatValue];
-            //                NSLog(@"self.collectionView.contentOffset.y%@",@(self.collectionView.contentOffset.y));
-            //
-            //            } else {
-            //
-            //                width = self.collectionView.bounds.size.width;
-            //                origin.x = 0;
-            //
-            //            }
-            
-            layoutAttributes.zIndex = 1024 +section;
-            layoutAttributes.frame = (CGRect){
-                .origin = origin,
-                .size = CGSizeMake(width, layoutAttributes.frame.size.height)
-            };
         }
     }
     
