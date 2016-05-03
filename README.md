@@ -10,7 +10,7 @@ More flexible support various types of waterfalls flow .（更加灵活支持各
 
 ![image](https://github.com/zhangsuya/SYStickHeaderWaterFall/blob/master/SYStickHeaderWaterFall/1.gif)
 
-五一期间，在家里把footer停留给加上了，并解决了一个很深的bug，现在可以让你更轻松的布局。
+五一期间，在家里把footer停留给加上了，并解决了一个很深的bug，现在保证您不需要header和footer视图时，也能用此layout来布局瀑布流。
 
 以后封装任务：
 1.装饰视图的增加。
