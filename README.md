@@ -8,7 +8,7 @@ SYStickHeaderWaterFall 中文介绍
 
 More flexible support various types of waterfalls flow .（更加灵活支持各种类型的瀑布流结构。）
 
-![image](https://github.com/zhangsuya/SYStickHeaderWaterFall/blob/master/SYStickHeaderWaterFall/1.gif)
+![image](https://github.com/zhangsuya/SYStickHeaderWaterFall/blob/master/SYStickHeaderWaterFall/2.gif)
 
 五一期间，在家里把footer停留给加上了，并解决了一个很深的bug，现在保证您不需要header和footer视图时，也能用此layout来布局瀑布流。
 
