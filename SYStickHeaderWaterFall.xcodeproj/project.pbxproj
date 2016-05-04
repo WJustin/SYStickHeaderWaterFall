@@ -34,6 +34,7 @@
 		92698E6E2D2CC9838DE2ECCD /* libPods-SYStickHeaderWaterFallUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3201C1CCBC0FD703D130B35C /* libPods-SYStickHeaderWaterFallUITests.a */; };
 		F02289D91CD1F77800EFF43C /* SYSHomeRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F02289D81CD1F77800EFF43C /* SYSHomeRequest.m */; };
 		F02289DC1CD203C600EFF43C /* SYSHomeBannerRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F02289DB1CD203C600EFF43C /* SYSHomeBannerRequest.m */; };
+		F0E355591CD9CAD9003828FE /* 2.gif in Resources */ = {isa = PBXBuildFile; fileRef = F0E355581CD9CAD9003828FE /* 2.gif */; };
 		F0F07D6D1CD0CB3400B26453 /* BaseRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F0F07D641CD0CB3400B26453 /* BaseRequest.m */; };
 		F0F07D6E1CD0CB3400B26453 /* NetWorkAgent.m in Sources */ = {isa = PBXBuildFile; fileRef = F0F07D661CD0CB3400B26453 /* NetWorkAgent.m */; };
 		F0F07D6F1CD0CB3400B26453 /* NetWorkConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = F0F07D681CD0CB3400B26453 /* NetWorkConfig.m */; };
@@ -118,6 +119,7 @@
 		F02289DB1CD203C600EFF43C /* SYSHomeBannerRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYSHomeBannerRequest.m; sourceTree = "<group>"; };
 		F02289DD1CD2042400EFF43C /* SYSURLMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SYSURLMacro.h; sourceTree = "<group>"; };
 		F02289DE1CD206CF00EFF43C /* SYSMAINMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SYSMAINMacro.h; path = ../SYSMAINMacro.h; sourceTree = "<group>"; };
+		F0E355581CD9CAD9003828FE /* 2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 2.gif; sourceTree = "<group>"; };
 		F0F07D631CD0CB3400B26453 /* BaseRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseRequest.h; sourceTree = "<group>"; };
 		F0F07D641CD0CB3400B26453 /* BaseRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseRequest.m; sourceTree = "<group>"; };
 		F0F07D651CD0CB3400B26453 /* NetWorkAgent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetWorkAgent.h; sourceTree = "<group>"; };
@@ -230,6 +232,7 @@
 		04CE952F1C8992F000CBA178 /* SYStickHeaderWaterFall */ = {
 			isa = PBXGroup;
 			children = (
+				F0E355581CD9CAD9003828FE /* 2.gif */,
 				FE39D4661CD78C4F005135DA /* 1.gif */,
 				F02289D61CD1F73700EFF43C /* Api */,
 				04A93B8B1CA0FB2C00C7DBC1 /* 4.gif */,
@@ -453,6 +456,7 @@
 				042E9ABC1C8EAC39004C406C /* HPCollectionViewCell.xib in Resources */,
 				04CE95401C8992F000CBA178 /* LaunchScreen.storyboard in Resources */,
 				04CE953D1C8992F000CBA178 /* Assets.xcassets in Resources */,
+				F0E355591CD9CAD9003828FE /* 2.gif in Resources */,
 				04CE953B1C8992F000CBA178 /* Main.storyboard in Resources */,
 				FE39D4671CD78C4F005135DA /* 1.gif in Resources */,
 				045979081C99039100C2E8C2 /* Classes in Resources */,
