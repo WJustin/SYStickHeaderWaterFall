@@ -7,6 +7,8 @@
 //
 //  Thank FRGWaterfallCollectionViewLayout😊.https://github.com/SureCase/WaterfallCollectionView
 
+// 项目有什么bug和建议 可以加群：436043199 来大家一起交流
+
 #import <UIKit/UIKit.h>
 
 @class SYStickHeaderWaterFallLayout;
