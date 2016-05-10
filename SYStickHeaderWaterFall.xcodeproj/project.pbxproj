@@ -34,6 +34,8 @@
 		92698E6E2D2CC9838DE2ECCD /* libPods-SYStickHeaderWaterFallUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3201C1CCBC0FD703D130B35C /* libPods-SYStickHeaderWaterFallUITests.a */; };
 		F02289D91CD1F77800EFF43C /* SYSHomeRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F02289D81CD1F77800EFF43C /* SYSHomeRequest.m */; };
 		F02289DC1CD203C600EFF43C /* SYSHomeBannerRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F02289DB1CD203C600EFF43C /* SYSHomeBannerRequest.m */; };
+		F0E12CEF1CDC7B5A002BA5CC /* YYFPSLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = F0E12CEE1CDC7B5A002BA5CC /* YYFPSLabel.m */; };
+		F0E12CF21CDC7B91002BA5CC /* YYWeakProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = F0E12CF11CDC7B91002BA5CC /* YYWeakProxy.m */; };
 		F0E355591CD9CAD9003828FE /* 2.gif in Resources */ = {isa = PBXBuildFile; fileRef = F0E355581CD9CAD9003828FE /* 2.gif */; };
 		F0F07D6D1CD0CB3400B26453 /* BaseRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F0F07D641CD0CB3400B26453 /* BaseRequest.m */; };
 		F0F07D6E1CD0CB3400B26453 /* NetWorkAgent.m in Sources */ = {isa = PBXBuildFile; fileRef = F0F07D661CD0CB3400B26453 /* NetWorkAgent.m */; };
@@ -119,6 +121,10 @@
 		F02289DB1CD203C600EFF43C /* SYSHomeBannerRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYSHomeBannerRequest.m; sourceTree = "<group>"; };
 		F02289DD1CD2042400EFF43C /* SYSURLMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SYSURLMacro.h; sourceTree = "<group>"; };
 		F02289DE1CD206CF00EFF43C /* SYSMAINMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SYSMAINMacro.h; path = ../SYSMAINMacro.h; sourceTree = "<group>"; };
+		F0E12CED1CDC7B59002BA5CC /* YYFPSLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYFPSLabel.h; sourceTree = "<group>"; };
+		F0E12CEE1CDC7B5A002BA5CC /* YYFPSLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYFPSLabel.m; sourceTree = "<group>"; };
+		F0E12CF01CDC7B91002BA5CC /* YYWeakProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYWeakProxy.h; sourceTree = "<group>"; };
+		F0E12CF11CDC7B91002BA5CC /* YYWeakProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYWeakProxy.m; sourceTree = "<group>"; };
 		F0E355581CD9CAD9003828FE /* 2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 2.gif; sourceTree = "<group>"; };
 		F0F07D631CD0CB3400B26453 /* BaseRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseRequest.h; sourceTree = "<group>"; };
 		F0F07D641CD0CB3400B26453 /* BaseRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseRequest.m; sourceTree = "<group>"; };
@@ -297,6 +303,10 @@
 		04CE95671C89998400CBA178 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				F0E12CF01CDC7B91002BA5CC /* YYWeakProxy.h */,
+				F0E12CF11CDC7B91002BA5CC /* YYWeakProxy.m */,
+				F0E12CED1CDC7B59002BA5CC /* YYFPSLabel.h */,
+				F0E12CEE1CDC7B5A002BA5CC /* YYFPSLabel.m */,
 				FE39D45D1CD77AF9005135DA /* HomeFooterCollectionReusableView.h */,
 				FE39D45E1CD77AF9005135DA /* HomeFooterCollectionReusableView.m */,
 				042E9AA81C8EA247004C406C /* HomePageHeadView.h */,
@@ -614,6 +624,7 @@
 				F02289DC1CD203C600EFF43C /* SYSHomeBannerRequest.m in Sources */,
 				04A93B8A1CA0E2F500C7DBC1 /* MulitipleSectionHeaderToTopViewController.m in Sources */,
 				04A93B871CA0D7BC00C7DBC1 /* MulitipleSectionNoTopHeightViewController.m in Sources */,
+				F0E12CEF1CDC7B5A002BA5CC /* YYFPSLabel.m in Sources */,
 				04CE95381C8992F000CBA178 /* ViewController.m in Sources */,
 				FE39D45F1CD77AF9005135DA /* HomeFooterCollectionReusableView.m in Sources */,
 				F0F07D701CD0CB3400B26453 /* NetWorkPrivate.m in Sources */,
@@ -627,6 +638,7 @@
 				FE402DB11CD8DA5A00FF7786 /* NoHeaderNoFooterViewController.m in Sources */,
 				045631541C9FF5610099ED78 /* SYRootViewController.m in Sources */,
 				045631571C9FF7CF0099ED78 /* MulitipleSectionViewController.m in Sources */,
+				F0E12CF21CDC7B91002BA5CC /* YYWeakProxy.m in Sources */,
 				04CE95321C8992F000CBA178 /* main.m in Sources */,
 				FE39D4651CD78249005135DA /* MulitipleSectionHeaderFooterViewController.m in Sources */,
 				042E9AB01C8EA269004C406C /* HomeThreeViewController.m in Sources */,

@@ -60,7 +60,7 @@ topInSection:(NSInteger )section;
                     layout:(nonnull SYStickHeaderWaterFallLayout *)collectionViewLayout
             bottomInSection:( NSInteger)section;
 /**
- *  返回所在section的header停留时与顶部的距离（如果设置isTopForHeader ＝ yes ，则距离会叠加）
+ *  返回所在section的header停留时与顶部的距离（如果设置isTopForHeader ＝ YES ，则距离会叠加）
  *
  */
 - (CGFloat) collectionView:(nonnull UICollectionView *)collectionView
@@ -68,12 +68,19 @@ topInSection:(NSInteger )section;
            headerToTopInSection:( NSInteger)section;
 @end
 
+typedef NS_ENUM(NSUInteger,SYStickHeaderAlignment)
+{
+    SYStickHeaderAlignmentLeft =0,
+    SYStickHeaderAlignmentcenter
+};
+
 @interface SYStickHeaderWaterFallLayout : UICollectionViewLayout
 
 @property (nonatomic, assign,nonnull)  id<SYStickHeaderWaterFallDelegate> delegate;
 //当你用UINavigationController和UITabbarViewController并设置一些属性时，collectionview的展示视图的坐标y会变得很奇怪，那就在此修正,默认64
 @property (nonatomic,assign) CGFloat fixTop;
-
+//对齐方式一个是靠最左边，一个是靠中间
+@property(nonatomic,assign) SYStickHeaderAlignment headAlignment;
 //是否设置sectionHeader停留,默认YES
 @property (nonatomic) BOOL isStickyHeader;
 //section停留的位置是否包括原来设置的top，默认NO

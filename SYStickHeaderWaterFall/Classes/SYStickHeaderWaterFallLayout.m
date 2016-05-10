@@ -7,8 +7,8 @@
 //
 
 #import "SYStickHeaderWaterFallLayout.h"
-#define kDeviceWidth  [UIScreen mainScreen].bounds.size.width
-#define kDeviceHeight [UIScreen mainScreen].bounds.size.height
+//#define kDeviceWidth  [UIScreen mainScreen].bounds.size.width
+//#define kDeviceHeight [UIScreen mainScreen].bounds.size.height
 #define NSLog(format, ...) do { \
 fprintf(stderr, "<%s : %d> %s\n", \
 [[[NSString stringWithUTF8String:__FILE__] lastPathComponent] UTF8String], \
@@ -58,6 +58,7 @@ NSString* const SYStickHeaderWaterDecorationKind = @"Decoration";
     self.isTopForHeader = NO;
     self.isStickyHeader = YES;
     self.isStickyFooter = NO;
+    self.headAlignment = SYStickHeaderAlignmentLeft;
     [self invalidateLayout];
     
 }
@@ -87,7 +88,7 @@ NSString* const SYStickHeaderWaterDecorationKind = @"Decoration";
                                                           UICollectionViewLayoutAttributes *attributes,
                                                           BOOL *innerStop) {
             if (CGRectIntersectsRect(rect, attributes.frame) || [elementIdentifier isEqualToString:UICollectionElementKindSectionHeader]) {
-                if (attributes.frame.size.height != 0) {//当用户不设置UICollectionElementKindSectionHeader时,如果不加判断的话,会走代理viewForSupplementaryElementOfKind:造成崩溃
+                if (attributes.frame.size.height != 0) {//当用户不设置UICollectionElementKindSectionHeader时,如果不加这个判断的话,会走代理viewForSupplementaryElementOfKind:而如果你在这个方法里没有设置UICollectionReusableView则会造成崩溃
                     [allAttributes addObject:attributes];
                 }
                 
@@ -122,18 +123,18 @@ NSString* const SYStickHeaderWaterDecorationKind = @"Decoration";
                                //保证消失
                                CGRectGetMinY(firstCellAttrs.frame) - headerHeight + [[self.sectionsHeights objectAtIndex:section] floatValue] - currentHeaderHeight - (self.isTopForHeader?[self.topInsetArray[section] floatValue]:0.0f)                           ) + (self.isTopForHeader?[self.topInsetArray[section] floatValue]:0.0f) ;//
                 CGFloat width = layoutAttributes.frame.size.width;
-                if(self.collectionView.contentOffset.y > origin.y -self.fixTop -[self.headerToTopArray[section] floatValue]) {
-                    width = self.collectionView.bounds.size.width;
-                    origin.x = 0;
-                    origin.y = origin.y + [self.headerToTopArray[section] floatValue];
-                    NSLog(@"self.collectionView.contentOffset.y%@",@(self.collectionView.contentOffset.y));
-                    
-                } else {
-                    
-                    width = self.collectionView.bounds.size.width;
-                    origin.x = 0;
-                    
-                }
+//                if(self.collectionView.contentOffset.y > origin.y -self.fixTop -[self.headerToTopArray[section] floatValue]) {
+//                    width = self.collectionView.bounds.size.width;
+//                    origin.x = 0;
+//                    origin.y = origin.y + [self.headerToTopArray[section] floatValue];
+//                    NSLog(@"self.collectionView.contentOffset.y%@",@(self.collectionView.contentOffset.y));
+//                    
+//                } else {
+//                    
+//                    width = self.collectionView.bounds.size.width;
+//                    origin.x = 0;
+//                    
+//                }
                 
                 layoutAttributes.zIndex = 2048 +section;//这里的zIndex一定要比footer的高，确保不会被footer遮挡
                 layoutAttributes.frame = (CGRect){
@@ -237,7 +238,7 @@ NSString* const SYStickHeaderWaterDecorationKind = @"Decoration";
 }
 
 -(BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)newBound {
-    return self.isStickyHeader;
+    return self.isStickyHeader||self.isStickyFooter;
 }
 
 #pragma mark - Prepare layout calculation
@@ -454,8 +455,9 @@ NSString* const SYStickHeaderWaterDecorationKind = @"Decoration";
 }
 //headerView的frame
 - (CGRect)frameForWaterfallHeaderAtIndexPath:(NSIndexPath *)indexPath {
-    CGFloat width = self.collectionView.bounds.size.width -
-    [self.itemInnerMarginArray[indexPath.section] floatValue] * 2;
+    CGFloat width = self.collectionView.bounds.size.width;
+//    self.collectionView.bounds.size.width -
+//    [self.itemInnerMarginArray[indexPath.section] floatValue] * 2
     CGFloat height = [self headerHeightForIndexPath:indexPath];
     //before
     //    CGFloat originY = self.topInset;
@@ -464,7 +466,8 @@ NSString* const SYStickHeaderWaterDecorationKind = @"Decoration";
         originY += [[self.sectionsHeights objectAtIndex:i] floatValue];
     }
     
-    CGFloat originX = [self.itemInnerMarginArray[indexPath.section] floatValue];
+    CGFloat originX = 0;
+//    [self.itemInnerMarginArray[indexPath.section] floatValue]
     return CGRectMake(originX, originY, width, height);
 }
 //footerView的frame

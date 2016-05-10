@@ -19,6 +19,7 @@
 #import "HPCollectionViewCell.h"
 #import "UIView+SDExtension.h"
 #import "HomeFooterCollectionReusableView.h"
+#import "YYFPSLabel.h"
 #define kDeviceWidth  [UIScreen mainScreen].bounds.size.width
 #define kDeviceHeight [UIScreen mainScreen].bounds.size.height
 #define kFileName @"MulitipleSectionNoTopHeightVC.plist"
@@ -32,6 +33,8 @@ static NSString* const WaterfallFooterIdentifier = @"WaterfallFooter";
     
     UICollectionReusableView *reusableView;
 }
+@property (nonatomic, strong) YYFPSLabel *fpsLabel;
+
 @property (nonatomic,strong)UIScrollView *baseScrollView;
 @property (nonatomic,strong )SDCycleScrollView *cycleScrollADView;
 @property(nonatomic,strong)UICollectionView * collectView;
@@ -62,9 +65,19 @@ static NSString* const WaterfallFooterIdentifier = @"WaterfallFooter";
     if (_optionalParam ==nil) {
         self.optionalParam = [[NSMutableDictionary alloc]init];
     }
+    
+    
+    
     // Do any additional setup after loading the view.
     [self initCollectionView];
     [self initNavigationItem];
+    _fpsLabel = [YYFPSLabel new];
+    [_fpsLabel sizeToFit];
+    _fpsLabel.frame = CGRectMake(30, self.view.bounds.size.height - 30, 55, 20);
+    //    _fpsLabel.bottom = self.view.bounds.size.height - 30;
+    //    _fpsLabel.left = 20;
+    _fpsLabel.alpha = 0;
+    [self.view addSubview:_fpsLabel];
     [self initRefresh];
     [self initData];
     
@@ -95,6 +108,7 @@ static NSString* const WaterfallFooterIdentifier = @"WaterfallFooter";
         [self requestHomePageList:page refreshType:@"footer"];
     }];
 }
+
 -(void)initNavigationItem
 {
     //    self.edgesForExtendedLayout = UIRectEdgeNone;
@@ -346,6 +360,41 @@ heightForFooterAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
     //广告页跳转
     //广告页跳转
+}
+//UIScrollViewDelegate
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    if (_fpsLabel.alpha == 0) {
+        [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+            _fpsLabel.alpha = 1;
+        } completion:NULL];
+    }
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    if (!decelerate) {
+        if (_fpsLabel.alpha != 0) {
+            [UIView animateWithDuration:1 delay:2 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+                _fpsLabel.alpha = 0;
+            } completion:NULL];
+        }
+    }
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    if (_fpsLabel.alpha != 0) {
+        [UIView animateWithDuration:1 delay:2 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+            _fpsLabel.alpha = 0;
+        } completion:NULL];
+    }
+}
+
+- (void)scrollViewDidScrollToTop:(UIScrollView *)scrollView {
+    if (_fpsLabel.alpha == 0) {
+        [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+            _fpsLabel.alpha = 1;
+        } completion:^(BOOL finished) {
+        }];
+    }
 }
 
 -(void)requestHomePageList:(NSString *)page refreshType:(NSString *)type
