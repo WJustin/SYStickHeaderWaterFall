@@ -102,4 +102,4 @@ More flexible support various types of waterfalls flow .（更加灵活支持各
 
 另
 ==============
-有什么问题可以邮箱联系我，或者issue我。
+有什么问题可以邮箱联系我，或者issue我。也可以加交流群：436043199
