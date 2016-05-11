@@ -19,6 +19,7 @@ fprintf(stderr, "-------\n"); \
 
 NSString* const SYStickHeaderWaterCellKind = @"WaterfallCell";
 NSString* const SYStickHeaderWaterDecorationKind = @"Decoration";
+
 @interface SYStickHeaderWaterFallLayout()
 @property (nonatomic,strong) NSArray *topInsetArray;//每个section的top
 @property (nonatomic,strong) NSArray *bottomInsetArray;//每个section的bottom
@@ -30,6 +31,7 @@ NSString* const SYStickHeaderWaterDecorationKind = @"Decoration";
 @property (nonatomic) NSArray *sectionsHeights;//
 @property (nonatomic) NSArray *itemsInSectionsHeights;//每个section里cell的高度.
 @end
+
 @implementation SYStickHeaderWaterFallLayout
 #pragma mark - Lifecycle
 
