@@ -27,9 +27,9 @@ NSString* const SYStickHeaderWaterDecorationKind = @"Decoration";
 @property (nonatomic,strong) NSArray *columnsCountArray;//每个section的columncount
 @property (nonatomic,strong) NSArray *itemsWidthArray;
 @property (nonatomic,strong) NSArray *headerToTopArray;//每个section的停留时与顶部的距离
-@property (nonatomic) NSDictionary *layoutInfo;//全部layoutAttribute信息
-@property (nonatomic) NSArray *sectionsHeights;//
-@property (nonatomic) NSArray *itemsInSectionsHeights;//每个section里cell的高度.
+@property (nonatomic,strong) NSDictionary *layoutInfo;//全部layoutAttribute信息
+@property (nonatomic,strong) NSArray *sectionsHeights;//
+@property (nonatomic,strong) NSArray *itemsInSectionsHeights;//每个section里cell的高度.
 @end
 
 @implementation SYStickHeaderWaterFallLayout
