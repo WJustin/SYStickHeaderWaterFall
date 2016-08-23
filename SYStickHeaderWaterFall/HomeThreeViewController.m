@@ -59,30 +59,30 @@
     [self initNavigationItem];
     [self initRefresh];
     [self initData];
-//    [self.collectView.header beginRefreshing];
-//    [self requestHomePageList:@"1" refreshType:@"header"];
-
+    //    [self.collectView.header beginRefreshing];
+    //    [self requestHomePageList:@"1" refreshType:@"header"];
+    
 }
 -(void)initCollectionView
 {
     SYStickHeaderWaterFallLayout *cvLayout = [[SYStickHeaderWaterFallLayout alloc] init];
     cvLayout.delegate = self;
-//    cvLayout.itemWidth = (kDeviceWidth-15)/2;
-//    cvLayout.topInset = 0.0f;
-//    cvLayout.bottomInset = 0.0f;
+    //    cvLayout.itemWidth = (kDeviceWidth-15)/2;
+    //    cvLayout.topInset = 0.0f;
+    //    cvLayout.bottomInset = 0.0f;
     cvLayout.isStickyHeader = YES;
     
     
     self.collectView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, kDeviceWidth, kDeviceHeight ) collectionViewLayout:cvLayout];
-
-//    self.collectView.delegate = self;
-//    self.collectView.dataSource = self;
+    
+    //    self.collectView.delegate = self;
+    //    self.collectView.dataSource = self;
     self.collectView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.collectView];
     [self.view insertSubview:self.goToTopBtn aboveSubview:self.collectView];
-
+    
     [self.collectView registerNib:[UINib nibWithNibName:@"HPCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:WaterfallCellIdentifier];
-
+    
     [self.collectView registerClass:[HomePageHeadView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:WaterfallHeaderIdentifier];
     [self.collectView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"cell"];
     [self.collectView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"head"];
@@ -96,12 +96,12 @@
 }
 -(void)initNavigationItem
 {
-//    self.edgesForExtendedLayout = UIRectEdgeNone;
+    //    self.edgesForExtendedLayout = UIRectEdgeNone;
     self.leftBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     self.leftBtn.frame = CGRectMake(16, 16, 14, 13);
     [self.leftBtn addTarget:self action:@selector(clicked) forControlEvents:UIControlEventTouchUpInside];
     [self.leftBtn setImage:[UIImage imageNamed:@"top_sidebar.pdf"]  forState:UIControlStateNormal];
-//    [self.leftBtn setEnlargeEdgeWithTop:10 right:20 bottom:10 left:20];
+    //    [self.leftBtn setEnlargeEdgeWithTop:10 right:20 bottom:10 left:20];
     UIBarButtonItem *barLeftBtn = [[UIBarButtonItem alloc]initWithCustomView:self.leftBtn];
     UIImageView *titleImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 34, 20)];
     titleImageView.image = [UIImage imageNamed:@"home_logo.pdf"];
@@ -116,16 +116,17 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
+    [collectionView.collectionViewLayout invalidateLayout];
     return 2;
 }
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -142,9 +143,9 @@
         
     }
     else
-        {
-            itemCount = 1;
-        }
+    {
+        itemCount = 1;
+    }
     return itemCount;
 }
 
@@ -175,14 +176,14 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section ==1) {
-            HPCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:WaterfallCellIdentifier forIndexPath:indexPath];
-//            cell.backgroundColor = listBgColor;
-            cell.shop = self.shops[indexPath.item];
-            UITapGestureRecognizer *personalGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(imageGesture:)];
-            //            personalGesture.cancelsTouchesInView = NO;
-            cell.markImageView.userInteractionEnabled = YES;
-            [cell.markImageView addGestureRecognizer:personalGesture];
-            return cell;
+        HPCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:WaterfallCellIdentifier forIndexPath:indexPath];
+        //            cell.backgroundColor = listBgColor;
+        cell.shop = self.shops[indexPath.item];
+        UITapGestureRecognizer *personalGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(imageGesture:)];
+        //            personalGesture.cancelsTouchesInView = NO;
+        cell.markImageView.userInteractionEnabled = YES;
+        [cell.markImageView addGestureRecognizer:personalGesture];
+        return cell;
         
     }else if (indexPath.section ==0)
     {
@@ -219,14 +220,14 @@
         
         UICollectionViewCell *cycleCollectionViewCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath ];
         cycleCollectionViewCell.frame = cycleView.frame;
-//        cycleCollectionViewCell.mj_y =38;
+        //        cycleCollectionViewCell.mj_y =38;
         //            [[UICollectionViewCell alloc]initWithFrame:cycleView.frame];
         [cycleCollectionViewCell addSubview:cycleView];
         return cycleCollectionViewCell;
-
+        
     }
     
-            return nil;
+    return nil;
     
 }
 
@@ -313,62 +314,68 @@ heightForHeaderAtIndexPath:(NSIndexPath *)indexPath {
 {
     //广告页跳转
     //广告页跳转
-    }
+}
 
 -(void)requestHomePageList:(NSString *)page refreshType:(NSString *)type
 {
     SYSHomeRequest *homeRequest = [[SYSHomeRequest alloc] initRequestWithPageLine:10 pageNum:[page integerValue]];
     
+    
+    __weak typeof(self) weakSelf = self;
+    
     [homeRequest startWithCompletionBlockWithSuccess:^(__kindof BaseRequest *request, id obj) {
-        if ([obj objectForKey:@"data"]== [NSNull null]) {
-            if ([page isEqualToString:@"1"]) {
-                [_shops removeAllObjects];
-                [self.collectView.header endRefreshing];
-                [self.collectView reloadData];
-                
-                return;
-                
-            }else
-            {
-                MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
-                hud.mode = MBProgressHUDModeText;
-                hud.labelText = @"内容看光了 刷新也白搭";
-                hud.margin = 10.f;
-                hud.removeFromSuperViewOnHide = YES;
-                [hud hide:YES afterDelay:1];
-                [self.collectView.footer endRefreshing];
-                return ;
-            }
-            
-        }
-        NSArray *dataArray = [obj objectForKey:@"data"];
-        NSString *status = [NSString stringWithFormat:@"%@",[obj objectForKey:@"status"]];
-        if ([status isEqual:@"1"]) {
-            self.collectView.delegate =self;
-            self.collectView.dataSource =self;
-            if ([status isEqual:@"1"]) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if ([obj objectForKey:@"data"]== [NSNull null]) {
                 if ([page isEqualToString:@"1"]) {
-                    [_shops removeAllObjects];
-                    showPage = 1;
-                }
-                for (int i =0; i<[dataArray count]; i++) {
-                    [_shops addObject:[HomeModel initHomeModelWithDict:dataArray[i]]];
+                    [weakSelf.shops removeAllObjects];
+                    [weakSelf.collectView.header endRefreshing];
+                    [weakSelf.collectView reloadData];
+                    
+                    return;
+                    
+                }else
+                {
+                    MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
+                    hud.mode = MBProgressHUDModeText;
+                    hud.labelText = @"内容看光了 刷新也白搭";
+                    hud.margin = 10.f;
+                    hud.removeFromSuperViewOnHide = YES;
+                    [hud hide:YES afterDelay:1];
+                    [weakSelf.collectView.footer endRefreshing];
+                    return ;
                 }
                 
             }
-            if ([type isEqualToString:@"header"]) {
-                [self.collectView.header endRefreshing];
-            }else if([type isEqualToString:@"footer"])
-            {
-                [self.collectView.footer endRefreshing];
+            NSArray *dataArray = [obj objectForKey:@"data"];
+            NSString *status = [NSString stringWithFormat:@"%@",[obj objectForKey:@"status"]];
+            if ([status isEqual:@"1"]) {
+                weakSelf.collectView.delegate =self;
+                weakSelf.collectView.dataSource =self;
+                if ([status isEqual:@"1"]) {
+                    if ([page isEqualToString:@"1"]) {
+                        [weakSelf.shops removeAllObjects];
+                        showPage = 1;
+                    }
+                    for (int i =0; i<[dataArray count]; i++) {
+                        [weakSelf.shops addObject:[HomeModel initHomeModelWithDict:dataArray[i]]];
+                    }
+                    
+                }
+                if ([type isEqualToString:@"header"]) {
+                    [weakSelf.collectView.header endRefreshing];
+                }else if([type isEqualToString:@"footer"])
+                {
+                    [weakSelf.collectView.footer endRefreshing];
+                }
+                [weakSelf.collectView.collectionViewLayout invalidateLayout];
+                [weakSelf.collectView reloadData];
             }
             
-            [self.collectView reloadData];
-        }
-
+        });
+        
     } failure:^(__kindof BaseRequest *request, id obj) {
-        if (self.view.superview) {
-            MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:self.view.superview animated:YES];
+        if (weakSelf.view.superview) {
+            MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:weakSelf.view.superview animated:YES];
             hud.mode = MBProgressHUDModeText;
             hud.labelText = @"网络不给力 挥泪重连中";
             hud.margin = 10.f;
@@ -378,14 +385,14 @@ heightForHeaderAtIndexPath:(NSIndexPath *)indexPath {
         
         if ([type isEqualToString:@"header"]) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self.collectView.header endRefreshing];
+                [weakSelf.collectView.header endRefreshing];
             });
             
             
         }else if([type isEqualToString:@"footer"])
         {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self.collectView.footer endRefreshing];
+                [weakSelf.collectView.footer endRefreshing];
                 
             });
             
@@ -418,9 +425,9 @@ heightForHeaderAtIndexPath:(NSIndexPath *)indexPath {
     HPCollectionViewCell * cell = (HPCollectionViewCell *)tap.view.superview.superview;
     NSIndexPath *indexPath = [_collectView indexPathForCell:cell];
     cell.shop = self.shops[indexPath.item];
-//    PersonalCenterViewController *personalViewController = [[PersonalCenterViewController alloc]init];
-//    personalViewController.user_id = cell.shop.user_id;
-//    [self.navigationController pushViewController:personalViewController animated:NO];
+    //    PersonalCenterViewController *personalViewController = [[PersonalCenterViewController alloc]init];
+    //    personalViewController.user_id = cell.shop.user_id;
+    //    [self.navigationController pushViewController:personalViewController animated:NO];
 }
 
 

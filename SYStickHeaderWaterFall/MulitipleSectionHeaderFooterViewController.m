@@ -101,6 +101,9 @@ static NSString* const WaterfallFooterIdentifier = @"WaterfallFooter";
     [self.collectView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"head"];
     [self.collectView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:WaterfallFooterIdentifier];
     
+    self.collectView.delegate =self;
+    self.collectView.dataSource =self;
+    
     self.collectView.footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
         // 进入刷新状态后会自动调用这个block
         showPage += 1;
@@ -174,7 +177,7 @@ static NSString* const WaterfallFooterIdentifier = @"WaterfallFooter";
     }else if ([kind isEqualToString:UICollectionElementKindSectionFooter])
     {
         HomeFooterCollectionReusableView *footerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:WaterfallFooterIdentifier forIndexPath:indexPath];
-//        footerView.frame = CGRectMake(0, 0, kDeviceWidth, 50);
+        //        footerView.frame = CGRectMake(0, 0, kDeviceWidth, 50);
         footerView.tag = 10001 + indexPath.section;
         footerView.backgroundColor = [UIColor redColor];
         return footerView;
@@ -399,61 +402,84 @@ heightForFooterAtIndexPath:(nonnull NSIndexPath *)indexPath
 
 -(void)requestHomePageList:(NSString *)page refreshType:(NSString *)type
 {
+    
+    if ([type isEqualToString:@"head"]) {
+        if (showPage ==1) {
+            self.shops = [[self.shops subarrayWithRange:NSMakeRange(0, 9)] mutableCopy];
+            [self.collectView.collectionViewLayout invalidateLayout];
+            [self.collectView setContentOffset:CGPointZero animated:NO];
+        }
+        
+    }
+    
+    __weak typeof(self) weakSelf = self;
     [RequestCustom requestFlowWater:_optionalParam pageNUM:page pageLINE:@"10" complete:^(BOOL succed, id obj){
         if (succed) {
-            if ([obj objectForKey:@"data"]== [NSNull null]) {
-                if ([page isEqualToString:@"1"]) {
-                    [_shopForThree removeAllObjects];
-                    [self.collectView.header endRefreshing];
-                    [self.collectView reloadData];
-                    
-                    return;
-                    
-                }else
-                {
-                    MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
-                    hud.mode = MBProgressHUDModeText;
-                    hud.labelText = @"内容看光了 刷新也白搭";
-                    hud.margin = 10.f;
-                    hud.removeFromSuperViewOnHide = YES;
-                    [hud hide:YES afterDelay:1];
-                    [self.collectView.footer endRefreshing];
-                    return ;
-                }
+            dispatch_async(dispatch_get_main_queue(), ^{
                 
-            }
-            NSArray *dataArray = [obj objectForKey:@"data"];
-            NSString *status = [NSString stringWithFormat:@"%@",[obj objectForKey:@"status"]];
-            if ([status isEqual:@"1"]) {
-                self.collectView.delegate =self;
-                self.collectView.dataSource =self;
-                if ([status isEqual:@"1"]) {
+                if ([obj objectForKey:@"data"]== [NSNull null]) {
                     if ([page isEqualToString:@"1"]) {
-                        [_shopForThree removeAllObjects];
-                        showPage = 1;
-                    }
-                    for (int i =0; i<[dataArray count]; i++) {
-                        [_shopForThree addObject:[HomeModel initHomeModelWithDict:dataArray[i]]];
-                    }
-                    if (showPage ==1) {
-                        _shops=_shopForThree;
+                        [weakSelf.shopForThree removeAllObjects];
+                        [weakSelf.collectView.header endRefreshing];
+                        [weakSelf.collectView reloadData];
+                        
+                        return;
+                        
+                    }else
+                    {
+                        MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
+                        hud.mode = MBProgressHUDModeText;
+                        hud.labelText = @"内容看光了 刷新也白搭";
+                        hud.margin = 10.f;
+                        hud.removeFromSuperViewOnHide = YES;
+                        [hud hide:YES afterDelay:1];
+                        [weakSelf.collectView.footer endRefreshing];
+                        return ;
                     }
                     
                 }
-                if ([type isEqualToString:@"header"]) {
-                    [self.collectView.header endRefreshing];
-                }else if([type isEqualToString:@"footer"])
-                {
-                    [self.collectView.footer endRefreshing];
+                NSArray *dataArray = [obj objectForKey:@"data"];
+                NSString *status = [NSString stringWithFormat:@"%@",[obj objectForKey:@"status"]];
+                if ([status isEqual:@"1"]) {
+                    
+                    if ([status isEqual:@"1"]) {
+                        if ([page isEqualToString:@"1"]) {
+                            [weakSelf.shopForThree removeAllObjects];
+                            showPage = 1;
+                        }
+                        for (int i =0; i<[dataArray count]; i++) {
+                            [weakSelf.shopForThree addObject:[HomeModel initHomeModelWithDict:dataArray[i]]];
+                        }
+                        if (showPage ==1) {
+                            weakSelf.shops=[weakSelf.shopForThree mutableCopy];
+                        }
+                        
+                    }
+                    if ([type isEqualToString:@"header"]) {
+                        [weakSelf.collectView.header endRefreshing];
+                    }else if([type isEqualToString:@"footer"])
+                    {
+                        [weakSelf.collectView.footer endRefreshing];
+                    }
+                    
+                    
+                    [UIView performWithoutAnimation:^{
+                        [weakSelf.collectView reloadData];
+                    }];
+                    
+                    [weakSelf.collectView.collectionViewLayout invalidateLayout];
+                    
+                    //                    [weakSelf.collectView setContentOffset:CGPointZero animated:NO];
+                    
                 }
                 
-                [self.collectView reloadData];
-            }
+                
+            });
             
         }else
         {
-            if (self.view.superview) {
-                MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:self.view.superview animated:YES];
+            if (weakSelf.view.superview) {
+                MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:weakSelf.view.superview animated:YES];
                 hud.mode = MBProgressHUDModeText;
                 hud.labelText = @"网络不给力 挥泪重连中";
                 hud.margin = 10.f;
@@ -463,14 +489,14 @@ heightForFooterAtIndexPath:(nonnull NSIndexPath *)indexPath
             
             if ([type isEqualToString:@"header"]) {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [self.collectView.header endRefreshing];
+                    [weakSelf.collectView.header endRefreshing];
                 });
                 
                 
             }else if([type isEqualToString:@"footer"])
             {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [self.collectView.footer endRefreshing];
+                    [weakSelf.collectView.footer endRefreshing];
                     
                 });
                 

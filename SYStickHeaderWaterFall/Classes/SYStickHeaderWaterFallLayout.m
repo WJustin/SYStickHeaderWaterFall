@@ -66,18 +66,21 @@ NSString* const SYStickHeaderWaterDecorationKind = @"Decoration";
 }
 
 - (void)prepareLayout {
-    if (self.collectionView.isDecelerating || self.collectionView.isDragging) {
-        
-    } else {
-        [self calculateHeaderToTop];//计算每个section的停留时与顶部的距离通,过代理方法（collectionView:layout:headerToTopInSection:）获得
-        [self calculateItemsWidth];//计算所在section的每个item的width（一个section只有一个width）.通过代理方法（collectionView:layout:widthForItemInSection:）获得
-        [self calculateSectionsTopInsetAndBottomInset];//计算所在section与上一个section的间距和所在section与下一个section的间距.通过代理方法（collectionView:layout:topInSection:和collectionView:layout:bottomInSection:）获得
-        [self calculateColumnsCount];//计算每个section的列数（根据itemsWidthArray计算列数，而itemsWidthArray是[self calculateItemsWidth]计算出来的）
-        [self calculateItemsInnerMarginArray];//计算每个section中item之间的间距(上下左右的间距都是同一个数值)(根据itemsWidthArray计算列数)
-        [self calculateItemsHeights];//计算item的高度
-        [self calculateSectionsHeights];//计算每个section的高度
-        [self calculateItemsAttributes];
-    }
+    
+    [super prepareLayout];
+    
+    //    if (self.collectionView.isDecelerating || self.collectionView.isDragging) {
+    //
+    //    } else {
+    [self calculateHeaderToTop];//计算每个section的停留时与顶部的距离通,过代理方法（collectionView:layout:headerToTopInSection:）获得
+    [self calculateItemsWidth];//计算所在section的每个item的width（一个section只有一个width）.通过代理方法（collectionView:layout:widthForItemInSection:）获得
+    [self calculateSectionsTopInsetAndBottomInset];//计算所在section与上一个section的间距和所在section与下一个section的间距.通过代理方法（collectionView:layout:topInSection:和collectionView:layout:bottomInSection:）获得
+    [self calculateColumnsCount];//计算每个section的列数（根据itemsWidthArray计算列数，而itemsWidthArray是[self calculateItemsWidth]计算出来的）
+    [self calculateItemsInnerMarginArray];//计算每个section中item之间的间距(上下左右的间距都是同一个数值)(根据itemsWidthArray计算列数)
+    [self calculateItemsHeights];//计算item的高度
+    [self calculateSectionsHeights];//计算每个section的高度
+    [self calculateItemsAttributes];
+    //    }
 }
 
 - (NSArray *)layoutAttributesForElementsInRect:(CGRect)rect {
