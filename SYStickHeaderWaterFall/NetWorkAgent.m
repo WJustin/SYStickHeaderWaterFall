@@ -229,7 +229,7 @@
 //    YTKLog(@"Finished Request: %@", NSStringFromClass([request class]));
     if (request) {
         BOOL succeed = [self checkResult:request];
-        if (succeed) {
+        if (succeed &&![responseObject isKindOfClass:[NSError class]]) {
             [request toggleAccessoriesWillStopCallBack];
             [request requestCompleteFilter];
             if (request.delegate != nil) {
