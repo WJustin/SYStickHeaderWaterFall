@@ -298,7 +298,7 @@ heightForHeaderAtIndexPath:(NSIndexPath *)indexPath {
 
 -(void)requestHomePageList:(NSString *)page refreshType:(NSString *)type
 {
-    SYSHomeRequest *homeRequest = [[SYSHomeRequest alloc] initRequestWithPageLine:10 pageNum:[page integerValue]];
+//    SYSHomeRequest *homeRequest = [[SYSHomeRequest alloc] initRequestWithPageLine:10 pageNum:[page integerValue]];
     
     __weak typeof(self) weakSelf = self;
     
@@ -310,98 +310,165 @@ heightForHeaderAtIndexPath:(NSIndexPath *)indexPath {
     //        }
     //
     //    }
+    NSData *data =  [self dataNamed:@"HomeData.json"];
     
-    [homeRequest startWithCompletionBlockWithSuccess:^(__kindof BaseRequest *request, id obj) {
-        dispatch_async(dispatch_get_main_queue(), ^{
+    NSDictionary *obj = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        if ([obj objectForKey:@"data"]== [NSNull null]) {
+            if ([page isEqualToString:@"1"]) {
+                [_shops removeAllObjects];
+                [weakSelf.collectView.header endRefreshing];
+                [weakSelf.collectView.collectionViewLayout invalidateLayout];
+                [weakSelf.collectView reloadData];
+                
+                return;
+                
+            }else
+            {
+                MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
+                hud.mode = MBProgressHUDModeText;
+                hud.labelText = @"内容看光了 刷新也白搭";
+                hud.margin = 10.f;
+                hud.removeFromSuperViewOnHide = YES;
+                [hud hide:YES afterDelay:1];
+                [weakSelf.collectView.footer endRefreshing];
+                return ;
+            }
             
-            if ([obj objectForKey:@"data"]== [NSNull null]) {
+        }
+        NSArray *dataArray = [obj objectForKey:@"data"];
+        NSString *status = [NSString stringWithFormat:@"%@",[obj objectForKey:@"status"]];
+        if ([status isEqual:@"1"]) {
+            
+            if ([status isEqual:@"1"]) {
                 if ([page isEqualToString:@"1"]) {
-                    [_shops removeAllObjects];
-                    [weakSelf.collectView.header endRefreshing];
-                    [weakSelf.collectView.collectionViewLayout invalidateLayout];
-                    [weakSelf.collectView reloadData];
                     
-                    return;
+                    [weakSelf.shops removeAllObjects];
+                    showPage = 1;
+                }
+                for (int i =0; i<[dataArray count]; i++) {
+                    [weakSelf.shops addObject:[HomeModel initHomeModelWithDict:dataArray[i]]];
+                }
+                
+            }
+            
+            if ([type isEqualToString:@"header"]) {
+                [weakSelf.collectView.header endRefreshing];
+            }else if([type isEqualToString:@"footer"])
+            {
+                [weakSelf.collectView.footer endRefreshing];
+            }
+            
+            [UIView performWithoutAnimation:^{
+                if ([type isEqualToString:@"head"]) {
+                    [weakSelf.collectView reloadData];
                     
                 }else
                 {
-                    MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
-                    hud.mode = MBProgressHUDModeText;
-                    hud.labelText = @"内容看光了 刷新也白搭";
-                    hud.margin = 10.f;
-                    hud.removeFromSuperViewOnHide = YES;
-                    [hud hide:YES afterDelay:1];
-                    [weakSelf.collectView.footer endRefreshing];
-                    return ;
-                }
-                
-            }
-            NSArray *dataArray = [obj objectForKey:@"data"];
-            NSString *status = [NSString stringWithFormat:@"%@",[obj objectForKey:@"status"]];
-            if ([status isEqual:@"1"]) {
-                
-                if ([status isEqual:@"1"]) {
-                    if ([page isEqualToString:@"1"]) {
-                        
-                        [weakSelf.shops removeAllObjects];
-                        showPage = 1;
-                    }
-                    for (int i =0; i<[dataArray count]; i++) {
-                        [weakSelf.shops addObject:[HomeModel initHomeModelWithDict:dataArray[i]]];
-                    }
+                    [weakSelf.collectView reloadData];
                     
                 }
-                
-                if ([type isEqualToString:@"header"]) {
-                    [weakSelf.collectView.header endRefreshing];
-                }else if([type isEqualToString:@"footer"])
-                {
-                    [weakSelf.collectView.footer endRefreshing];
-                }
-                
-                [UIView performWithoutAnimation:^{
-                    if ([type isEqualToString:@"head"]) {
-                        [weakSelf.collectView reloadData];
-                        
-                    }else
-                    {
-                        [weakSelf.collectView reloadData];
-                        
-                    }
-                }];
-                
-                [weakSelf.collectView.collectionViewLayout invalidateLayout];
-                
-                
-            }
+            }];
             
-        });
-        
-    } failure:^(__kindof BaseRequest *request, id obj) {
-        if (weakSelf.view.superview) {
-            MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:weakSelf.view.superview animated:YES];
-            hud.mode = MBProgressHUDModeText;
-            hud.labelText = @"网络不给力 挥泪重连中";
-            hud.margin = 10.f;
-            hud.removeFromSuperViewOnHide = YES;
-            [hud hide:YES afterDelay:1];
+            [weakSelf.collectView.collectionViewLayout invalidateLayout];
+            
+            
         }
         
-        if ([type isEqualToString:@"header"]) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [weakSelf.collectView.header endRefreshing];
-            });
-            
-            
-        }else if([type isEqualToString:@"footer"])
-        {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [weakSelf.collectView.footer endRefreshing];
-                
-            });
-            
-        }
-    }];
+    });
+
+//    [homeRequest startWithCompletionBlockWithSuccess:^(__kindof BaseRequest *request, id obj) {
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            
+//            if ([obj objectForKey:@"data"]== [NSNull null]) {
+//                if ([page isEqualToString:@"1"]) {
+//                    [_shops removeAllObjects];
+//                    [weakSelf.collectView.header endRefreshing];
+//                    [weakSelf.collectView.collectionViewLayout invalidateLayout];
+//                    [weakSelf.collectView reloadData];
+//                    
+//                    return;
+//                    
+//                }else
+//                {
+//                    MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
+//                    hud.mode = MBProgressHUDModeText;
+//                    hud.labelText = @"内容看光了 刷新也白搭";
+//                    hud.margin = 10.f;
+//                    hud.removeFromSuperViewOnHide = YES;
+//                    [hud hide:YES afterDelay:1];
+//                    [weakSelf.collectView.footer endRefreshing];
+//                    return ;
+//                }
+//                
+//            }
+//            NSArray *dataArray = [obj objectForKey:@"data"];
+//            NSString *status = [NSString stringWithFormat:@"%@",[obj objectForKey:@"status"]];
+//            if ([status isEqual:@"1"]) {
+//                
+//                if ([status isEqual:@"1"]) {
+//                    if ([page isEqualToString:@"1"]) {
+//                        
+//                        [weakSelf.shops removeAllObjects];
+//                        showPage = 1;
+//                    }
+//                    for (int i =0; i<[dataArray count]; i++) {
+//                        [weakSelf.shops addObject:[HomeModel initHomeModelWithDict:dataArray[i]]];
+//                    }
+//                    
+//                }
+//                
+//                if ([type isEqualToString:@"header"]) {
+//                    [weakSelf.collectView.header endRefreshing];
+//                }else if([type isEqualToString:@"footer"])
+//                {
+//                    [weakSelf.collectView.footer endRefreshing];
+//                }
+//                
+//                [UIView performWithoutAnimation:^{
+//                    if ([type isEqualToString:@"head"]) {
+//                        [weakSelf.collectView reloadData];
+//                        
+//                    }else
+//                    {
+//                        [weakSelf.collectView reloadData];
+//                        
+//                    }
+//                }];
+//                
+//                [weakSelf.collectView.collectionViewLayout invalidateLayout];
+//                
+//                
+//            }
+//            
+//        });
+//        
+//    } failure:^(__kindof BaseRequest *request, id obj) {
+//        if (weakSelf.view.superview) {
+//            MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:weakSelf.view.superview animated:YES];
+//            hud.mode = MBProgressHUDModeText;
+//            hud.labelText = @"网络不给力 挥泪重连中";
+//            hud.margin = 10.f;
+//            hud.removeFromSuperViewOnHide = YES;
+//            [hud hide:YES afterDelay:1];
+//        }
+//        
+//        if ([type isEqualToString:@"header"]) {
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                [weakSelf.collectView.header endRefreshing];
+//            });
+//            
+//            
+//        }else if([type isEqualToString:@"footer"])
+//        {
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                [weakSelf.collectView.footer endRefreshing];
+//                
+//            });
+//            
+//        }
+//    }];
     
 }
 //
@@ -547,4 +614,10 @@ heightForHeaderAtIndexPath:(NSIndexPath *)indexPath {
     return YES;
 }
 
+- (NSData *)dataNamed:(NSString *)name {
+    NSString *path = [[NSBundle mainBundle] pathForResource:name ofType:@""];
+    if (!path) return nil;
+    NSData *data = [NSData dataWithContentsOfFile:path];
+    return data;
+}
 @end
