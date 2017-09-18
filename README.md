@@ -1,10 +1,7 @@
 SYStickHeaderWaterFall 中文介绍
 ==============
 
-[![License MIT](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://raw.githubusercontent.com/zhangsuya/SYStickHeaderWaterFall/master/LICENSE)
-[![CocoaPods](http://img.shields.io/cocoapods/v/SYStickHeaderWaterFall.svg?style=flat)](http://cocoapods.org/?q= SYStickHeaderWaterFall)
-[![CocoaPods](http://img.shields.io/cocoapods/p/SYStickHeaderWaterFall.svg?style=flat)](http://cocoapods.org/?q= SYStickHeaderWaterFall)
-[![Support](https://img.shields.io/badge/support-iOS%208%2B%20-blue.svg?style=flat)](https://www.apple.com/nl/ios/)
+[![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/zhangsuya/ZZRouter) [![pod](https://img.shields.io/badge/pod-0.2.0--beta-yellow.svg)](https://github.com/zhangsuya/ZZRouter) [![platform](https://img.shields.io/badge/platform-iOS-ff69b4.svg)](https://github.com/zhangsuya/ZZRouter) [![aboutme](https://img.shields.io/badge/about%20me-zhangsuya-blue.svg)](http://www.jianshu.com/u/f2503bba4cfa)
 
 
 More flexible support various types of waterfalls flow .（更加灵活支持各种类型的瀑布流结构。）
