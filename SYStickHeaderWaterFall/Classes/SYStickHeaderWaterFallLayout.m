@@ -65,6 +65,11 @@ NSString* const SYStickHeaderWaterDecorationKind = @"Decoration";
     
 }
 
+- (void)invalidateLayout {
+    [super invalidateLayout];
+    self.layoutInfo = nil;
+}
+
 - (void)prepareLayout {
     
     [super prepareLayout];
